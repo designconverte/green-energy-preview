@@ -18,6 +18,9 @@
    CORES: a lista junta as amostras cadastradas no popup com as cores que a
    ficha escreve por extenso. Hex das amostras = medido na imagem da amostra;
    hex das que só existem no texto = aproximação do nome, marcada com `aprox`.
+   No site, só a cor COM `galeria` vira bolinha no seletor; as demais saem
+   por extenso na linha "Cores" da ficha. Para uma voltar a ser bolinha,
+   basta dar foto a ela.
    ========================================================================== */
 
 /* Ordem canônica da ficha, igual para todo modelo. Campo ausente não aparece. */
@@ -37,6 +40,7 @@ window.GREEN_FICHA_ORDEM = [
   ['dimensoes', 'Dimensões'],
   ['peso', 'Peso'],
   ['rampa', 'Rampa'],
+  ['cores', 'Cores'], // preenchida pelo app.js quando alguma cor não tem foto
   ['garantia', 'Garantia'],
 ];
 

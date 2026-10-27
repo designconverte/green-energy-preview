@@ -1927,15 +1927,20 @@ body.menu-aberto .header {
   border-top: 1px solid rgba(201, 214, 204, .14);
   background: rgba(6, 20, 9, .6);
 }
-.modal__linha { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 20px; }
+/* Preço em cima, seletor de cor numa linha própria logo abaixo. Lado a lado,
+   a quebra dependia de quantas cores o modelo tinha: uns modelos quebravam,
+   outros não, e o rótulo descolava das bolinhas. Empilhado é igual em todos. */
+.modal__linha { display: grid; gap: 12px; }
 .preco--modal .preco__rotulo { color: var(--ge-stone-escuro); }
 .preco--modal .preco__valor { font-size: 24px; color: var(--ge-white); }
 .preco--modal .preco__parcelas { color: var(--ge-neon-500); }
 
-.modal__cores { display: grid; gap: 8px; justify-items: end; }
-.modal__cores-rotulo { margin: 0; color: var(--ge-stone-escuro); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.modal__cores-rotulo strong { color: var(--ge-white); }
-.modal__swatches { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; max-width: 260px; }
+/* Medida do pior caso: "COR: AZUL-CLARO" + 5 bolinhas cabe numa linha a 360 px.
+   A margem negativa alinha a BOLINHA (não o alvo de 32 px) com a borda dos botões. */
+.modal__cores { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px; }
+.modal__cores-rotulo { margin: 0; color: var(--ge-stone-escuro); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.modal__cores-rotulo strong { color: var(--ge-white); white-space: nowrap; }
+.modal__swatches { display: flex; gap: 2px; margin-right: -5px; }
 .modal__swatch { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; background: none; }
 .modal__swatch i {
   width: 22px; height: 22px;

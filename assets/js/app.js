@@ -692,18 +692,20 @@
     let origem = null;
     let atual = null;
     let corAtiva = 0;
-    // Última cor COM foto que foi para a tela (ver fotosDaCorAtiva).
-    let corDaFoto = 0;
+    // Cores do modelo aberto que viram bolinha: só as que têm foto.
+    let paleta = [];
 
     const temFoto = (c) => Array.isArray(c?.galeria) && c.galeria.length > 0;
 
-    /* A cor troca as fotos do VEÍCULO INTEIRO. As de detalhe ficam sempre.
-       Cor sem foto (amostra que a loja tem, mas sem fotografia) não apaga a
-       galeria: fica a última cor com foto, e só o rótulo e a mensagem do
-       WhatsApp mudam. Sem esta regra a pessoa via apenas os closes de detalhe. */
+    /* Bolinha que não troca a foto parece quebrada (pedido do cliente,
+       27/10/2026). Cor sem foto sai do seletor e vai por extenso para a
+       ficha (ver ficha). O catálogo continua com todas: chegando a foto, a
+       bolinha volta sozinha. */
+    const paletaDe = (m) => (m.cores || []).filter(temFoto);
+
+    /* A cor troca as fotos do VEÍCULO INTEIRO. As de detalhe ficam sempre. */
     function fotosDaCorAtiva(m) {
-      if (temFoto(m.cores?.[corAtiva])) corDaFoto = corAtiva;
-      const daCor = temFoto(m.cores?.[corDaFoto]) ? m.cores[corDaFoto].galeria : null;
+      const daCor = paleta[corAtiva]?.galeria;
       if (!daCor) return m.galeria || [];
       return [...daCor, ...(m.galeria || []).filter((f) => f.detalhe)];
     }
@@ -842,7 +844,14 @@
     function ficha(m) {
       const alvo = $('#modal-ficha');
       const classe = m.classificacao ? window.GREEN_CLASSIFICACOES[m.classificacao] : null;
-      const specs = { ...(m.specs || {}), ...(classe ? { classificacao: classe.ficha } : {}) };
+      const nomes = (m.cores || []).map((c) => c.nome);
+      // Alguma cor ficou fora do seletor: a lista completa vai por extenso.
+      const coresNoTexto = nomes.length > paleta.length ? nomesPorExtenso(nomes) : null;
+      const specs = {
+        ...(m.specs || {}),
+        ...(classe ? { classificacao: classe.ficha } : {}),
+        ...(coresNoTexto ? { cores: coresNoTexto } : {}),
+      };
       /* Campo sem dado simplesmente não aparece: dez linhas de "não
          informado" comunicam ausência, não especificação. */
       alvo.innerHTML = window.GREEN_FICHA_ORDEM
@@ -880,14 +889,23 @@
       return `background:${HEX_VALIDO.test(c.hex || '') ? c.hex : 'transparent'}`;
     }
 
-    function cores(m) {
+    /* "Preta, Laranja e Verde". */
+    function nomesPorExtenso(nomes) {
+      try {
+        return new Intl.ListFormat('pt-BR', { type: 'conjunction' }).format(nomes);
+      } catch (e) {
+        return nomes.join(', ');
+      }
+    }
+
+    function cores() {
       const bloco = $('#modal-cores');
-      if (!m.cores || !m.cores.length) { bloco.hidden = true; return; }
-      bloco.hidden = false;
-      $('#modal-cor-nome').textContent = m.cores[corAtiva].nome;
+      bloco.hidden = !paleta.length;
+      if (!paleta.length) { $('#modal-swatches').innerHTML = ''; return; }
+      $('#modal-cor-nome').textContent = paleta[corAtiva].nome;
       // Uma cor só: fica o rótulo (entra na mensagem), sai a bolinha sem função.
-      $('#modal-swatches').hidden = m.cores.length < 2;
-      $('#modal-swatches').innerHTML = m.cores.map((c, i) => `
+      $('#modal-swatches').hidden = paleta.length < 2;
+      $('#modal-swatches').innerHTML = paleta.map((c, i) => `
         <button class="modal__swatch" type="button" data-cor="${i}"
                 aria-pressed="${i === corAtiva}" aria-label="Cor ${escapar(c.nome)}"
                 title="${escapar(c.nome)}">
@@ -899,7 +917,7 @@
     /* Remonta os dois links da base com o modelo e a cor escolhidos. */
     function cta() {
       const nome = atual.nome;
-      const cor = atual.cores?.[corAtiva]?.nome;
+      const cor = paleta[corAtiva]?.nome;
       $('#modal-cta').href = cor ? linkWhats('modeloCor', { modelo: nome, cor }) : linkWhats('modelo', { modelo: nome });
       $('#modal-testride').href = cor
         ? linkWhats('testRideModeloCor', { modelo: nome, cor })
@@ -940,7 +958,7 @@
       if (!atual) return;
       if (gatilho !== undefined) origem = gatilho || null;
       corAtiva = 0;
-      corDaFoto = 0;
+      paleta = paletaDe(atual);
 
       $('#modal-eyebrow').textContent = vitrine.eyebrow(atual);
       $('#modal-titulo').textContent = atual.nome;
@@ -959,7 +977,7 @@
       galeria(atual);
       ficha(atual);
       equipamentos(atual);
-      cores(atual);
+      cores();
       cta();
       setas();
       $('#modal-corpo').scrollTop = 0;
@@ -1024,7 +1042,7 @@
         if (botaoCta && atual) {
           botaoCta.dataset.rastreado = '1';
           const testRide = botaoCta.id === 'modal-testride';
-          interesseNoModelo(atual, testRide ? 'modal_testride' : 'modal', { cor: atual.cores?.[corAtiva]?.nome });
+          interesseNoModelo(atual, testRide ? 'modal_testride' : 'modal', { cor: paleta[corAtiva]?.nome });
           return;
         }
 
@@ -1033,7 +1051,7 @@
           // Compara pelo SRC da primeira foto: fotosDaCorAtiva monta array novo.
           const anterior = fotosDaCorAtiva(atual)[0]?.src;
           corAtiva = Number(swatch.dataset.cor);
-          cores(atual);
+          cores();
           if (fotosDaCorAtiva(atual)[0]?.src !== anterior) galeria(atual, 0);
           cta();
           $(`#modal-swatches [data-cor="${corAtiva}"]`)?.focus({ preventScroll: true });
