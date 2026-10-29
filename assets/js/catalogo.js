@@ -72,8 +72,9 @@ window.GREEN_CATEGORIAS = [
   {
     id: 'ciclomotor',
     nome: 'Ciclomotores',
-    // "ou porte de carga": o Tank (29/10/2026) faz 32 km/h, mas tem 117 cm de largura.
-    nota: 'Mais potência, velocidade ou porte de carga. Exigem CNH e emplacamento, e todos são homologados.',
+    /* "ou porte de carga": o Tank (29/10/2026) faz 32 km/h, mas tem 117 cm de
+       largura. Saiu "e todos são homologados": o do Tank não está na fonte. */
+    nota: 'Mais potência, velocidade ou porte de carga. Exigem CNH e emplacamento.',
   },
   {
     id: 'scooter',
@@ -104,6 +105,13 @@ window.GREEN_CLASSIFICACOES = {
   ciclomotor: {
     extenso: 'Exige CNH e emplacamento',
     ficha: 'Exige CNH e emplacamento · modelo homologado',
+    selos: [{ t: 'Requer CNH', tom: 'exige' }, { t: 'Emplacamento', tom: 'exige' }],
+  },
+  /* Ciclomotor cuja fonte não fala em homologação (Tank: o site da Aima não
+     diz, e o cliente pediu, em 29/10/2026, para tirar o que lá não está). */
+  ciclomotorSemHomologacao: {
+    extenso: 'Exige CNH e emplacamento',
+    ficha: 'Exige CNH e emplacamento',
     selos: [{ t: 'Requer CNH', tom: 'exige' }, { t: 'Emplacamento', tom: 'exige' }],
   },
   /* Modelo cuja ficha passa de algum limite do autopropelido (32 km/h, 70 cm
@@ -676,22 +684,21 @@ const MODELOS = [
     tags: ['Carga pesada', 'Trabalho', 'Robustez'],
     categorias: ['ciclomotor', 'triciclo'],
     /* 117 cm de largura: passa dos 70 cm do autopropelido. A loja o vende como
-       ciclomotor (29/10/2026): exige CNH e emplacamento. */
-    classificacao: 'ciclomotor',
+       ciclomotor (29/10/2026): exige CNH e emplacamento. Sem "homologado",
+       que o site da Aima não diz. */
+    classificacao: 'ciclomotorSemHomologacao',
     foto: 'assets/img/models/tank-card.webp',
     alt: 'Triciclo de carga elétrico Aima Tank cáqui, com caçamba e cabine aberta',
     preco: { valor: 20990, parcelas: PARCELADO(23990) }, // loja, 29/10/2026
     /* Fonte: aimabrasil.com.br/modelos/aima-tank (fabricante), menos a
-       bateria, que é a da tabela da loja (29/10/2026: chumbo 40V 65Ah; o
-       fabricante diz 60V 45 ou 52 Ah). A página do fabricante se contradiz
-       (README): autonomia 60 ou 70 km, recarga 7-8 h ou 6-7 h. Fica o
-       destaque da página, com a outra versão na nota. */
+       bateria, que é a da tabela da loja (29/10/2026: chumbo 40V 65Ah). O
+       fabricante só descreve a de 60V 45/52Ah, e a autonomia (60 ou 70 km) e
+       a recarga (6 a 8 h) dele são dessa versão: saíram, a pedido do cliente,
+       até a loja informar as da 40V. */
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2500 W.' },
-      autonomia: { valor: 60, unidade: 'km', nota: 'A ficha do fabricante diz até 70 km.' },
       bateria: 'Chumbo 40V 65Ah',
-      recarga: '6 a 8 horas',
       freios: 'De cubo, dianteiro e traseiro',
       suspensao: 'Traseira hidráulica',
       rodas: 'Pneus 3,50-12 e 3,75-12',
