@@ -819,19 +819,20 @@ body.menu-aberto .header {
   .filtro__btn { min-height: 44px; padding: 6px 14px 6px 6px; font-size: 10px; gap: 8px; }
   .filtro__contagem { min-width: 28px; height: 28px; font-size: 10px; }
 }
-/* Grudada abaixo de 1000 px a barra vira um rolo de uma linha só: em duas
-   linhas (medido a 768 px) o vidro cobria a primeira fileira de cards. */
-@media (max-width: 1000px) {
-  .filtro.is-fixo {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-  }
-  .filtro.is-fixo::-webkit-scrollbar { display: none; }
-  .filtro.is-fixo .filtro__btn { flex: 0 0 auto; }
+/* Grudada, a barra é sempre um rolo de uma linha só: em duas linhas o vidro
+   cobria a primeira fileira de cards (medido a 768 px; e a 1024 px quando
+   entrou a 6ª categoria, 28/10/2026). Era uma media query de 1000 px, que
+   valia para cinco abas; sem ela não há número de abas que quebre. Quando
+   tudo cabe, nada muda: a barra tem a largura do conteúdo. */
+.filtro.is-fixo {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
 }
+.filtro.is-fixo::-webkit-scrollbar { display: none; }
+.filtro.is-fixo .filtro__btn { flex: 0 0 auto; }
 
 .filtro__nota {
   min-height: 3.4em;
@@ -907,6 +908,10 @@ body.menu-aberto .header {
   place-items: center;
   width: 100%;
   aspect-ratio: 4 / 3;
+  /* Sem isto a foto em pé (patinete) estica a caixa: o `aspect-ratio` cede
+     ao conteúdo quando min-height é auto, e o nome desce em relação à fileira. */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  min-height: 0;
   padding: 7% 6% 4%;
   border: 0;
   background: radial-gradient(circle at 50% 72%, var(--ge-neon-100), var(--ge-paper) 70%);

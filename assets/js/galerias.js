@@ -86,7 +86,7 @@ window.GREEN_GALERIAS = {
    "alt": "Scooter elétrica X13 branca em três quartos frontal, em estúdio",
    "w": 736,
    "h": 616,
-   "fundo": "#020003",
+   "fundo": "#FFFFFF",
    "estudio": true
   },
   {
@@ -164,7 +164,7 @@ window.GREEN_GALERIAS = {
    "alt": "GT2000 preta em três quartos frontal, em estúdio",
    "w": 736,
    "h": 616,
-   "fundo": "#020002",
+   "fundo": "#FFFFFF",
    "estudio": true
   },
   {
@@ -860,7 +860,142 @@ window.GREEN_GALERIAS = {
    "fundo": "#59534D",
    "estudio": true
   }
- ]
+ ],
+ "tank": [
+  {
+   "src": "assets/img/models/tank-01.webp",
+   "mini": "assets/img/models/tank-01-mini.webp",
+   "alt": "Caçamba do triciclo de carga Aima Tank levantada, com o chassi à mostra",
+   "w": 840,
+   "h": 556,
+   "fundo": "#C1BCB8",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/tank-02.webp",
+   "mini": "assets/img/models/tank-02-mini.webp",
+   "alt": "Lateral da caçamba do Aima Tank, com grade e a marca Aima",
+   "w": 411,
+   "h": 274,
+   "fundo": "#86847C",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/tank-03.webp",
+   "mini": "assets/img/models/tank-03-mini.webp",
+   "alt": "Baterias montadas no chassi do Aima Tank, sob a caçamba",
+   "w": 840,
+   "h": 556,
+   "fundo": "#A6A199",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/tank-04.webp",
+   "mini": "assets/img/models/tank-04-mini.webp",
+   "alt": "Controlador e motor do Aima Tank, com o cabeamento laranja",
+   "w": 840,
+   "h": 556,
+   "fundo": "#787873",
+   "estudio": false
+  }
+ ],
+ "l10": [
+  {
+   "src": "assets/img/models/l10-01.webp",
+   "mini": "assets/img/models/l10-01-mini.webp",
+   "alt": "Patinete elétrico Atomi L10 dobrado, em estúdio",
+   "w": 1200,
+   "h": 740,
+   "fundo": "#FDFFFD",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/l10-02.webp",
+   "mini": "assets/img/models/l10-02-mini.webp",
+   "alt": "Atomi L10 estacionado num parque, ao pôr do sol",
+   "w": 1024,
+   "h": 1024,
+   "fundo": "#979074",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/l10-03.webp",
+   "mini": "assets/img/models/l10-03-mini.webp",
+   "alt": "Homem de capacete andando de Atomi L10 numa avenida",
+   "w": 1024,
+   "h": 1024,
+   "fundo": "#756F68",
+   "estudio": false
+  }
+ ],
+ "l11": [
+  {
+   "src": "assets/img/models/l11-01.webp",
+   "mini": "assets/img/models/l11-01-mini.webp",
+   "alt": "Patinete elétrico Atomi L11 dobrado, com os detalhes laranja, em estúdio",
+   "w": 1200,
+   "h": 556,
+   "fundo": "#FFFEFF",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/l11-02.webp",
+   "mini": "assets/img/models/l11-02-mini.webp",
+   "alt": "Atomi L11 parado numa rua de pedestres, ao entardecer",
+   "w": 1024,
+   "h": 1024,
+   "fundo": "#3D3F41",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/l11-03.webp",
+   "mini": "assets/img/models/l11-03-mini.webp",
+   "alt": "Homem andando de Atomi L11 numa ciclovia arborizada",
+   "w": 1024,
+   "h": 1024,
+   "fundo": "#A39E79",
+   "estudio": false
+  }
+ ],
+ "joy-tri": [
+  {
+   "src": "assets/img/models/joy-tri-01.webp",
+   "mini": "assets/img/models/joy-tri-01-mini.webp",
+   "alt": "Painel digital do Joy Tri, com marcador de bateria",
+   "w": 726,
+   "h": 726,
+   "fundo": "#616464",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/joy-tri-02.webp",
+   "mini": "assets/img/models/joy-tri-02-mini.webp",
+   "alt": "Banco do Joy Tri com encosto, e a marca MC Tri na lateral",
+   "w": 726,
+   "h": 726,
+   "fundo": "#BABCBA",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/joy-tri-03.webp",
+   "mini": "assets/img/models/joy-tri-03-mini.webp",
+   "alt": "Traseira do Joy Tri com lanterna e grade de carga",
+   "w": 726,
+   "h": 726,
+   "fundo": "#8D8E8D",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/joy-tri-04.webp",
+   "mini": "assets/img/models/joy-tri-04-mini.webp",
+   "alt": "Compartimento do banco do Joy Tri aberto, com a bateria",
+   "w": 726,
+   "h": 726,
+   "fundo": "#787A7B",
+   "estudio": false
+  }
+ ],
+ "titan": []
 };
 window.GREEN_FOTOS_COR = {
  "x11-3000w": {
@@ -985,6 +1120,64 @@ window.GREEN_FOTOS_COR = {
    "w": 1000,
    "h": 1000,
    "fundo": "#FFFFFE",
+   "estudio": true
+  }
+ },
+ "joy-tri": {
+  "azul": {
+   "src": "assets/img/models/joy-tri-cor-azul.webp",
+   "mini": "assets/img/models/joy-tri-cor-azul-mini.webp",
+   "alt": "Triciclo elétrico MotoChefe Joy Tri azul com banco marrom e cesta, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  },
+  "branco": {
+   "src": "assets/img/models/joy-tri-cor-branco.webp",
+   "mini": "assets/img/models/joy-tri-cor-branco-mini.webp",
+   "alt": "Triciclo elétrico MotoChefe Joy Tri branco e azul-marinho com banco marrom, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  },
+  "preto": {
+   "src": "assets/img/models/joy-tri-cor-preto.webp",
+   "mini": "assets/img/models/joy-tri-cor-preto-mini.webp",
+   "alt": "Triciclo elétrico MotoChefe Joy Tri preto com banco marrom e cesta, em estúdio",
+   "w": 726,
+   "h": 726,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  }
+ },
+ "titan": {
+  "branco": {
+   "src": "assets/img/models/titan-cor-branco.webp",
+   "mini": "assets/img/models/titan-cor-branco-mini.webp",
+   "alt": "Scooter elétrica Voe Titan branca com farol duplo e baú, em três quartos frontal",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFFFF",
+   "estudio": true
+  },
+  "cinza": {
+   "src": "assets/img/models/titan-cor-cinza.webp",
+   "mini": "assets/img/models/titan-cor-cinza-mini.webp",
+   "alt": "Scooter elétrica Voe Titan cinza com farol duplo e baú, em três quartos frontal",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFFFF",
+   "estudio": true
+  },
+  "preto": {
+   "src": "assets/img/models/titan-cor-preto.webp",
+   "mini": "assets/img/models/titan-cor-preto-mini.webp",
+   "alt": "Scooter elétrica Voe Titan preta com farol duplo e baú, em três quartos frontal",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFFFF",
    "estudio": true
   }
  }

@@ -371,8 +371,17 @@
         </dl>`;
     }
 
+    /* Sem preço (modelo novo antes de a loja informar): o bloco continua no
+       lugar, para o card não ficar mais baixo que os vizinhos da fileira. */
     function preco(m, classe = '') {
-      if (!m.preco?.valor) return '';
+      if (!m.preco?.valor) {
+        return `
+        <p class="preco ${classe}">
+          <span class="preco__rotulo">Valor</span>
+          <span class="preco__valor">Sob consulta</span>
+          <span class="preco__parcelas">Condições pelo WhatsApp</span>
+        </p>`;
+      }
       return `
         <p class="preco ${classe}">
           <span class="preco__rotulo">Valor</span>
@@ -1181,7 +1190,9 @@
       });
     }
 
-    const modelos = vitrine.todos();
+    /* Product sem `offers` (nem avaliação) é erro no Search Console: modelo
+       sem preço fica fora da lista até a loja informar o valor. */
+    const modelos = vitrine.todos().filter((m) => m.preco?.valor);
     if (modelos.length) {
       scripts.push({
         '@context': 'https://schema.org',

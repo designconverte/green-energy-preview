@@ -6,6 +6,11 @@
    detalhes (ficha, cores) e galeria de cada modelo. O bruto está em
    projeto/site_atual_green/dados/modelos-wp.json.
 
+   28/10/2026, pedido do cliente: MECH-T, KN8, VED e Roma saíram da vitrine
+   (`oculto: true`, dado e fotos guardados para voltar) e entraram cinco
+   modelos que o WP não tinha, no fim da lista. A fonte de cada um está no
+   próprio modelo; sem preço por enquanto, também a pedido do cliente.
+
    REGRA HERDADA DO FRAMEWORK: nenhum número entra sem fonte. Aqui a fonte é a
    própria loja (o cadastro do WordPress). Onde o card e a ficha do mesmo
    modelo discordam, vale o CARD (é o que o cliente vê primeiro) e a
@@ -72,7 +77,13 @@ window.GREEN_CATEGORIAS = [
   {
     id: 'triciclo',
     nome: 'Triciclos',
-    nota: 'Três rodas, mais estabilidade. Os triciclos da Green são autopropelidos: sem CNH e sem emplacamento.',
+    // Era "os triciclos da Green são autopropelidos": o Tank (28/10/2026) não é.
+    nota: 'Três rodas, mais estabilidade. A classificação de cada um, com ou sem CNH, está no card e nos detalhes.',
+  },
+  {
+    id: 'patinete',
+    nome: 'Patinetes',
+    nota: 'Patinetes elétricos dobráveis. A classificação de cada um está no card e nos detalhes.',
   },
 ];
 
@@ -88,6 +99,15 @@ window.GREEN_CLASSIFICACOES = {
     extenso: 'Exige CNH e emplacamento',
     ficha: 'Exige CNH e emplacamento · modelo homologado',
     selos: [{ t: 'Requer CNH', tom: 'exige' }, { t: 'Emplacamento', tom: 'exige' }],
+  },
+  /* Modelo cuja ficha passa de algum limite do autopropelido (32 km/h, 70 cm
+     de largura) sem que a loja tenha dito como ele é vendido. "Sem CNH" seria
+     falso pela própria regra que o site cita; "Requer CNH" seria palpite.
+     Até a loja confirmar (README), o selo manda perguntar. */
+  consultar: {
+    extenso: 'Classificação a confirmar com a loja',
+    ficha: 'A confirmar com a loja antes da compra',
+    selos: [{ t: 'Consulte CNH e emplacamento', tom: 'exige' }],
   },
 };
 
@@ -144,9 +164,10 @@ window.GREEN_ORDEM = [
   'v8-ultra', 'x13-pro', 'kuyan-litio-pro', 'x13', 'q5-dimoon', 'mech-t',
   'gt2000', 'liberty', 'tiger-x6', 'kn8', 'mike', 'x11-3000w', 'ved',
   'mia-tri', 'roma', 's8-3000w',
+  'tank', 'l10', 'l11', 'joy-tri', 'titan',
 ];
 
-window.GREEN_MODELOS = [
+const MODELOS = [
   {
     id: 'v8-ultra',
     nome: 'V8 Ultra',
@@ -268,6 +289,7 @@ window.GREEN_MODELOS = [
   },
   {
     id: 'mech-t',
+    oculto: true, // fora da vitrine a pedido do cliente (28/10/2026)
     nome: 'MECH-T',
     fabricante: null,
     descritivo: 'Scooter elétrica',
@@ -391,6 +413,7 @@ window.GREEN_MODELOS = [
   },
   {
     id: 'kn8',
+    oculto: true, // fora da vitrine a pedido do cliente (28/10/2026)
     nome: 'KN8',
     fabricante: 'Kappak',
     descritivo: 'Scooter elétrica',
@@ -490,6 +513,7 @@ window.GREEN_MODELOS = [
   },
   {
     id: 'ved',
+    oculto: true, // fora da vitrine a pedido do cliente (28/10/2026)
     nome: 'VED',
     fabricante: 'MotoChefe',
     descritivo: 'Triciclo elétrico',
@@ -555,6 +579,7 @@ window.GREEN_MODELOS = [
   },
   {
     id: 'roma',
+    oculto: true, // fora da vitrine a pedido do cliente (28/10/2026)
     nome: 'Roma',
     fabricante: 'MotoChefe',
     descritivo: 'Scooter elétrica',
@@ -627,7 +652,189 @@ window.GREEN_MODELOS = [
     ],
     galeria: detalhes('s8-3000w', 2, 3),
   },
+
+  /* ── Fora do WP (28/10/2026) ─────────────────────────────────────────── */
+
+  {
+    id: 'tank',
+    nome: 'Tank',
+    fabricante: 'Aima',
+    descritivo: 'Triciclo de carga elétrico',
+    tags: ['Carga pesada', 'Trabalho', 'Robustez'],
+    categorias: ['triciclo'],
+    /* 117 cm de largura: passa dos 70 cm do autopropelido. Ver `consultar`. */
+    classificacao: 'consultar',
+    foto: 'assets/img/models/tank-card.webp',
+    alt: 'Triciclo de carga elétrico Aima Tank cáqui, com caçamba e cabine aberta',
+    preco: null, // sem preço por enquanto (cliente, 28/10/2026)
+    /* Fonte: aimabrasil.com.br/modelos/aima-tank (fabricante). A página se
+       contradiz (README): autonomia 60 ou 70 km, bateria 45 ou 52 Ah, recarga
+       7-8 h ou 6-7 h. Fica o destaque da página, com a outra versão na nota. */
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2500 W.' },
+      autonomia: { valor: 60, unidade: 'km', nota: 'A ficha do fabricante diz até 70 km.' },
+      bateria: 'Chumbo 60V 52Ah',
+      recarga: '6 a 8 horas',
+      freios: 'De cubo, dianteiro e traseiro',
+      suspensao: 'Traseira hidráulica',
+      rodas: 'Pneus 3,50-12 e 3,75-12',
+      carga: 'Até 400 kg',
+      dimensoes: '3145 × 1170 × 1340 mm (C × L × A) · assento a 710 mm',
+    },
+    equipamentos: ['Caçamba de carga', 'Display LCD Bafang'],
+    galeria: [
+      ...doCard('tank', 'Triciclo de carga elétrico Aima Tank cáqui, com caçamba e cabine aberta'),
+      ...fotos('tank'),
+    ],
+  },
+  {
+    id: 'l10',
+    nome: 'L10',
+    fabricante: 'Atomi',
+    descritivo: 'Patinete elétrico',
+    tags: ['Agilidade', 'Potência', 'Dobrável'],
+    categorias: ['patinete'],
+    /* 40 km/h de fábrica: passa dos 32 km/h do autopropelido. */
+    classificacao: 'consultar',
+    foto: 'assets/img/models/l10-card.webp',
+    recorte: false, // foto do anúncio com fundo branco, sem alfa
+    alt: 'Patinete elétrico Atomi L10 preto, de perfil, em estúdio',
+    preco: null, // sem preço por enquanto (cliente, 28/10/2026)
+    /* Fonte: anúncio do Mercado Livre indicado pelo cliente (o modelo lá é
+       "L10K"). O anúncio escreve "1,22 cm" e "1,28 cm": são metros. */
+    specs: {
+      velocidade: { valor: 40, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W' },
+      autonomia: { valor: 50, unidade: 'km' },
+      bateria: 'Lítio 48V 12,6Ah',
+      recarga: '7,5 horas',
+      freios: 'A tambor, dianteiro e traseiro, mais freio elétrico traseiro',
+      rodas: 'Pneus CST tubeless de 10"',
+      carga: 'Até 100 kg',
+      dimensoes: '122 × 20 × 128 cm (C × L × A)',
+      peso: '32 kg',
+    },
+    equipamentos: [
+      'Dobrável', '3 modos de condução', 'Painel de LED',
+      'Farol, lanterna e setas', 'Campainha',
+    ],
+    cores: [COR.preta],
+    galeria: [...doCard('l10', 'Patinete elétrico Atomi L10 preto, de perfil, em estúdio'), ...fotos('l10')],
+  },
+  {
+    id: 'l11',
+    nome: 'L11',
+    fabricante: 'Atomi',
+    descritivo: 'Patinete elétrico',
+    tags: ['Potência', 'Dois motores', 'Dobrável'],
+    categorias: ['patinete'],
+    /* 60 km/h de fábrica: passa dos 32 km/h do autopropelido. */
+    classificacao: 'consultar',
+    foto: 'assets/img/models/l11-card.webp',
+    recorte: false, // foto do anúncio com fundo branco, sem alfa
+    alt: 'Patinete elétrico Atomi L11 cinza-escuro com detalhes laranja, de perfil, em estúdio',
+    preco: null, // sem preço por enquanto (cliente, 28/10/2026)
+    /* Fonte: anúncio do Mercado Livre indicado pelo cliente. A potência é a
+       da tabela do anúncio; o texto diz "2 x 1000W (potência nominal 800W –
+       1000W)", e isso vai na nota. Altura e comprimento em metros (o anúncio
+       escreve "cm"). */
+    specs: {
+      velocidade: { valor: 60, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W', nota: 'Dois motores. O anúncio diz 2 × 1000 W, com potência nominal de 800 a 1000 W.' },
+      autonomia: { valor: 60, unidade: 'km' },
+      bateria: 'Lítio 48V 20Ah',
+      recarga: '10 horas',
+      carregador: '2 A',
+      freios: 'A disco, dianteiro e traseiro',
+      suspensao: 'Dianteira e traseira, ajustável',
+      rodas: 'Pneus de 10"',
+      protecao: 'IP54 · poeira e respingos',
+      carga: 'Até 140 kg',
+      dimensoes: '125 × 25 × 134 cm (C × L × A)',
+      peso: '35 kg',
+    },
+    equipamentos: [
+      'Dobrável, em alumínio', 'Tração traseira ou nas duas rodas', 'Modos Eco, Drive e Sport',
+      'Tela LCD multifuncional', 'Luz de freio, setas e LEDs laterais', 'Buzina',
+    ],
+    cores: [{ nome: 'Cinza-escuro', hex: '#3B3D40' }],
+    galeria: [
+      ...doCard('l11', 'Patinete elétrico Atomi L11 cinza-escuro com detalhes laranja, de perfil, em estúdio'),
+      ...fotos('l11'),
+    ],
+  },
+  {
+    id: 'joy-tri',
+    nome: 'Joy Tri',
+    fabricante: 'MotoChefe',
+    descritivo: 'Triciclo elétrico',
+    tags: ['Estabilidade', 'Autonomia', 'Praticidade'],
+    categorias: ['autopropelido', 'triciclo'],
+    classificacao: 'autopropelido',
+    foto: 'assets/img/models/joy-tri-card.webp',
+    alt: 'Triciclo elétrico MotoChefe Joy Tri preto com cesta frontal e banco marrom',
+    preco: null, // sem preço por enquanto (cliente, 28/10/2026)
+    // Fonte: piracicaba.motochefe.com.br/#modelo/mc-joy-tri. Fotos do cliente.
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 600, unidade: 'W' },
+      autonomia: { valor: 55, unidade: 'km' },
+      bateria: 'Lítio 60V 20Ah',
+      carga: 'Até 180 kg',
+    },
+    equipamentos: [
+      'Painel digital', 'Bateria removível', 'Carregador bivolt',
+      '3 níveis de velocidade', 'Porta-treco sob o banco',
+    ],
+    // Azul medido na foto; a ordem é a da fonte.
+    cores: [
+      { ...COR.preta, galeria: fotoCor('joy-tri', 'preto') },
+      { nome: 'Azul', hex: '#2729AD', galeria: fotoCor('joy-tri', 'azul') },
+      { ...COR.branca, galeria: fotoCor('joy-tri', 'branco') },
+    ],
+    galeria: detalhes('joy-tri'),
+  },
+  {
+    id: 'titan',
+    nome: 'Titan',
+    fabricante: 'Voe',
+    descritivo: 'Scooter elétrica',
+    tags: ['Autonomia', 'Garupa', 'Baú'],
+    categorias: ['autopropelido'],
+    classificacao: 'autopropelido',
+    foto: 'assets/img/models/titan-card.webp',
+    alt: 'Scooter elétrica Voe Titan branca com farol duplo e baú',
+    preco: null, // sem preço por enquanto (cliente, 28/10/2026)
+    // Fonte: urbanamotoseletricas.com.br/#modelo/voe-titan. Fotos do cliente.
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W' },
+      autonomia: { valor: 70, unidade: 'km' },
+      bateria: 'Lítio ferro fosfato 60V 30Ah, removível com alça',
+      recarga: '5 horas',
+      freios: 'Hidráulicos a disco, dianteiro e traseiro',
+      suspensao: 'Amortecedores dianteiro e traseiro',
+      rodas: 'Dianteira de liga leve, aro 12"',
+      carga: 'Até 180 kg',
+    },
+    equipamentos: [
+      'Baú de 27 litros', 'Banco com espaço para garupa', 'Marcha ré', 'Modo parking',
+      '3 níveis de velocidade', 'Tecnologia NFC', 'Alarme antifurto',
+      'Painel e setas em LED', 'Carregador bivolt', 'Buzina', 'Chaves reserva',
+    ],
+    // Cinza da fonte, amostrado na foto (a lataria é cinza-clara).
+    cores: [
+      { ...COR.branca, galeria: fotoCor('titan', 'branco') },
+      { nome: 'Cinza', hex: '#9A9FA6', galeria: fotoCor('titan', 'cinza') },
+      { ...COR.preta, galeria: fotoCor('titan', 'preto') },
+    ],
+    galeria: [],
+  },
 ];
+
+/* Só o que está à venda vai para a vitrine, o JSON-LD e os links #modelo/. */
+window.GREEN_MODELOS = MODELOS.filter((m) => !m.oculto);
 
 /* FAQ do site atual, as doze perguntas na ordem de lá. Revisão mínima de
    texto: "nos cartão" virou "no cartão", "R$ 0,90 uma carga" virou "por carga"
