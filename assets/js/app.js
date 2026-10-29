@@ -373,7 +373,21 @@
 
     /* Sem preço (modelo novo antes de a loja informar): o bloco continua no
        lugar, para o card não ficar mais baixo que os vizinhos da fileira. */
-    function preco(m, classe = '') {
+    /* Parcelamento confirmado pela loja (29/10/2026) vem como objeto: o dado é
+       o total no cartão e a parcela sai da conta, para não voltar a divergir
+       do total (README, seção 1). O texto herdado do WP continua string. O
+       total a prazo e os cartões aceitos só cabem no modal. */
+    function parcelas(p, completo) {
+      if (!p) return '';
+      if (typeof p === 'string') return `<span class="preco__parcelas">${escapar(p)}</span>`;
+      const linha = `${p.vezes}x de ${real.format(p.total / p.vezes)} ${p.juros ? 'com' : 'sem'} juros`;
+      const total = completo
+        ? `<span class="preco__total">Total a prazo ${real.format(p.total)} · ${escapar(p.cartoes)}</span>`
+        : '';
+      return `<span class="preco__parcelas">${linha}</span>${total}`;
+    }
+
+    function preco(m, classe = '', completo = false) {
       if (!m.preco?.valor) {
         return `
         <p class="preco ${classe}">
@@ -386,7 +400,7 @@
         <p class="preco ${classe}">
           <span class="preco__rotulo">Valor</span>
           <span class="preco__valor">${real.format(m.preco.valor)}</span>
-          ${m.preco.parcelas ? `<span class="preco__parcelas">${escapar(m.preco.parcelas)}</span>` : ''}
+          ${parcelas(m.preco.parcelas, completo)}
         </p>`;
     }
 
@@ -981,7 +995,7 @@
       destaque.innerHTML = vitrine.numeros(atual, 'specs--modal');
       destaque.hidden = !destaque.innerHTML.trim();
 
-      $('#modal-preco').innerHTML = vitrine.preco(atual, 'preco--modal');
+      $('#modal-preco').innerHTML = vitrine.preco(atual, 'preco--modal', true);
 
       galeria(atual);
       ficha(atual);

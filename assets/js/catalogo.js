@@ -11,6 +11,11 @@
    modelos que o WP não tinha, no fim da lista. A fonte de cada um está no
    próprio modelo; sem preço por enquanto, também a pedido do cliente.
 
+   29/10/2026, tabela da loja (WhatsApp): preço à vista e total em 12x COM
+   juros no cartão (Visa e Master) de Kuyan Lítio Pro, Liberty, Q5 Dimoon,
+   Tank e Tiger X6, que passam a `parcelas: PARCELADO(total)`. O Tank vira
+   ciclomotor (CNH e emplacamento), como a loja o vende.
+
    REGRA HERDADA DO FRAMEWORK: nenhum número entra sem fonte. Aqui a fonte é a
    própria loja (o cadastro do WordPress). Onde o card e a ficha do mesmo
    modelo discordam, vale o CARD (é o que o cliente vê primeiro) e a
@@ -67,7 +72,8 @@ window.GREEN_CATEGORIAS = [
   {
     id: 'ciclomotor',
     nome: 'Ciclomotores',
-    nota: 'Mais potência e velocidade. Exigem CNH e emplacamento, e todos são homologados.',
+    // "ou porte de carga": o Tank (29/10/2026) faz 32 km/h, mas tem 117 cm de largura.
+    nota: 'Mais potência, velocidade ou porte de carga. Exigem CNH e emplacamento, e todos são homologados.',
   },
   {
     id: 'scooter',
@@ -158,6 +164,10 @@ function fotoCor(id, cor) {
    miniatura própria: o modal usa o próprio recorte, que já está em cache. */
 const doCard = (id, alt) => [{ src: `assets/img/models/${id}-card.webp`, alt, fundo: '#FFFFFF', estudio: true }];
 
+/* Parcelamento da tabela da loja: o total em 12x no cartão. O app.js tira
+   a parcela da conta e mostra o total a prazo no modal. */
+const PARCELADO = (total) => ({ vezes: 12, total, juros: true, cartoes: 'Visa e Master' });
+
 /* Ordem da vitrine = ordem do site atual. Mexer aqui é a forma certa de
    reordenar; quem não estiver na lista aparece depois, na ordem do catálogo. */
 window.GREEN_ORDEM = [
@@ -228,7 +238,7 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/kuyan-litio-pro-card.webp',
     alt: 'Scooter elétrica Aima Kuyan Lítio Pro branca com banco bege e cesta',
-    preco: { valor: 8590, parcelas: '12x R$ 799,17 s/ juros' },
+    preco: { valor: 8590, parcelas: PARCELADO(9590) }, // loja, 29/10/2026
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -274,7 +284,7 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/q5-dimoon-card.webp',
     alt: 'Scooter elétrica Aima Q5 Dimoon creme com banco vermelho e baú',
-    preco: { valor: 11590, parcelas: '12x R$ 1.065,57 s/ juros' },
+    preco: { valor: 11590, parcelas: PARCELADO(12990) }, // loja, 29/10/2026
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2600 W.' },
@@ -348,14 +358,16 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/liberty-card.webp',
     alt: 'Scooter elétrica Aima Liberty prata com baú traseiro',
-    preco: { valor: 11990, parcelas: '10x de R$ 1.199,00 no cartão' },
+    // Loja, 29/10/2026 (era 11.990 em 10x de 1.199, do WP).
+    preco: { valor: 10990, parcelas: PARCELADO(12290) },
     /* Autonomia: o card diz 50 km; a ficha, "de 50 a 70 km". Vale o card, e
-       a faixa da ficha vai na nota. */
+       a faixa da ficha vai na nota. Bateria: o WP dizia "Lítio"; a tabela da
+       loja (29/10/2026) diz LiFePO4. */
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Motor AIMA Hub, pico de 2600 W.' },
       autonomia: { valor: 50, unidade: 'km', nota: 'De 50 a 70 km, segundo a ficha.' },
-      bateria: 'Lítio 64V 30Ah',
+      bateria: 'LiFePO4 64V 30Ah',
       recarga: '7 a 8 horas',
       carregador: 'Bivolt 110–220V, tomada comum',
       freios: 'Disco dianteiro e traseiro',
@@ -383,7 +395,8 @@ const MODELOS = [
     classificacao: 'ciclomotor',
     foto: 'assets/img/models/tiger-x6-card.webp',
     alt: 'Scooter elétrica Aima Tiger X6 preta com farol em LED azul',
-    preco: { valor: 23900, parcelas: 'Em até 10x no cartão' },
+    // Loja, 29/10/2026 (era 23.900 em até 10x, do WP).
+    preco: { valor: 20990, parcelas: PARCELADO(23990) },
     specs: {
       velocidade: { valor: 80, unidade: 'km/h' },
       potencia: { valor: 3000, unidade: 'W', nota: 'Pico de 6000 W.' },
@@ -661,20 +674,23 @@ const MODELOS = [
     fabricante: 'Aima',
     descritivo: 'Triciclo de carga elétrico',
     tags: ['Carga pesada', 'Trabalho', 'Robustez'],
-    categorias: ['triciclo'],
-    /* 117 cm de largura: passa dos 70 cm do autopropelido. Ver `consultar`. */
-    classificacao: 'consultar',
+    categorias: ['ciclomotor', 'triciclo'],
+    /* 117 cm de largura: passa dos 70 cm do autopropelido. A loja o vende como
+       ciclomotor (29/10/2026): exige CNH e emplacamento. */
+    classificacao: 'ciclomotor',
     foto: 'assets/img/models/tank-card.webp',
     alt: 'Triciclo de carga elétrico Aima Tank cáqui, com caçamba e cabine aberta',
-    preco: null, // sem preço por enquanto (cliente, 28/10/2026)
-    /* Fonte: aimabrasil.com.br/modelos/aima-tank (fabricante). A página se
-       contradiz (README): autonomia 60 ou 70 km, bateria 45 ou 52 Ah, recarga
-       7-8 h ou 6-7 h. Fica o destaque da página, com a outra versão na nota. */
+    preco: { valor: 20990, parcelas: PARCELADO(23990) }, // loja, 29/10/2026
+    /* Fonte: aimabrasil.com.br/modelos/aima-tank (fabricante), menos a
+       bateria, que é a da tabela da loja (29/10/2026: chumbo 40V 65Ah; o
+       fabricante diz 60V 45 ou 52 Ah). A página do fabricante se contradiz
+       (README): autonomia 60 ou 70 km, recarga 7-8 h ou 6-7 h. Fica o
+       destaque da página, com a outra versão na nota. */
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2500 W.' },
       autonomia: { valor: 60, unidade: 'km', nota: 'A ficha do fabricante diz até 70 km.' },
-      bateria: 'Chumbo 60V 52Ah',
+      bateria: 'Chumbo 40V 65Ah',
       recarga: '6 a 8 horas',
       freios: 'De cubo, dianteiro e traseiro',
       suspensao: 'Traseira hidráulica',
