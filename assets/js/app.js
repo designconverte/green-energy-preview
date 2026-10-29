@@ -376,11 +376,13 @@
     /* Parcelamento confirmado pela loja (29/10/2026) vem como objeto: o dado é
        o total no cartão e a parcela sai da conta, para não voltar a divergir
        do total (README, seção 1). O texto herdado do WP continua string. O
-       total a prazo e os cartões aceitos só cabem no modal. */
+       total a prazo e os cartões aceitos só cabem no modal. Decisão do
+       cliente (29/10/2026): "sem juros" por extenso quando não há juros; com
+       juros, a linha não fala neles e o total a prazo do modal mostra. */
     function parcelas(p, completo) {
       if (!p) return '';
       if (typeof p === 'string') return `<span class="preco__parcelas">${escapar(p)}</span>`;
-      const linha = `${p.vezes}x de ${real.format(p.total / p.vezes)} ${p.juros ? 'com' : 'sem'} juros`;
+      const linha = `${p.vezes}x de ${real.format(p.total / p.vezes)}${p.juros ? '' : ' sem juros'}`;
       const total = completo
         ? `<span class="preco__total">Total a prazo ${real.format(p.total)} · ${escapar(p.cartoes)}</span>`
         : '';
