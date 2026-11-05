@@ -16,6 +16,12 @@
    Tank e Tiger X6, que passam a `parcelas: PARCELADO(total)`. O Tank vira
    ciclomotor (CNH e emplacamento), como a loja o vende.
 
+   30/10/2026, segunda tabela da loja: os outros oito da vitrine (Mike, X11,
+   S8, Mia Tri, X13 Pro, X13, GT2000 e V8 Ultra, que a loja chama de "V8
+   Pro"), também em `PARCELADO(total)`. Onde a bateria da tabela difere da do
+   WP, vale a da tabela, com a do WP no comentário do modelo. A Titan passa a
+   se chamar "Tank (Titan)", nome pelo qual o pessoal a procura (cliente).
+
    REGRA HERDADA DO FRAMEWORK: nenhum número entra sem fonte. Aqui a fonte é a
    própria loja (o cadastro do WordPress). Onde o card e a ficha do mesmo
    modelo discordam, vale o CARD (é o que o cliente vê primeiro) e a
@@ -196,7 +202,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/v8-ultra-card.webp',
     alt: 'Bike elétrica V8 Ultra preta com banco marrom e pneus fat',
-    preco: { valor: 7990, parcelas: '12x R$ 734,59 s/ juros' },
+    /* Loja, 30/10/2026, como "V8 Pro 1000W Lítio 48V 15Ah" (era 7.990 em 12x
+       de 734,59 "s/ juros", do WP). Mesma bateria; o motor segue o do WP. */
+    preco: { valor: 8590, parcelas: PARCELADO(9590) },
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 750, unidade: 'W', nota: 'Pico de 1000 W.' },
@@ -223,12 +231,13 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/x13-pro-card.webp',
     alt: 'Scooter elétrica X13 Pro vermelha e preta com pneus largos',
-    preco: { valor: 11990, parcelas: '12x R$ 982,50 s/ juros' },
+    // Loja, 30/10/2026 (era 11.990, do WP; bateria do WP: 60V 24Ah).
+    preco: { valor: 10590, parcelas: PARCELADO(11990) },
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2500 W.' },
       autonomia: { valor: 50, unidade: 'km' },
-      bateria: 'Lítio 60V 24Ah, removível',
+      bateria: 'Lítio 60V 20Ah, removível',
       carregador: 'Smart (5A) bivolt 110/220V, tomada convencional',
       garantia: '1 ano para motor e bateria',
     },
@@ -270,12 +279,13 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/x13-card.webp',
     alt: 'Scooter elétrica X13 branca com pneus largos e banco com encosto',
-    preco: { valor: 9590, parcelas: '12x R$ 890,83 s/ juros' },
+    // Loja, 30/10/2026 (era 9.590, do WP; bateria do WP: 60V 24Ah).
+    preco: { valor: 9990, parcelas: PARCELADO(10990) },
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
       autonomia: { valor: 50, unidade: 'km' },
-      bateria: 'Lítio 60V 24Ah, removível',
+      bateria: 'Lítio 60V 20Ah, removível',
       carregador: 'Smart (5A) bivolt 110/220V, tomada convencional',
       garantia: '1 ano para motor e bateria',
     },
@@ -339,7 +349,7 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/gt2000-card.webp',
     alt: 'Bike elétrica GT2000 preta com pneus de trilha',
-    preco: { valor: 11590, parcelas: '12x R$ 1.065,57 s/ juros' },
+    preco: { valor: 11590, parcelas: PARCELADO(12990) }, // loja, 30/10/2026
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -469,13 +479,15 @@ const MODELOS = [
     foto: 'assets/img/models/mike-card.webp',
     recorte: false, // a foto do card do WP veio com fundo branco, sem alfa
     alt: 'Triciclo elétrico Aima Mike verde com banco marrom e cesta',
-    preco: { valor: 13990, parcelas: 'Em até 10x sem juros no cartão' },
-    /* Autonomia: o card diz 50 km; a ficha, "de 30 a 50 km". */
+    // Loja, 30/10/2026 (era 13.990 em até 10x, do WP).
+    preco: { valor: 11590, parcelas: PARCELADO(12990) },
+    /* Autonomia: o card diz 50 km; a ficha, "de 30 a 50 km". Bateria: a da
+       tabela da loja (30/10/2026); o WP dizia grafeno chumbo 72V 21,8Ah, fixa. */
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 650, unidade: 'W', nota: 'Pico de 1500 W.' },
       autonomia: { valor: 50, unidade: 'km', nota: 'De 30 a 50 km, segundo a ficha.' },
-      bateria: 'Grafeno chumbo 72V 21,8Ah (fixa)',
+      bateria: 'Lítio 60V 24Ah',
       carregador: 'Smart bivolt, com desligamento automático',
       freios: 'A tambor',
       suspensao: 'Dianteira e traseira',
@@ -505,11 +517,14 @@ const MODELOS = [
     classificacao: 'ciclomotor',
     foto: 'assets/img/models/x11-3000w-card.webp',
     alt: 'Scooter elétrica MotoChefe X11 3000W com a bandeira do Reino Unido',
-    preco: { valor: 12490, parcelas: 'Em até 10x sem juros no cartão' },
+    /* Loja, 30/10/2026, como "X11-12 3000W Lítio 60V 24Ah" (era 12.490 em até
+       10x, do WP, que não informava a bateria). */
+    preco: { valor: 11490, parcelas: PARCELADO(12590) },
     specs: {
       velocidade: { valor: 70, unidade: 'km/h' },
       potencia: { valor: 3000, unidade: 'W' },
       autonomia: { valor: 50, unidade: 'km', nota: 'Com a bateria extra.' },
+      bateria: 'Lítio 60V 24Ah',
       recarga: '6 a 8 horas',
       carregador: 'Bivolt',
       freios: 'A disco',
@@ -571,7 +586,8 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/mia-tri-card.webp',
     alt: 'Triciclo elétrico MotoChefe Mia Tri azul-claro com baú',
-    preco: { valor: 12990, parcelas: 'Em até 10x sem juros no cartão' },
+    // Loja, 30/10/2026 (era 12.990 em até 10x, do WP).
+    preco: { valor: 11990, parcelas: PARCELADO(13590) },
     /* A ficha do WP traz "Tamanho do veículo: 1356562mm", medida truncada no
        cadastro. Fica fora até a loja confirmar (ver README). */
     specs: {
@@ -642,7 +658,9 @@ const MODELOS = [
     classificacao: 'ciclomotor',
     foto: 'assets/img/models/s8-3000w-card.webp',
     alt: 'Scooter elétrica MotoChefe S8 3000W prata e preta com pneus largos',
-    preco: { valor: 13490, parcelas: 'Em até 10x sem juros no cartão' },
+    /* Loja, 30/10/2026, como "S8-12 3000W Lítio 60V 24Ah" (era 13.490 em até
+       10x, do WP, que não informava a bateria). */
+    preco: { valor: 12590, parcelas: PARCELADO(13990) },
     /* DIVERGÊNCIA (README): o card diz 50 km/h e 3000 W; a ficha lista duas
        versões, 2000 W/50 km/h/aro 10" e 3000 W/70 km/h/aro 12". O card
        mistura as duas. Fica o card, com as versões na nota. */
@@ -650,6 +668,7 @@ const MODELOS = [
       velocidade: { valor: 50, unidade: 'km/h', nota: 'A ficha lista 2000 W a 50 km/h (aro 10") e 3000 W a 70 km/h (aro 12").' },
       potencia: { valor: 3000, unidade: 'W' },
       autonomia: { valor: 80, unidade: 'km', nota: 'Com a bateria extra.' },
+      bateria: 'Lítio 60V 24Ah',
       recarga: '6 a 8 horas',
       carregador: 'Bivolt',
       freios: 'A disco',
@@ -820,14 +839,17 @@ const MODELOS = [
   },
   {
     id: 'titan',
-    nome: 'Titan',
+    /* "Tank (Titan)" a pedido do cliente (30/10/2026): o modelo surgiu como
+       Tank, antes do triciclo da Aima, e é por esse nome que o procuram. O id
+       (e o link #modelo/titan) não muda. */
+    nome: 'Tank (Titan)',
     fabricante: 'Voe',
     descritivo: 'Scooter elétrica',
     tags: ['Autonomia', 'Garupa', 'Baú'],
     categorias: ['autopropelido'],
     classificacao: 'autopropelido',
     foto: 'assets/img/models/titan-card.webp',
-    alt: 'Scooter elétrica Voe Titan branca com farol duplo e baú',
+    alt: 'Scooter elétrica Voe Tank (Titan) branca com farol duplo e baú',
     preco: null, // sem preço por enquanto (cliente, 28/10/2026)
     // Fonte: urbanamotoseletricas.com.br/#modelo/voe-titan. Fotos do cliente.
     specs: {

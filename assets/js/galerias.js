@@ -1156,7 +1156,7 @@ window.GREEN_FOTOS_COR = {
   "branco": {
    "src": "assets/img/models/titan-cor-branco.webp",
    "mini": "assets/img/models/titan-cor-branco-mini.webp",
-   "alt": "Scooter elétrica Voe Titan branca com farol duplo e baú, em três quartos frontal",
+   "alt": "Scooter elétrica Voe Tank (Titan) branca com farol duplo e baú, em três quartos frontal",
    "w": 1000,
    "h": 750,
    "fundo": "#FFFFFF",
@@ -1165,7 +1165,7 @@ window.GREEN_FOTOS_COR = {
   "cinza": {
    "src": "assets/img/models/titan-cor-cinza.webp",
    "mini": "assets/img/models/titan-cor-cinza-mini.webp",
-   "alt": "Scooter elétrica Voe Titan cinza com farol duplo e baú, em três quartos frontal",
+   "alt": "Scooter elétrica Voe Tank (Titan) cinza com farol duplo e baú, em três quartos frontal",
    "w": 1000,
    "h": 750,
    "fundo": "#FFFFFF",
@@ -1174,7 +1174,7 @@ window.GREEN_FOTOS_COR = {
   "preto": {
    "src": "assets/img/models/titan-cor-preto.webp",
    "mini": "assets/img/models/titan-cor-preto-mini.webp",
-   "alt": "Scooter elétrica Voe Titan preta com farol duplo e baú, em três quartos frontal",
+   "alt": "Scooter elétrica Voe Tank (Titan) preta com farol duplo e baú, em três quartos frontal",
    "w": 1000,
    "h": 750,
    "fundo": "#FFFFFF",
