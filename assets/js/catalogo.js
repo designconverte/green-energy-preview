@@ -928,7 +928,7 @@ window.GREEN_FAQ = [
        cartão de crédito, dinheiro, PIX ou transferência bancária": a tabela é
        12x com juros, o à vista é só PIX ou dinheiro e o cartão não passa 1x. */
     q: 'Quais são as formas de pagamento?',
-    a: `À vista, no PIX ou em dinheiro. No cartão de crédito (${PAGAMENTO.cartoes}), só parcelado, em até ${PAGAMENTO.vezes}x: o valor da parcela está em cada modelo.`,
+    a: `À vista, no PIX ou em dinheiro. No cartão de crédito (${PAGAMENTO.cartoes}), parcelado em ${PAGAMENTO.vezes}x: o valor da parcela está em cada modelo.`,
   },
   {
     q: 'Posso carregar minha moto em tomada 110V e 220V?',
