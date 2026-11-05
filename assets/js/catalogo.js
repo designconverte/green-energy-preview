@@ -185,7 +185,7 @@ const PAGAMENTO = { aVista: 'PIX ou dinheiro', vezes: 12, cartoes: 'Visa e Maste
 window.GREEN_PAGAMENTO = PAGAMENTO;
 
 /* Parcelamento da tabela da loja: o total em 12x no cartão. O app.js tira
-   a parcela da conta e mostra o total a prazo no modal. */
+   a parcela da conta (o total não aparece no site, pedido do dono, 05/11). */
 const PARCELADO = (total) => ({ vezes: PAGAMENTO.vezes, total, juros: true, cartoes: PAGAMENTO.cartoes });
 
 /* Ordem da vitrine = ordem do site atual. Mexer aqui é a forma certa de
@@ -928,7 +928,7 @@ window.GREEN_FAQ = [
        cartão de crédito, dinheiro, PIX ou transferência bancária": a tabela é
        12x com juros, o à vista é só PIX ou dinheiro e o cartão não passa 1x. */
     q: 'Quais são as formas de pagamento?',
-    a: `À vista, no PIX ou em dinheiro. No cartão de crédito (${PAGAMENTO.cartoes}), só parcelado, em até ${PAGAMENTO.vezes}x: o valor da parcela e o total a prazo estão na ficha de cada modelo.`,
+    a: `À vista, no PIX ou em dinheiro. No cartão de crédito (${PAGAMENTO.cartoes}), só parcelado, em até ${PAGAMENTO.vezes}x: o valor da parcela está em cada modelo.`,
   },
   {
     q: 'Posso carregar minha moto em tomada 110V e 220V?',

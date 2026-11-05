@@ -375,27 +375,26 @@
        lugar, para o card não ficar mais baixo que os vizinhos da fileira. */
     /* Parcelamento confirmado pela loja (29/10/2026) vem como objeto: o dado é
        o total no cartão e a parcela sai da conta, para não voltar a divergir
-       do total (README, seção 1). O texto herdado do WP continua string. O
-       total a prazo e os cartões aceitos só cabem no modal. Decisão do
-       cliente (29/10/2026): "sem juros" por extenso quando não há juros; com
-       juros, a linha não fala neles e o total a prazo do modal mostra.
+       do total (README, seção 1). O texto herdado do WP continua string.
+       Decisão do cliente (29/10/2026): "sem juros" por extenso quando não há
+       juros; com juros, a linha não fala neles.
        05/11/2026 (loja): o à vista é só no PIX ou dinheiro, então o rótulo diz
        onde ele vale e a parcela vem como alternativa ("ou 12x"), em tom mais
        discreto que o preço. Os cartões aceitos aparecem também no card
        ("tem que deixar na home"), numa linha própria: junto da parcela, o pior
-       caso vazava o card a 320, 1024, 1280 e 1440 px. O total a prazo fica só
-       no modal (no card a loja dispensou). */
-    function parcelas(p, completo) {
+       caso vazava o card a 320, 1024, 1280 e 1440 px. Sem o total a prazo, no
+       card e no modal (pedido do dono, mesmo avisado do Decreto 5.903/2006;
+       README, seção 1): o card e o modal mostram as mesmas linhas. */
+    function parcelas(p) {
       if (!p) return '';
       if (typeof p === 'string') return `<span class="preco__parcelas">${escapar(p)}</span>`;
       const juros = p.juros ? '' : ' sem juros';
       const linha = `<span class="preco__parcelas">ou ${p.vezes}x de ${real.format(p.total / p.vezes)}${juros}</span>`;
       const cartoes = p.cartoes ? `<span class="preco__cartoes">no cartão ${escapar(p.cartoes)}</span>` : '';
-      const total = completo ? `<span class="preco__total">Total a prazo ${real.format(p.total)}</span>` : '';
-      return linha + cartoes + total;
+      return linha + cartoes;
     }
 
-    function preco(m, classe = '', completo = false) {
+    function preco(m, classe = '') {
       if (!m.preco?.valor) {
         return `
         <p class="preco ${classe}">
@@ -409,7 +408,7 @@
         <p class="preco ${classe}">
           <span class="preco__rotulo">${aVista ? `À vista · ${escapar(aVista)}` : 'Valor'}</span>
           <span class="preco__valor">${real.format(m.preco.valor)}</span>
-          ${parcelas(m.preco.parcelas, completo)}
+          ${parcelas(m.preco.parcelas)}
         </p>`;
     }
 
@@ -1004,7 +1003,7 @@
       destaque.innerHTML = vitrine.numeros(atual, 'specs--modal');
       destaque.hidden = !destaque.innerHTML.trim();
 
-      $('#modal-preco').innerHTML = vitrine.preco(atual, 'preco--modal', true);
+      $('#modal-preco').innerHTML = vitrine.preco(atual, 'preco--modal');
 
       galeria(atual);
       ficha(atual);

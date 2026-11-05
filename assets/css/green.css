@@ -1946,8 +1946,6 @@ body.menu-aberto .header {
 .preco--modal .preco__valor { font-size: 24px; color: var(--ge-white); }
 .preco--modal .preco__parcelas,
 .preco--modal .preco__cartoes { color: var(--ge-texto-escuro); font-size: 12px; }
-.preco__total { color: var(--ge-stone-escuro); font-size: 11px; font-weight: 400; line-height: 1.4; }
-
 /* Medida do pior caso: "COR: AZUL-CLARO" + 5 bolinhas cabe numa linha a 360 px.
    A margem negativa alinha a BOLINHA (não o alvo de 32 px) com a borda dos botões. */
 .modal__cores { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px; }
