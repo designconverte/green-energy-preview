@@ -378,15 +378,21 @@
        do total (README, seção 1). O texto herdado do WP continua string. O
        total a prazo e os cartões aceitos só cabem no modal. Decisão do
        cliente (29/10/2026): "sem juros" por extenso quando não há juros; com
-       juros, a linha não fala neles e o total a prazo do modal mostra. */
+       juros, a linha não fala neles e o total a prazo do modal mostra.
+       05/11/2026 (loja): o à vista é só no PIX ou dinheiro, então o rótulo diz
+       onde ele vale e a parcela vem como alternativa ("ou 12x"), em tom mais
+       discreto que o preço. Os cartões aceitos aparecem também no card
+       ("tem que deixar na home"), numa linha própria: junto da parcela, o pior
+       caso vazava o card a 320, 1024, 1280 e 1440 px. O total a prazo fica só
+       no modal (no card a loja dispensou). */
     function parcelas(p, completo) {
       if (!p) return '';
       if (typeof p === 'string') return `<span class="preco__parcelas">${escapar(p)}</span>`;
-      const linha = `${p.vezes}x de ${real.format(p.total / p.vezes)}${p.juros ? '' : ' sem juros'}`;
-      const total = completo
-        ? `<span class="preco__total">Total a prazo ${real.format(p.total)} · ${escapar(p.cartoes)}</span>`
-        : '';
-      return `<span class="preco__parcelas">${linha}</span>${total}`;
+      const juros = p.juros ? '' : ' sem juros';
+      const linha = `<span class="preco__parcelas">ou ${p.vezes}x de ${real.format(p.total / p.vezes)}${juros}</span>`;
+      const cartoes = p.cartoes ? `<span class="preco__cartoes">no cartão ${escapar(p.cartoes)}</span>` : '';
+      const total = completo ? `<span class="preco__total">Total a prazo ${real.format(p.total)}</span>` : '';
+      return linha + cartoes + total;
     }
 
     function preco(m, classe = '', completo = false) {
@@ -398,9 +404,10 @@
           <span class="preco__parcelas">Condições pelo WhatsApp</span>
         </p>`;
       }
+      const aVista = window.GREEN_PAGAMENTO?.aVista;
       return `
         <p class="preco ${classe}">
-          <span class="preco__rotulo">Valor</span>
+          <span class="preco__rotulo">${aVista ? `À vista · ${escapar(aVista)}` : 'Valor'}</span>
           <span class="preco__valor">${real.format(m.preco.valor)}</span>
           ${parcelas(m.preco.parcelas, completo)}
         </p>`;

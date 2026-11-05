@@ -178,9 +178,15 @@ function fotoCor(id, cor) {
    miniatura própria: o modal usa o próprio recorte, que já está em cache. */
 const doCard = (id, alt) => [{ src: `assets/img/models/${id}-card.webp`, alt, fundo: '#FFFFFF', estudio: true }];
 
+/* Condições de pagamento da loja (Gabriel, 05/11/2026): o preço à vista vale
+   só no PIX ou em dinheiro; no cartão a loja não passa 1x, só parcelado com
+   juros. Um lugar só para o rótulo do preço, o parcelamento e o FAQ. */
+const PAGAMENTO = { aVista: 'PIX ou dinheiro', vezes: 12, cartoes: 'Visa e Master' };
+window.GREEN_PAGAMENTO = PAGAMENTO;
+
 /* Parcelamento da tabela da loja: o total em 12x no cartão. O app.js tira
    a parcela da conta e mostra o total a prazo no modal. */
-const PARCELADO = (total) => ({ vezes: 12, total, juros: true, cartoes: 'Visa e Master' });
+const PARCELADO = (total) => ({ vezes: PAGAMENTO.vezes, total, juros: true, cartoes: PAGAMENTO.cartoes });
 
 /* Ordem da vitrine = ordem do site atual. Mexer aqui é a forma certa de
    reordenar; quem não estiver na lista aparece depois, na ordem do catálogo. */
@@ -918,8 +924,11 @@ window.GREEN_FAQ = [
     a: 'Nossas scooters contam com índice de proteção (IP65), que possibilita não só a lavagem a seco, como também a lavagem com água corrente para a melhor limpeza.',
   },
   {
+    /* Reescrita com a loja (05/11/2026). A do WP dizia "Até 10x sem juros no
+       cartão de crédito, dinheiro, PIX ou transferência bancária": a tabela é
+       12x com juros, o à vista é só PIX ou dinheiro e o cartão não passa 1x. */
     q: 'Quais são as formas de pagamento?',
-    a: 'Até 10x sem juros no cartão de crédito, dinheiro, PIX ou transferência bancária.',
+    a: `À vista, no PIX ou em dinheiro. No cartão de crédito (${PAGAMENTO.cartoes}), só parcelado, em até ${PAGAMENTO.vezes}x: o valor da parcela e o total a prazo estão na ficha de cada modelo.`,
   },
   {
     q: 'Posso carregar minha moto em tomada 110V e 220V?',

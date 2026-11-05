@@ -1000,7 +1000,13 @@ body.menu-aberto .header {
 .preco { display: grid; gap: 1px; margin: 0; }
 .preco__rotulo { color: var(--ge-stone); font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .preco__valor { font-size: clamp(18px, 7.6cqi, 22px); font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
-.preco__parcelas { color: var(--ge-green-700); font-size: 11px; font-weight: 700; line-height: 1.4; }
+/* Parcela abaixo do à vista, em tom de apoio (loja, 05/11/2026: o cartão é
+   só parcelado com juros; o destaque é o preço do PIX). Slate sobre branco: 9.3:1. */
+.preco__parcelas,
+.preco__cartoes { color: var(--ge-slate); font-size: 11px; font-weight: 400; line-height: 1.4; }
+/* Parcela + cartões = 4 linhas; "Sob consulta" tem 3. A linha que falta fica
+   reservada para o preço não subir no card com preço da fileira (Tank × L10). */
+.card__preco { grid-template-rows: auto auto repeat(2, minmax(calc(11px * 1.4), auto)); }
 
 /* Duas metades iguais, fonte e ícone menores que o botão de seção: com o
    texto em 11 px o "Comprar" encostava na borda da pílula (feedback do
@@ -1938,7 +1944,8 @@ body.menu-aberto .header {
 .modal__linha { display: grid; gap: 12px; }
 .preco--modal .preco__rotulo { color: var(--ge-stone-escuro); }
 .preco--modal .preco__valor { font-size: 24px; color: var(--ge-white); }
-.preco--modal .preco__parcelas { color: var(--ge-neon-500); }
+.preco--modal .preco__parcelas,
+.preco--modal .preco__cartoes { color: var(--ge-texto-escuro); font-size: 12px; }
 .preco__total { color: var(--ge-stone-escuro); font-size: 11px; font-weight: 400; line-height: 1.4; }
 
 /* Medida do pior caso: "COR: AZUL-CLARO" + 5 bolinhas cabe numa linha a 360 px.
