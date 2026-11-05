@@ -105,6 +105,8 @@
   /* ── Hero ─────────────────────────────────────────────────────────────── */
 
   function hero() {
+    // Página do modelo não tem hero: sem isto o GSAP avisa "target not found".
+    if (!document.querySelector('.hero')) return;
     const titulo = document.querySelector('[data-anima-linhas]');
     if (titulo) {
       /* Cada linha (separada por <br>) vira uma máscara. O <span> do neon
@@ -187,6 +189,7 @@
   /* ── Profundidade no Sobre (desktop) ─────────────────────────────────── */
 
   function profundidade() {
+    if (!document.querySelector('.sobre')) return;
     gsap.matchMedia().add(desktopFino, () => {
       gsap.fromTo('.sobre__video', { yPercent: 6 }, {
         yPercent: -6, ease: 'none',

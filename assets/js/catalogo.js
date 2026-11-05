@@ -374,6 +374,8 @@ const MODELOS = [
   },
   {
     id: 'liberty',
+    // Endereço da página = o do WP (/modelos-de-motos/liberty-a500/): herda o histórico no Google.
+    slug: 'liberty-a500',
     nome: 'Liberty',
     fabricante: 'Aima',
     descritivo: 'Scooter elétrica',

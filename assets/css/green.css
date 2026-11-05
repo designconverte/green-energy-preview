@@ -2031,6 +2031,57 @@ body.menu-aberto .header {
   .modal__acoes { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* ── página do modelo (/modelos-de-motos/<slug>/) ─────────────────────────
+   O MESMO bloco do modal, fixo na página (`.modal--pagina`, gerado pelo
+   tools/gerar-seo.js). Desktop: a caixa do modal, já aprovada, na altura da
+   tela. Celular: a página corre, e o preço com o "Comprar" grudam embaixo
+   enquanto a ficha passa, como no modal; soltam ao chegar no "Compare com".
+   A seção sobe por baixo do header (como o hero), que é transparente no topo. */
+.produto {
+  margin-top: calc(var(--ge-header) * -1);
+  padding: calc(var(--ge-header) + var(--sp-4)) 0 var(--sp-16);
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 0%, rgba(0, 247, 0, .06), transparent 70%),
+    var(--ge-ink);
+  color: var(--ge-white);
+}
+.trilha { margin: 0 0 var(--sp-4); }
+.trilha ol { display: flex; flex-wrap: wrap; gap: 4px 8px; margin: 0; padding: 0; list-style: none; color: var(--ge-stone-escuro); font-size: 11px; line-height: 1.5; }
+.trilha li + li::before { content: "/"; margin-right: 8px; color: rgba(201, 214, 204, .35); }
+.trilha a { color: var(--ge-texto-escuro); text-decoration: none; }
+.trilha a:hover { color: var(--ge-neon-500); }
+.trilha [aria-current="page"] { color: var(--ge-white); font-weight: 700; }
+
+.modal--pagina { position: relative; inset: auto; z-index: auto; display: block; padding: 0; visibility: visible; opacity: 1; transition: none; }
+.modal--pagina .modal__caixa {
+  height: min(calc(100vh - var(--ge-header) - 88px), 820px);
+  min-height: 560px;
+  transform: none;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+}
+/* O "Comprar" da própria página faz o papel do botão flutuante. */
+.pagina-modelo .flutuante { display: none; }
+
+.comparar__topo { margin-bottom: var(--sp-8); }
+.comparar__mais { display: flex; justify-content: center; margin-top: var(--sp-8); }
+
+@media (max-width: 900px) {
+  .produto { padding-bottom: var(--sp-12); }
+  /* `overflow: clip` (não hidden) mantém o canto arredondado SEM virar
+     caixa de rolagem: com hidden, o `sticky` da base não grudava. */
+  .modal--pagina .modal__caixa { height: auto; min-height: 0; max-height: none; border-radius: var(--r-card); overflow: clip; }
+  .modal--pagina .modal__painel { grid-template-rows: auto auto auto; overflow: visible; }
+  .modal--pagina .modal__corpo { overflow: visible; }
+  .modal--pagina .modal__base {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: rgba(6, 20, 9, .94);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
 /* ── lightbox ──────────────────────────────────────────────────────────── */
 
 .lightbox {

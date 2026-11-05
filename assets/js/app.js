@@ -300,10 +300,8 @@
 
   /* ── 5. Vitrine ───────────────────────────────────────────────────────── */
 
-  const HEX_VALIDO = /^#[0-9a-fA-F]{6}$/;
-  /* Caminho de imagem do próprio site, para entrar em `url()` dentro de um
-     atributo style: qualquer outra coisa é descartada, não remendada. */
-  const IMAGEM_LOCAL = /^assets\/img\/[a-z0-9/_-]+\.webp$/;
+  // Caminho de imagem do próprio site (render.js): o único que entra em `url()`.
+  const { IMAGEM_LOCAL } = R;
 
   const { selos } = R;
 
@@ -460,8 +458,16 @@
       addEventListener('load', () => window.GREEN_MOTION?.recalcular());
 
       grade.addEventListener('click', (e) => {
+        /* "+ Detalhes" é LINK para a página do modelo (o Google segue; Ctrl,
+           Shift e o botão do meio abrem a página). Clique comum: o modal, como
+           sempre, sem sair da vitrine. */
         const btn = e.target.closest('[data-detalhes]');
-        if (btn) { modal.abrir(btn.dataset.detalhes, btn); return; }
+        if (btn) {
+          if (btn.tagName === 'A' && (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey)) return;
+          e.preventDefault();
+          modal.abrir(btn.dataset.detalhes, btn);
+          return;
+        }
 
         const comprar = e.target.closest('.card a[href*="wa.me"]');
         if (comprar) {
@@ -589,45 +595,21 @@
 
   const modal = (() => {
     const raiz = $('#modal');
+    /* Página do modelo (/modelos-de-motos/<slug>/): o MESMO bloco do modal,
+       fixo na página e já aberto (`.modal--pagina`, gerado pelo
+       tools/gerar-seo.js). Sem fechar, sem travar a rolagem, sem setas e sem
+       mexer no endereço; galeria, cores, zoom e WhatsApp iguais. */
+    const naPagina = Boolean(raiz?.classList.contains('modal--pagina'));
     let origem = null;
     let atual = null;
     let corAtiva = 0;
     // Cores do modelo aberto que viram bolinha: só as que têm foto.
     let paleta = [];
 
-    const temFoto = (c) => Array.isArray(c?.galeria) && c.galeria.length > 0;
-
-    /* Bolinha que não troca a foto parece quebrada (pedido do cliente,
-       27/10/2026). Cor sem foto sai do seletor e vai por extenso para a
-       ficha (ver ficha). O catálogo continua com todas: chegando a foto, a
-       bolinha volta sozinha. */
-    const paletaDe = (m) => (m.cores || []).filter(temFoto);
-
-    /* A cor troca as fotos do VEÍCULO INTEIRO. As de detalhe ficam sempre. */
-    function fotosDaCorAtiva(m) {
-      const daCor = paleta[corAtiva]?.galeria;
-      if (!daCor) return m.galeria || [];
-      return [...daCor, ...(m.galeria || []).filter((f) => f.detalhe)];
-    }
-
-    /* Foto de estúdio: cabe inteira sobre a cor da própria borda, e a sobra do
-       quadro some. Foto de ambiente: cabe inteira sobre uma cópia desfocada de
-       si mesma, para não boiar numa faixa de cor chapada. */
-    function slide(f, k, total) {
-      const fundo = HEX_VALIDO.test(f.fundo || '') ? f.fundo : '#F5F7F2';
-      const ambiente = !f.estudio && IMAGEM_LOCAL.test(f.src);
-      /* URL ABSOLUTA: `url()` dentro de variável CSS é resolvida a partir da
-         folha que a usa (assets/css/), não da página. Relativa, dava 404. */
-      const estilo = ambiente
-        ? `--fundo:${fundo};--foto:url('${new URL(f.src, document.baseURI).href}')`
-        : `--fundo:${fundo}`;
-      return `
-        <div class="modal__slide${ambiente ? ' is-ambiente' : ''}" role="group" aria-roledescription="slide"
-             aria-label="${k + 1} de ${total}" style="${escapar(estilo)}">
-          <img src="${escapar(f.src)}" alt="${escapar(f.alt)}" draggable="false" decoding="async"
-               ${f.w ? `width="${Number(f.w)}" height="${Number(f.h)}"` : ''}${k > 0 ? ' loading="lazy"' : ''}>
-        </div>`;
-    }
+    /* Moldes da galeria, da ficha e das cores: render.js (a página de cada
+       modelo, gerada pelo tools/gerar-seo.js, usa os mesmos). */
+    const { paletaDe } = R;
+    const fotosDaCorAtiva = (m) => R.fotosDaCor(m, paleta, corAtiva);
 
     function galeria(m, indice = 0) {
       const trilho = $('#modal-slider');
@@ -635,16 +617,11 @@
       if (!fotos.length) return;
       const i = Math.min(indice, fotos.length - 1);
 
-      trilho.innerHTML = fotos.map((f, k) => slide(f, k, fotos.length)).join('');
+      trilho.innerHTML = R.slides(fotos, document.baseURI);
 
       $('#modal-miniaturas').hidden = fotos.length < 2;
       $('.modal__galeria').classList.toggle('tem-miniaturas', fotos.length > 1);
-      $('#modal-miniaturas').innerHTML = fotos.map((f, k) => `
-        <button class="modal__mini" type="button" data-foto="${k}" aria-current="${k === i}"
-                aria-label="Ver foto ${k + 1} de ${fotos.length}">
-          <img src="${escapar(f.mini || f.src)}" alt="" loading="lazy" decoding="async" width="180" height="127">
-        </button>
-      `).join('');
+      $('#modal-miniaturas').innerHTML = R.miniaturas(fotos, i);
 
       irPara(i, 'auto');
     }
@@ -742,29 +719,7 @@
     }
 
     function ficha(m) {
-      const alvo = $('#modal-ficha');
-      const classe = m.classificacao ? window.GREEN_CLASSIFICACOES[m.classificacao] : null;
-      const nomes = (m.cores || []).map((c) => c.nome);
-      // Alguma cor ficou fora do seletor: a lista completa vai por extenso.
-      const coresNoTexto = nomes.length > paleta.length ? nomesPorExtenso(nomes) : null;
-      const specs = {
-        ...(m.specs || {}),
-        ...(classe ? { classificacao: classe.ficha } : {}),
-        ...(coresNoTexto ? { cores: coresNoTexto } : {}),
-      };
-      /* Campo sem dado simplesmente não aparece: dez linhas de "não
-         informado" comunicam ausência, não especificação. */
-      alvo.innerHTML = window.GREEN_FICHA_ORDEM
-        .filter(([chave]) => specs[chave] != null)
-        .map(([chave, rotulo]) => {
-          const bruto = specs[chave];
-          const valor = typeof bruto === 'object' ? `${bruto.valor} ${bruto.unidade}` : bruto;
-          // Número com condição carrega a condição NA MESMA LINHA.
-          const nota = typeof bruto === 'object' && bruto.nota
-            ? `<small class="ficha__nota">${escapar(bruto.nota)}</small>`
-            : '';
-          return `<div><dt>${rotulo}</dt><dd>${escapar(valor)}${nota}</dd></div>`;
-        }).join('');
+      $('#modal-ficha').innerHTML = R.ficha(m, paleta);
     }
 
     function equipamentos(m) {
@@ -772,30 +727,7 @@
       const itens = m.equipamentos || [];
       bloco.hidden = !itens.length;
       if (!itens.length) return;
-      $('#modal-equipamentos-lista').innerHTML = itens.map((item) => `<li>${escapar(item)}</li>`).join('');
-    }
-
-    /**
-     * Fundo da bolinha, em ordem de precedência: bicolor → imagem → hex.
-     * SEGURANÇA: o valor entra numa declaração CSS dentro de um atributo
-     * style, então hex passa pela regex e imagem só se for caminho do próprio
-     * site (IMAGEM_LOCAL). O resto é descartado e cai no hex.
-     */
-    const parDeHex = (v) => Array.isArray(v) && v.length === 2 && v.every((h) => HEX_VALIDO.test(h));
-
-    function fundoDoSwatch(c) {
-      if (parDeHex(c.bicolor)) return `background:linear-gradient(135deg, ${c.bicolor[0]} 50%, ${c.bicolor[1]} 50%)`;
-      if (c.imagem && IMAGEM_LOCAL.test(c.imagem)) return `background:url('${c.imagem}') center/cover no-repeat`;
-      return `background:${HEX_VALIDO.test(c.hex || '') ? c.hex : 'transparent'}`;
-    }
-
-    /* "Preta, Laranja e Verde". */
-    function nomesPorExtenso(nomes) {
-      try {
-        return new Intl.ListFormat('pt-BR', { type: 'conjunction' }).format(nomes);
-      } catch (e) {
-        return nomes.join(', ');
-      }
+      $('#modal-equipamentos-lista').innerHTML = R.equipamentos(m);
     }
 
     function cores() {
@@ -805,13 +737,7 @@
       $('#modal-cor-nome').textContent = paleta[corAtiva].nome;
       // Uma cor só: fica o rótulo (entra na mensagem), sai a bolinha sem função.
       $('#modal-swatches').hidden = paleta.length < 2;
-      $('#modal-swatches').innerHTML = paleta.map((c, i) => `
-        <button class="modal__swatch" type="button" data-cor="${i}"
-                aria-pressed="${i === corAtiva}" aria-label="Cor ${escapar(c.nome)}"
-                title="${escapar(c.nome)}">
-          <i style="${fundoDoSwatch(c)}" aria-hidden="true"></i>
-        </button>
-      `).join('');
+      $('#modal-swatches').innerHTML = R.swatches(paleta, corAtiva);
     }
 
     /* Remonta os dois links da base com o modelo e a cor escolhidos. */
@@ -879,7 +805,7 @@
       equipamentos(atual);
       cores();
       cta();
-      setas();
+      if (!naPagina) setas();
       $('#modal-corpo').scrollTop = 0;
 
       emitir('view_item', {
@@ -889,8 +815,10 @@
         item_category: categoriasDe(atual)[0],
         value: atual.preco?.valor || undefined,
         currency: atual.preco?.valor ? 'BRL' : undefined,
+        origem: naPagina ? 'pagina' : 'modal',
       });
 
+      if (naPagina) return;
       raiz.classList.add('is-aberto');
       raiz.setAttribute('aria-hidden', 'false');
       document.body.classList.add('is-locked');
@@ -958,6 +886,9 @@
         }
       });
 
+      // Página do modelo: o bloco já está no lugar; só liga o dado à galeria.
+      if (naPagina) { abrir(raiz.dataset.modelo); return; }
+
       addEventListener('keydown', (e) => {
         if (!raiz.classList.contains('is-aberto')) return;
         if (lightbox.estaAberto()) return; // com o lightbox por cima, o ESC é dele
@@ -985,6 +916,32 @@
 
     return { iniciar, abrir };
   })();
+
+  /* ── 8b. "Compare com" (página do modelo) ─────────────────────────────
+     Cards de outros modelos, gerados pelo build. Sem modal nesta página: a
+     foto e o "+ Detalhes" levam à página daquele modelo; o "Comprar" conta
+     como interesse, igual ao da vitrine. */
+
+  function comparar() {
+    const grade = $('#comparar-grade');
+    if (!grade) return;
+    const doCard = (el) => (window.GREEN_MODELOS || []).find((m) => m.id === el.closest('.card')?.dataset.id);
+
+    grade.addEventListener('click', (e) => {
+      const foto = e.target.closest('button[data-detalhes]');
+      if (foto) {
+        const m = doCard(foto);
+        if (m) location.href = new URL(R.urlModelo(m), document.baseURI).href;
+        return;
+      }
+      const comprar = e.target.closest('.card a[href*="wa.me"]');
+      if (comprar) {
+        comprar.dataset.rastreado = '1';
+        interesseNoModelo(doCard(comprar), 'comparar');
+      }
+    });
+    brilhoDeBorda();
+  }
 
   /* ── 9. FAQ ───────────────────────────────────────────────────────────── */
 
@@ -1286,6 +1243,7 @@
     menu();
     vitrine.iniciar();
     modal.iniciar();
+    comparar();
     faq();
     depoimentos();
     midia();
