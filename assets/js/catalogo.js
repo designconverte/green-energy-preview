@@ -212,25 +212,40 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/v8-pro-card.webp',
     alt: 'Bike elétrica V8 Pro preta com banco marrom e pneus fat',
-    /* Loja, 30/10/2026, como "V8 Pro 1000W Lítio 48V 15Ah" (era 7.990 em 12x
-       de 734,59 "s/ juros", do WP, onde se chamava "V8 Ultra"). Mesma
-       bateria; o motor segue o do WP (750 W, pico de 1000 W) até a loja
-       dizer se os 1000W da tabela são o nominal ou o pico. */
+    /* Preço: loja, 30/10/2026, como "V8 Pro 1000W Lítio 48V 15Ah" (era 7.990
+       em 12x de 734,59 "s/ juros", do WP, onde se chamava "V8 Ultra").
+       Ficha: catálogo do fabricante (Panda, "V8 PRO"), enviado pela loja em
+       06/11/2026. Ela corrige a do WP: motor 1000 W (o WP dizia 750 W, com
+       pico de 1000 W), autonomia de 45 a 50 km (o WP dizia 97 km, com pedal
+       assistido) e cores cinza e preta (o WP dizia preta, laranja e verde).
+       Cabe no autopropelido: 1000 W, 32 km/h, 66 cm de largura e 105 cm
+       entre eixos. Saíram, até a loja confirmar (usuário, 06/11/2026), três
+       itens do WP que o catálogo não traz: câmbio Shimano 7 marchas,
+       iluminação full LED e IP54. A marca fica fora do nome (`fabricante:
+       null`), escolha do usuário. */
     preco: { valor: 8590, parcelas: PARCELADO(9590) },
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
-      potencia: { valor: 750, unidade: 'W', nota: 'Pico de 1000 W.' },
-      autonomia: { valor: 97, unidade: 'km', nota: 'Com pedal assistido.' },
-      bateria: 'Lítio 48V 15Ah, removível',
-      carregador: 'Smart bivolt 110/220V, tomada convencional',
-      freios: 'A disco',
-      suspensao: 'Dianteira e traseira',
-      rodas: 'Fat tire 20"',
-      protecao: 'IP54 · resistente à poeira e água',
+      potencia: { valor: 1000, unidade: 'W' },
+      autonomia: { valor: 50, unidade: 'km', nota: 'De 45 a 50 km, segundo o fabricante.' },
+      bateria: 'Lítio ternário 48V 15Ah, removível',
+      recarga: '6 a 7 horas',
+      carregador: 'Bivolt 100–240V (48V 3A), tomada convencional',
+      freios: 'A disco hidráulicos',
+      suspensao: 'Hidráulica na dianteira, com molas na traseira',
+      rodas: 'Fat tire 20" × 4.0"',
+      carga: 'Até 120 kg',
+      dimensoes: '1615 × 660 × 1165 mm · 1050 mm entre eixos',
+      peso: '45 kg',
       garantia: '1 ano para motor e bateria',
     },
-    equipamentos: ['Câmbio Shimano 7 marchas', 'Iluminação full LED', 'Banco duplo'],
-    cores: [COR.preta, COR.laranja, COR.verde],
+    equipamentos: [
+      'Três modos: elétrico, pedal assistido e só pedal',
+      'Banco duplo, preto ou marrom',
+      'Cesta dianteira',
+      'Quadro de aço',
+    ],
+    cores: [COR.cinza, COR.preta],
     galeria: fotos('v8-pro'),
   },
   {
