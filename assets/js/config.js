@@ -84,7 +84,7 @@ window.GREEN_CONFIG = {
 
   /* Mensagens pré-preenchidas. As de modelo e de assistência são as do site
      atual, palavra por palavra ("Olá, gostaria de saber mais sobre o modelo
-     V8 Ultra"): é por elas que a equipe já reconhece o lead que vem do site.
+     X13 Pro"): é por elas que a equipe já reconhece o lead que vem do site.
      `{modelo}` e `{cor}` são trocados na hora do clique.
 
      `prefixoMensagem` vazio: a Green não tem a regra do "Vim pelo site" da KOM.

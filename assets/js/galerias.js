@@ -1,29 +1,29 @@
 /* Gerado por tools/gerar-galerias.js. NÃO editar à mão: o tamanho e a cor de
    fundo vêm do build-media.js; o texto alternativo, do próprio gerador. */
 window.GREEN_GALERIAS = {
- "v8-ultra": [
+ "v8-pro": [
   {
-   "src": "assets/img/models/v8-ultra-01.webp",
-   "mini": "assets/img/models/v8-ultra-01-mini.webp",
-   "alt": "Bike elétrica V8 Ultra preta em três quartos frontal, em estúdio",
+   "src": "assets/img/models/v8-pro-01.webp",
+   "mini": "assets/img/models/v8-pro-01-mini.webp",
+   "alt": "Bike elétrica V8 Pro preta em três quartos frontal, em estúdio",
    "w": 753,
    "h": 754,
    "fundo": "#DFDBE0",
    "estudio": true
   },
   {
-   "src": "assets/img/models/v8-ultra-02.webp",
-   "mini": "assets/img/models/v8-ultra-02-mini.webp",
-   "alt": "V8 Ultra preta de perfil, com banco duplo e pneus fat de 20 polegadas",
+   "src": "assets/img/models/v8-pro-02.webp",
+   "mini": "assets/img/models/v8-pro-02-mini.webp",
+   "alt": "V8 Pro preta de perfil, com banco duplo e pneus fat de 20 polegadas",
    "w": 753,
    "h": 754,
    "fundo": "#D4D0D3",
    "estudio": false
   },
   {
-   "src": "assets/img/models/v8-ultra-03.webp",
-   "mini": "assets/img/models/v8-ultra-03-mini.webp",
-   "alt": "V8 Ultra preta em três quartos traseira",
+   "src": "assets/img/models/v8-pro-03.webp",
+   "mini": "assets/img/models/v8-pro-03-mini.webp",
+   "alt": "V8 Pro preta em três quartos traseira",
    "w": 753,
    "h": 754,
    "fundo": "#D0CDC9",

@@ -17,10 +17,14 @@
    ciclomotor (CNH e emplacamento), como a loja o vende.
 
    30/10/2026, segunda tabela da loja: os outros oito da vitrine (Mike, X11,
-   S8, Mia Tri, X13 Pro, X13, GT2000 e V8 Ultra, que a loja chama de "V8
-   Pro"), também em `PARCELADO(total)`. Onde a bateria da tabela difere da do
-   WP, vale a da tabela, com a do WP no comentário do modelo. A Titan passa a
-   se chamar "Tank (Titan)", nome pelo qual o pessoal a procura (cliente).
+   S8, Mia Tri, X13 Pro, X13, GT2000 e V8 Pro), também em `PARCELADO(total)`.
+   Onde a bateria da tabela difere da do WP, vale a da tabela, com a do WP no
+   comentário do modelo. A Titan passa a se chamar "Tank (Titan)", nome pelo
+   qual o pessoal a procura (cliente).
+
+   06/11/2026, Gabriel: a V8 é a versão PRO, não a Ultra. O WP a chamava de
+   "V8 Ultra" (e o site herdou); agora é "V8 Pro" em tudo, com a página em
+   /modelos-de-motos/v8-pro/ e 301 do endereço antigo no .htaccess.
 
    REGRA HERDADA DO FRAMEWORK: nenhum número entra sem fonte. Aqui a fonte é a
    própria loja (o cadastro do WordPress). Onde o card e a ficha do mesmo
@@ -191,7 +195,7 @@ const PARCELADO = (total) => ({ vezes: PAGAMENTO.vezes, total, juros: true, cart
 /* Ordem da vitrine = ordem do site atual. Mexer aqui é a forma certa de
    reordenar; quem não estiver na lista aparece depois, na ordem do catálogo. */
 window.GREEN_ORDEM = [
-  'v8-ultra', 'x13-pro', 'kuyan-litio-pro', 'x13', 'q5-dimoon', 'mech-t',
+  'v8-pro', 'x13-pro', 'kuyan-litio-pro', 'x13', 'q5-dimoon', 'mech-t',
   'gt2000', 'liberty', 'tiger-x6', 'kn8', 'mike', 'x11-3000w', 'ved',
   'mia-tri', 'roma', 's8-3000w',
   'tank', 'l10', 'l11', 'joy-tri', 'titan',
@@ -199,17 +203,19 @@ window.GREEN_ORDEM = [
 
 const MODELOS = [
   {
-    id: 'v8-ultra',
-    nome: 'V8 Ultra',
+    id: 'v8-pro',
+    nome: 'V8 Pro',
     fabricante: null,
     descritivo: 'Bike elétrica',
     tags: ['Estilo', 'Clássica', 'Leveza'],
     categorias: ['autopropelido'],
     classificacao: 'autopropelido',
-    foto: 'assets/img/models/v8-ultra-card.webp',
-    alt: 'Bike elétrica V8 Ultra preta com banco marrom e pneus fat',
+    foto: 'assets/img/models/v8-pro-card.webp',
+    alt: 'Bike elétrica V8 Pro preta com banco marrom e pneus fat',
     /* Loja, 30/10/2026, como "V8 Pro 1000W Lítio 48V 15Ah" (era 7.990 em 12x
-       de 734,59 "s/ juros", do WP). Mesma bateria; o motor segue o do WP. */
+       de 734,59 "s/ juros", do WP, onde se chamava "V8 Ultra"). Mesma
+       bateria; o motor segue o do WP (750 W, pico de 1000 W) até a loja
+       dizer se os 1000W da tabela são o nominal ou o pico. */
     preco: { valor: 8590, parcelas: PARCELADO(9590) },
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
@@ -225,7 +231,7 @@ const MODELOS = [
     },
     equipamentos: ['Câmbio Shimano 7 marchas', 'Iluminação full LED', 'Banco duplo'],
     cores: [COR.preta, COR.laranja, COR.verde],
-    galeria: fotos('v8-ultra'),
+    galeria: fotos('v8-pro'),
   },
   {
     id: 'x13-pro',
