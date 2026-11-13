@@ -194,6 +194,9 @@ window.GREEN_RENDER = (() => {
   const eyebrow = (m) => [m.fabricante, m.descritivo].filter(Boolean).join(' · ');
   const eyebrowCurto = (m) => m.fabricante || m.descritivo || '';
 
+  /* Card da vitrine. Nos botões, o texto oculto fica DENTRO do rótulo: solto,
+     virava um item a mais do flex e ganhava o gap, descentralizando o botão.
+     (Nada de <!-- --> no HTML gerado: regra do usuário, ver tools/html-limpo.js.) */
   function card(m) {
     const bloco = numeros(m) || `
         <p class="card__pendente"><strong>Ficha técnica sob consulta</strong>
@@ -219,8 +222,6 @@ window.GREEN_RENDER = (() => {
               ${bloco}
               ${preco(m, 'card__preco')}
               <div class="card__acoes">
-                <!-- O texto oculto fica DENTRO do rótulo: solto, virava um item
-                     a mais do flex e ganhava o gap, descentralizando o botão. -->
                 <a class="btn btn--primario btn--card" href="${linkWhats('modelo', { modelo: m.nome })}" target="_blank" rel="noopener">${ICONE_WHATS}<span>Comprar<span class="u-visually-hidden"> o ${escapar(m.nome)} pelo WhatsApp</span></span></a>
                 <a class="btn btn--contorno btn--card" href="${urlModelo(m)}" data-detalhes="${escapar(m.id)}"><span>+ Detalhes<span class="u-visually-hidden"> do ${escapar(m.nome)}</span></span></a>
               </div>
