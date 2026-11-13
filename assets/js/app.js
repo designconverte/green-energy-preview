@@ -55,8 +55,8 @@
       item_name: nomeCompleto(modelo),
       item_brand: modelo.fabricante || undefined,
       item_category: categoriasDe(modelo)[0],
-      value: modelo.preco?.valor || undefined,
-      currency: modelo.preco?.valor ? 'BRL' : undefined,
+      value: R.precoVigente(modelo) || undefined,
+      currency: R.precoVigente(modelo) ? 'BRL' : undefined,
       ...extras,
     };
     emitir('generate_lead', dados);
@@ -813,8 +813,8 @@
         item_name: nomeCompleto(atual),
         item_brand: atual.fabricante || undefined,
         item_category: categoriasDe(atual)[0],
-        value: atual.preco?.valor || undefined,
-        currency: atual.preco?.valor ? 'BRL' : undefined,
+        value: R.precoVigente(atual) || undefined,
+        currency: R.precoVigente(atual) ? 'BRL' : undefined,
         origem: naPagina ? 'pagina' : 'modal',
       });
 

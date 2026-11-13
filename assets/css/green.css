@@ -1008,6 +1008,49 @@ body.menu-aberto .header {
    reservada para o preço não subir no card com preço da fileira (Tank × L10). */
 .card__preco { grid-template-rows: auto auto repeat(2, minmax(calc(11px * 1.4), auto)); }
 
+/* ── Black Green (render.js: precoBlack/faixaBlack; some sozinho no fim) ──
+   No card o bloco do preço não muda (a fileira continua alinhada com quem não
+   está em oferta): o à vista de antes vai riscado na faixa, na base da foto
+   (os selos legais ocupam o canto de cima). No modal, ao lado do preço. */
+.preco__de { display: inline-block; color: var(--ge-stone); font-size: 13px; font-weight: 500; white-space: nowrap; }
+.preco__de s { text-decoration-thickness: 1px; }
+.preco--modal .preco__de { margin-left: .35em; color: var(--ge-stone-escuro); }
+.faixa-black .preco__de { color: var(--ge-stone-escuro); font-size: inherit; font-weight: 700; }
+.preco__black {
+  justify-self: start;
+  margin-bottom: 4px;
+  padding: 3px 8px;
+  border: 1px solid var(--ge-neon-500);
+  border-radius: 4px;
+  background: #050A06;
+  color: var(--ge-neon-400);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.faixa-black {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+  padding: 7px 14px;
+  border-top: 2px solid var(--ge-neon-500);
+  background: #050A06;
+  color: var(--ge-white);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.faixa-black strong { color: var(--ge-neon-400); font-weight: 800; white-space: nowrap; }
+
 /* Duas metades iguais, fonte e ícone menores que o botão de seção: com o
    texto em 11 px o "Comprar" encostava na borda da pílula (feedback do
    cliente, 19/10/2026). Tudo medido pela largura do CARD (cqi). */

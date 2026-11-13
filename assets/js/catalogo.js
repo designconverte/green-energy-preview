@@ -188,6 +188,20 @@ const doCard = (id, alt) => [{ src: `assets/img/models/${id}-card.webp`, alt, fu
 const PAGAMENTO = { aVista: 'PIX ou dinheiro', vezes: 12, cartoes: 'Visa e Master' };
 window.GREEN_PAGAMENTO = PAGAMENTO;
 
+/* Black Green (tabela "BLACK MONTH GREEN" da loja, 12/11/2026), até 30/11
+   (usuário). Cada modelo em oferta tem `black` = o preço À VISTA da Black.
+   Dentro da janela, o render.js mostra esse preço com o à vista de sempre
+   riscado, e uma faixa no card. O 12x continua o de hoje (usuário). Fora
+   dela, tudo volta sozinho, no relógio de quem visita, sem publicar nada.
+   `?gbf-agora=2026-12-01T00:00` na URL testa outra data (vale também para o
+   hero da campanha, tools/campanha.js).
+   O "Valor antigo" da tabela é o TOTAL no cartão em 12x, não o à vista: o
+   "de/por" daqui compara à vista com à vista (decisão do usuário, para não
+   anunciar desconto que não existe; CDC art. 37). Por isso a Kuyan Lítio
+   Pro fica de fora: a Black dela (8.590) é o à vista de hoje. A "Pulse" da
+   tabela não está no site. */
+window.GREEN_BLACK = { nome: 'Black Green', fim: '2026-11-30T23:59:59-03:00' };
+
 /* Parcelamento da tabela da loja: o total em 12x no cartão. O app.js tira
    a parcela da conta (o total não aparece no site, pedido do dono, 05/11). */
 const PARCELADO = (total) => ({ vezes: PAGAMENTO.vezes, total, juros: true, cartoes: PAGAMENTO.cartoes });
@@ -224,6 +238,7 @@ const MODELOS = [
        iluminação full LED e IP54. A marca fica fora do nome (`fabricante:
        null`), escolha do usuário. */
     preco: { valor: 8590, parcelas: PARCELADO(9590) },
+    black: 7990, // Black Green à vista (tabela da loja, 12/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W' },
@@ -260,6 +275,7 @@ const MODELOS = [
     alt: 'Scooter elétrica X13 Pro vermelha e preta com pneus largos',
     // Loja, 30/10/2026 (era 11.990, do WP; bateria do WP: 60V 24Ah).
     preco: { valor: 10590, parcelas: PARCELADO(11990) },
+    black: 9990, // Black Green à vista (tabela da loja, 12/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2500 W.' },
@@ -308,6 +324,7 @@ const MODELOS = [
     alt: 'Scooter elétrica X13 branca com pneus largos e banco com encosto',
     // Loja, 30/10/2026 (era 9.590, do WP; bateria do WP: 60V 24Ah).
     preco: { valor: 9990, parcelas: PARCELADO(10990) },
+    black: 8990, // Black Green à vista (tabela da loja, 12/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -330,6 +347,7 @@ const MODELOS = [
     foto: 'assets/img/models/q5-dimoon-card.webp',
     alt: 'Scooter elétrica Aima Q5 Dimoon creme com banco vermelho e baú',
     preco: { valor: 11590, parcelas: PARCELADO(12990) }, // loja, 29/10/2026
+    black: 10590, // Black Green à vista (tabela da loja, 12/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2600 W.' },
@@ -377,6 +395,7 @@ const MODELOS = [
     foto: 'assets/img/models/gt2000-card.webp',
     alt: 'Bike elétrica GT2000 preta com pneus de trilha',
     preco: { valor: 11590, parcelas: PARCELADO(12990) }, // loja, 30/10/2026
+    black: 10590, // Black Green à vista (tabela da loja, 12/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -407,6 +426,7 @@ const MODELOS = [
     alt: 'Scooter elétrica Aima Liberty prata com baú traseiro',
     // Loja, 29/10/2026 (era 11.990 em 10x de 1.199, do WP).
     preco: { valor: 10990, parcelas: PARCELADO(12290) },
+    black: 9990, // Black Green à vista (tabela da loja, 12/11/2026)
     /* Autonomia: o card diz 50 km; a ficha, "de 50 a 70 km". Vale o card, e
        a faixa da ficha vai na nota. Bateria: o WP dizia "Lítio"; a tabela da
        loja (29/10/2026) diz LiFePO4. */
@@ -444,6 +464,7 @@ const MODELOS = [
     alt: 'Scooter elétrica Aima Tiger X6 preta com farol em LED azul',
     // Loja, 29/10/2026 (era 23.900 em até 10x, do WP).
     preco: { valor: 20990, parcelas: PARCELADO(23990) },
+    black: 19990, // Black Green à vista (tabela da loja, 12/11/2026)
     specs: {
       velocidade: { valor: 80, unidade: 'km/h' },
       potencia: { valor: 3000, unidade: 'W', nota: 'Pico de 6000 W.' },
@@ -510,6 +531,7 @@ const MODELOS = [
     alt: 'Triciclo elétrico Aima Mike verde com banco marrom e cesta',
     // Loja, 30/10/2026 (era 13.990 em até 10x, do WP).
     preco: { valor: 11590, parcelas: PARCELADO(12990) },
+    black: 10590, // Black Green à vista (tabela da loja, 12/11/2026)
     /* Autonomia: o card diz 50 km; a ficha, "de 30 a 50 km". Bateria: a da
        tabela da loja (30/10/2026); o WP dizia grafeno chumbo 72V 21,8Ah, fixa. */
     specs: {
@@ -617,6 +639,7 @@ const MODELOS = [
     alt: 'Triciclo elétrico MotoChefe Mia Tri azul-claro com baú',
     // Loja, 30/10/2026 (era 12.990 em até 10x, do WP).
     preco: { valor: 11990, parcelas: PARCELADO(13590) },
+    black: 10990, // Black Green à vista (tabela da loja, 12/11/2026)
     /* A ficha do WP traz "Tamanho do veículo: 1356562mm", medida truncada no
        cadastro. Fica fora até a loja confirmar (ver README). */
     specs: {

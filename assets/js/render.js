@@ -109,7 +109,68 @@ window.GREEN_RENDER = (() => {
     return linha + cartoes;
   }
 
+  /* ── Black Green (catalogo.js, GREEN_BLACK) ──────────────────────────────
+     A janela é conferida no relógio de quem visita (e, no build, no da
+     máquina): passou do fim, o preço normal volta sem publicar nada.
+     `?gbf-agora=AAAA-MM-DDTHH:MM` simula outra data (o mesmo parâmetro do
+     hero da campanha). Sem horário de fuso no parâmetro, vale Brasília. */
+  function agora() {
+    const q = typeof location !== 'undefined' && /[?&]gbf-agora=([^&#]+)/.exec(location.search || '');
+    if (q) {
+      const v = decodeURIComponent(q[1]);
+      const t = Date.parse(/[zZ]|[+-]\d\d:\d\d$/.test(v) ? v : `${v}-03:00`);
+      if (!Number.isNaN(t)) return t;
+    }
+    return Date.now();
+  }
+
+  function emBlack() {
+    const b = window.GREEN_BLACK;
+    if (!b?.fim) return false;
+    const t = agora();
+    return t <= Date.parse(b.fim) && (!b.inicio || t >= Date.parse(b.inicio));
+  }
+
+  /** Preço Black do modelo, só dentro da janela e só se for desconto de verdade. */
+  const precoBlack = (m) => (emBlack() && m.black && m.preco?.valor && m.black < m.preco.valor ? m.black : null);
+  /** O preço à vista que vale agora (tracking, JSON-LD). */
+  const precoVigente = (m) => precoBlack(m) || m.preco?.valor || null;
+  /** "30/11" do fim da Black, no fuso de Brasília. */
+  const fimBlack = () => {
+    const d = new Date(Date.parse(window.GREEN_BLACK.fim) - 3 * 3600e3);
+    return `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+  };
+  const inteiro = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+
+  const antes = (v, formato) => `<span class="preco__de"><span class="u-visually-hidden">Antes: </span><s>${formato.format(v)}</s></span>`;
+
+  /* Faixa sobre a foto do card: a campanha, o à vista de antes riscado e o
+     desconto em reais. O riscado mora AQUI e não na linha do preço: com a
+     Termina (larga), "R$ 9.990,00 R$ 10.990,00" não cabe no card de 4
+     colunas e alargava o card por dentro. */
+  function faixaBlack(m) {
+    const b = precoBlack(m);
+    if (!b) return '';
+    return `<p class="faixa-black"><span>${escapar(window.GREEN_BLACK.nome)}</span>`
+      + `<span>${antes(m.preco.valor, inteiro)} <strong>${inteiro.format(m.preco.valor - b)} off</strong></span></p>`;
+  }
+
+  /* No card o bloco do preço tem as mesmas linhas de sempre (a fileira
+     continua alinhada com quem não está em oferta). No modal (e na página
+     do modelo), que é largo, entram o nome e o prazo e o riscado ao lado. */
   function preco(m, classe = '') {
+    const b = precoBlack(m);
+    if (b) {
+      const aVista = window.GREEN_PAGAMENTO?.aVista;
+      const largo = classe.includes('preco--modal');
+      const faixa = largo ? `<span class="preco__black">${escapar(window.GREEN_BLACK.nome)} · até ${fimBlack()}</span>` : '';
+      return `
+        <p class="preco preco--black ${classe}">
+          ${faixa}<span class="preco__rotulo">${aVista ? `À vista · ${escapar(aVista)}` : 'À vista'}</span>
+          <span class="preco__valor">${real.format(b)}${largo ? ` ${antes(m.preco.valor, real)}` : ''}</span>
+          ${parcelas(m.preco.parcelas)}
+        </p>`;
+    }
     if (!m.preco?.valor) {
       return `
         <p class="preco ${classe}">
@@ -147,6 +208,7 @@ window.GREEN_RENDER = (() => {
                 <img src="${escapar(m.foto)}" alt="${escapar(m.alt)}" loading="lazy" decoding="async" width="640" height="536">
               </button>
               ${selos(m, 'card__selos')}
+              ${faixaBlack(m)}
             </div>
             <div class="card__corpo">
               <div class="card__cabeca">
@@ -306,5 +368,6 @@ window.GREEN_RENDER = (() => {
     ordenados, selos, numeros, parcelas, preco, eyebrow, eyebrowCurto, card, faq,
     HEX_VALIDO, IMAGEM_LOCAL, paletaDe, fotosDaCor, slides, miniaturas, ficha,
     equipamentos, swatches, urlModelo,
+    emBlack, precoBlack, precoVigente, fimBlack,
   };
 })();

@@ -1,0 +1,695 @@
+/* HERO DE CAMPANHA · Black Green · Green Energy · Liberty + X13 · gerado em 2026-11-13 pela skill hero-campanha v1.1.0 (campanha black-green, plataforma html). Não edite à mão: mude o campanha.json e gere de novo. */
+  /* ── Raiz: variáveis da campanha (cores, fontes, medidas da página) ── */
+  .gbf {
+    --gbf-fundo: #050A06;
+    --gbf-destaque: #7CFF2E;
+    --gbf-quente: #00C200;
+    --gbf-foco: #7CFF2E;
+    --gbf-neon: #b7ff8c;
+    --gbf-brilho-hover: rgba(124, 255, 46, .55);
+    --gbf-flash1: #e7ffd9;
+    --gbf-flash2: #8cff47;
+    --gbf-flash3: #00C200;
+    --gbf-flare1: #ffffff;
+    --gbf-flare2: #c4ffa1;
+    --gbf-flare3: #00C200;
+    --gbf-faisca: #aaff77;
+    --gbf-faisca-clara: #e5ffd5;
+    --gbf-farol1: rgba(255, 255, 255, .95);
+    --gbf-farol2: rgba(216, 255, 192, .7);
+    --gbf-farol3: rgba(124, 255, 46, .28);
+    --gbf-farol4: rgba(0, 194, 0, 0);
+    --gbf-glow-a: 170, 255, 119;
+    --gbf-glow-b: 0, 194, 0;
+    --gbf-glow-c: 89, 126, 0;
+    --gbf-selo-borda: #86ff3f;
+    --gbf-selo-fundo1: #07140d;
+    --gbf-selo-fundo2: #0A1F14;
+    --gbf-selo-fundo3: #084310;
+    --gbf-selo-fundo4: #06630c;
+    --gbf-selo-fundo5: #048108;
+    --gbf-selo-nome1: #ffffff;
+    --gbf-selo-nome2: #f3f4f3;
+    --gbf-selo-nome3: #d3d7d5;
+    --gbf-selo-nome4: #acb3af;
+    --gbf-selo-nome-traco: #f5f6f6;
+    --gbf-selo-valor1: #e7ffd9;
+    --gbf-selo-valor2: #b0ff82;
+    --gbf-selo-valor3: #7CFF2E;
+    --gbf-selo-valor4: #25d40e;
+    --gbf-selo-valor-traco: #7CFF2E;
+    --gbf-selo-brilho: rgba(222, 255, 203, .55);
+    --gbf-botao-fundo: #070B08;
+    --gbf-botao-fundo2: #09150e;
+    --gbf-botao-borda: #7CFF2E;
+    --gbf-botao-titulo: #ffffff;
+    --gbf-botao-texto: #ffffff;
+    --gbf-botao-setas: #7CFF2E;
+    --gbf-botao-glow: 124, 255, 46;
+    --gbf-selo-nome-ex1: #838b86;
+    --gbf-selo-valor-ex1: #17b908;
+    --gbf-selo-nome-ex2: #707773;
+    --gbf-selo-valor-ex2: #139f07;
+    --gbf-selo-nome-ex3: #5d635f;
+    --gbf-selo-valor-ex3: #108406;
+    --gbf-selo-nome-ex4: #4a4f4c;
+    --gbf-selo-valor-ex4: #0d6905;
+    --gbf-selo-nome-ex5: #373b39;
+    --gbf-selo-valor-ex5: #0a4e03;
+    --gbf-selo-nome-ex6: #242725;
+    --gbf-selo-valor-ex6: #063402;
+    --gbf-fonte-display: "Bebas Neue", "Bebas Neue", "Oswald", "Arial Narrow", sans-serif;
+    --gbf-fonte-display-peso: 400;
+    --gbf-fonte-texto: "Montserrat", "Segoe UI", Arial, sans-serif;
+    --gbf-acima: 0px;
+    --gbf-topo: 80px;
+    --gbf-respiro: 0px;
+    --gbf-reserva-baixo: 0px;
+    --gbf-altura-min: 480px;
+    --gbf-fundo-posicao: 50% 50%;
+    --gbf-entrada1: gbf-entra-esq;
+    --gbf-entrada2: gbf-entra-dir;
+    --gbf-botao-proporcao: 2.5;
+    --gbf-botao-titulo-fs: 18.3cqw;
+    --gbf-botao-sub-fs: 6.17cqw;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(100vh - var(--gbf-acima));
+    height: calc(100svh - var(--gbf-acima));
+    min-height: var(--gbf-altura-min);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--gbf-fundo);
+    isolation: isolate;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: left;
+    letter-spacing: normal;
+    font-family: var(--gbf-fonte-texto);
+  }
+  /* Reset do que temas costumam impor (img max-width, margem de título, sublinhado) */
+  .gbf *, .gbf *::before, .gbf *::after { box-sizing: border-box; }
+  .gbf h1, .gbf h2, .gbf h3, .gbf p { margin: 0; padding: 0; border: 0; font-weight: inherit; letter-spacing: inherit; }
+  .gbf a, .gbf a:hover, .gbf a:focus { text-decoration: none; }
+  .gbf .gbf__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  /* Fundo: ocupa a seção inteira. <picture>: o celular em pé baixa só o fundo dele */
+  .gbf__fundo { position: absolute; inset: 0; z-index: 0; }
+  .gbf .gbf__palco {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--gbf-fundo-posicao);
+    z-index: 0;
+  }
+  .gbf__apagao {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Área útil (abaixo do header sobreposto, acima do que é fixo embaixo) e a
+     cena: um palco de proporção fixa encaixado (contain) nela. */
+  .gbf__area {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--gbf-topo) + var(--gbf-respiro));
+    bottom: var(--gbf-reserva-baixo);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    container-type: size;
+  }
+  .gbf__cena { position: relative; }
+  .gbf__p { position: absolute; left: var(--x); top: var(--y); width: var(--w); }
+  .gbf__a { position: relative; display: block; }
+  /* No desktop o grupo dos produtos não existe como caixa: as peças se posicionam direto na cena */
+  .gbf__grupo, .gbf__grupo-cena { display: contents; }
+
+  /* ── Layout gerado (gerar.js): desktop e celular deitado ── */
+  .gbf__cena {
+    width: min(100vw, (100svh - var(--gbf-acima) - var(--gbf-topo) - var(--gbf-respiro) - var(--gbf-reserva-baixo)) * 1.7621);
+    width: min(100cqw, 100cqh * 1.7621);
+    aspect-ratio: 1163 / 660;
+  }
+  .gbf__p--titulo { --x: 5.85%; --y: 15.8%; --w: 29.46%; z-index: 1; }
+  .gbf__p--cta { --x: 6.79%; --y: 62.46%; --w: 27.83%; z-index: 5; }
+  .gbf__p--prod1 { --x: 34%; --y: 21.99%; --w: 33.39%; z-index: 2; }
+  .gbf__p--prod2 { --x: 58.9%; --y: 26.53%; --w: 33.17%; z-index: 3; }
+  .gbf__p--selo1 { --x: 36.61%; --y: 73.34%; --w: 21.59%; z-index: 4; }
+  .gbf__p--selo2 { --x: 71.13%; --y: 70.34%; --w: 20.29%; z-index: 4; }
+  .gbf__p--selo .gbf-selo { --selo-fonte: 8.6; }
+  /* Notebook baixo (1366×657, 1280×600): um respiro entre o header e o título */
+  @media (orientation: landscape) and (max-height: 760px) { .gbf { --gbf-respiro: 12px; } }
+
+  /* ── Celular e tablet em pé: pilha título → produtos → botão ──
+     --u é a unidade de tamanho: o maior valor que cabe na largura E na altura
+     útil (abaixo do header, acima do que é fixo embaixo). As três variáveis
+     --gbf-k-* aumentam/diminuem cada parte (1 = o calculado). */
+  @media (orientation: portrait) {
+    .gbf { --gbf-acima: 0px; --gbf-topo: 64px; --gbf-respiro: 0px; --gbf-reserva-baixo: 40px; --gbf-altura-min: 400px; --gbf-fundo-posicao: 50% 35%; }
+    .gbf__cena {
+      --gbf-k-titulo: 0.68;
+      --gbf-k-produtos: 1;
+      --gbf-k-botao: 0.7;
+      --gbf-pilha: calc(0.27 * var(--gbf-k-titulo) + 1.1179 * var(--gbf-k-produtos) + 0.2516 * var(--gbf-k-botao));
+      --gbf-largura: max(0.7507 * var(--gbf-k-produtos), 0.4111 * var(--gbf-k-titulo), 0.629 * var(--gbf-k-botao));
+      --u: min((100vw - 16px) / var(--gbf-largura), (100svh - var(--gbf-acima) - var(--gbf-topo) - var(--gbf-reserva-baixo)) / var(--gbf-pilha));
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    @supports (width: 1cqw) {
+      .gbf__cena { --u: min((100cqw - 16px) / var(--gbf-largura), 100cqh / var(--gbf-pilha)); }
+    }
+    .gbf__p--titulo, .gbf__p--cta { position: relative; left: auto; top: auto; flex: none; }
+    .gbf__p--titulo { width: calc(var(--u) * 0.4111 * var(--gbf-k-titulo)); margin-bottom: calc(var(--u) * -0.03 * var(--gbf-k-titulo)); }
+    .gbf__p--cta { width: calc(var(--u) * 0.629 * var(--gbf-k-botao)); margin-top: calc(var(--u) * 0.05 * var(--gbf-k-produtos)); }
+    .gbf__grupo { display: block; flex: none; }
+    .gbf__grupo-cena { display: block; position: relative; width: calc(var(--u) * 0.7507 * var(--gbf-k-produtos)); aspect-ratio: 0.7507 / 1.0679; }
+    .gbf__p--prod1 { --x: 11.43%; --y: 0%; --w: 81.11%; }
+    .gbf__p--prod2 { --x: 0%; --y: 40.97%; --w: 81.13%; }
+    .gbf__p--selo1 { --x: 55.55%; --y: 40.97%; --w: 43.88%; }
+    .gbf__p--selo2 { --x: 5.59%; --y: 86.03%; --w: 46.87%; }
+    .gbf__p--selo .gbf-selo { --selo-fonte: 9.6; }
+  }
+
+  /* ═══ SELO ═════════════════════════════════════════════════════════════════
+     Placa de preço: uma peça física inclinada no espaço, vista de uma câmera um
+     pouco acima e à esquerda. De trás para a frente: GLOW (filtro do SVG),
+     PLACA (SVG: dois retângulos que formam o recorte da direita; a borda é o
+     traço deles), TEXTO (topo, valor + sufixo, rodapé), EXTRUSÃO (cadeia de
+     drop-shadow no próprio texto) e o BRILHO da coreografia. O texto mora
+     DENTRO da placa transformada: os dois compartilham o mesmo plano. */
+  .gbf-selo {
+    --selo-fonte: 10.2;                 /* tamanho: cqw por em (tudo no selo é em) */
+    --selo-largura: 9.8em;
+    --selo-altura: 3.8em;
+    --selo-raio: .32em;
+    --selo-borda: .1em;
+    --selo-recorte-largura: 9%;
+    --selo-recorte-altura: 27%;
+    --selo-perspectiva: 16em;
+    --selo-rx: 6deg;
+    --selo-ry: -13deg;
+    --selo-rz: -7.5deg;
+    --selo-3d: .06em;
+    --selo-3d-dx: -1;
+    --selo-3d-dy: .12;
+    --selo-glow: 1.15;
+    --selo-fonte-topo: 1.4em;
+    --selo-fonte-valor: 2.62em;
+    --selo-fonte-sufixo: 2em;
+    --selo-fonte-rodape: .98em;
+    --selo-entrelinhas: .02em;
+    --selo-junta: -.24em;               /* cola "R$" e o número */
+
+    position: relative;
+    display: block;
+    width: var(--selo-largura);
+    margin: 0 auto;
+    font-size: calc(var(--selo-fonte) * 1cqw);
+    font-family: var(--gbf-fonte-display);
+    font-weight: var(--gbf-fonte-display-peso);
+    line-height: .86;
+    text-transform: uppercase;
+    perspective: var(--selo-perspectiva);
+    perspective-origin: 50% 50%;
+  }
+  .gbf-selo__placa {
+    --p3: calc(var(--selo-3d) / 6);
+    position: relative;
+    width: var(--selo-largura);
+    height: var(--selo-altura);
+    transform: rotateZ(var(--selo-rz)) rotateY(var(--selo-ry)) rotateX(var(--selo-rx));
+    transform-origin: 40% 55%;
+  }
+  .gbf-selo__forma {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter:
+      drop-shadow(0 0 calc(.05em * var(--selo-glow)) rgba(var(--gbf-glow-a), calc(.95 * var(--selo-glow))))
+      drop-shadow(0 0 calc(.32em * var(--selo-glow)) rgba(var(--gbf-glow-b), calc(.85 * var(--selo-glow))))
+      drop-shadow(0 0 calc(1.1em * var(--selo-glow)) rgba(var(--gbf-glow-c), calc(.55 * var(--selo-glow))));
+  }
+  .gbf-selo__forma rect { rx: var(--selo-raio); }
+  .gbf-selo__corpo, .gbf-selo__aba { x: calc(var(--selo-borda) / 2); }
+  .gbf-selo__corpo {
+    y: calc(var(--selo-borda) / 2);
+    width: calc(100% - var(--selo-recorte-largura) - var(--selo-borda));
+    height: calc(100% - var(--selo-borda));
+  }
+  .gbf-selo__aba {
+    y: var(--selo-recorte-altura);
+    width: calc(100% - var(--selo-borda));
+    height: calc(100% - var(--selo-recorte-altura) - var(--selo-borda) / 2);
+  }
+  .gbf-selo__borda rect { fill: none; stroke: var(--gbf-selo-borda); stroke-width: calc(var(--selo-borda) * 2); }
+  .gbf-selo__fundo rect { stroke: none; }
+  .gbf-selo__g1 { stop-color: var(--gbf-selo-fundo1); }
+  .gbf-selo__g2 { stop-color: var(--gbf-selo-fundo2); }
+  .gbf-selo__g3 { stop-color: var(--gbf-selo-fundo3); }
+  .gbf-selo__g4 { stop-color: var(--gbf-selo-fundo4); }
+  .gbf-selo__g5 { stop-color: var(--gbf-selo-fundo5); }
+
+  /* TEXTO: grade de duas colunas; o topo fica centrado sobre o valor (sem o sufixo) */
+  .gbf-selo__texto {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: .3em .5em .26em .66em;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    align-content: center;
+    justify-content: start;
+    /* .3em: com menos, a extrusão do sufixo (que vai para a esquerda) cobre a
+       borda do último dígito, e "1.000" é lido como "1.00(". */
+    column-gap: .3em;
+    row-gap: var(--selo-entrelinhas);
+    white-space: nowrap;
+    letter-spacing: 0;
+    font-size: calc(1em * var(--selo-texto, 1));
+  }
+  .gbf-selo__topo {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+    font-size: var(--selo-fonte-topo);
+    letter-spacing: .01em;
+    background: linear-gradient(180deg, var(--gbf-selo-nome1) 0%, var(--gbf-selo-nome2) 40%, var(--gbf-selo-nome3) 72%, var(--gbf-selo-nome4) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    -webkit-text-stroke: .012em var(--gbf-selo-nome-traco);
+    --c1: var(--gbf-selo-nome-ex1); --c2: var(--gbf-selo-nome-ex2); --c3: var(--gbf-selo-nome-ex3);
+    --c4: var(--gbf-selo-nome-ex4); --c5: var(--gbf-selo-nome-ex5); --c6: var(--gbf-selo-nome-ex6);
+  }
+  .gbf-selo__valor {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: subgrid;
+    /* Linha de base: valor e sufixo têm tamanhos diferentes; pela linha de base
+       o sufixo pisa na linha do valor com qualquer fonte. */
+    align-items: baseline;
+  }
+  .gbf-selo__digitos, .gbf-selo__sufixo, .gbf-selo__rodape {
+    background: linear-gradient(180deg, var(--gbf-selo-valor1) 0%, var(--gbf-selo-valor2) 30%, var(--gbf-selo-valor3) 62%, var(--gbf-selo-valor4) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    -webkit-text-stroke: .022em var(--gbf-selo-valor-traco);
+    --c1: var(--gbf-selo-valor-ex1); --c2: var(--gbf-selo-valor-ex2); --c3: var(--gbf-selo-valor-ex3);
+    --c4: var(--gbf-selo-valor-ex4); --c5: var(--gbf-selo-valor-ex5); --c6: var(--gbf-selo-valor-ex6);
+  }
+  /* O valor fica NA FRENTE do sufixo: a extrusão do sufixo vai para a
+     esquerda e, sem isso, pinta por cima do último dígito quando passa do vão
+     de .3em. Isso acontece em tela pequena (cada passo da extrusão arredonda
+     para 1 px no mínimo) e com fonte de zero mais largo (Saira Condensed, na
+     Urbana: "1.000" lido como "1.00("). Na frente, a extrusão some atrás do
+     zero, como profundidade, com qualquer fonte e tamanho. */
+  .gbf-selo__digitos { grid-column: 1; font-size: var(--selo-fonte-valor); word-spacing: var(--selo-junta); letter-spacing: -.012em; position: relative; z-index: 1; }
+  .gbf-selo__sufixo { grid-column: 2; font-size: var(--selo-fonte-sufixo); padding-bottom: .02em; }
+  .gbf-selo__rodape { grid-column: 1 / -1; grid-row: 3; justify-self: center; font-size: var(--selo-fonte-rodape); letter-spacing: .06em; }
+  /* Sem sufixo (ex.: "R$ 9.990"): o valor centraliza na placa */
+  .gbf-selo--sem-sufixo .gbf-selo__texto { justify-content: center; padding-left: .5em; }
+  .gbf-selo--sem-sufixo .gbf-selo__topo { grid-column: 1 / -1; }
+  /* Topo mais largo que o valor (ex.: "TURBO X COM" sobre "R$800"): na grade o
+     sufixo ficaria longe do número. As duas linhas alinham à esquerda e o
+     valor segue colado no sufixo. */
+  .gbf-selo--topo-largo .gbf-selo__topo { grid-column: 1 / -1; justify-self: start; }
+  .gbf-selo--topo-largo .gbf-selo__valor { grid-column: 1 / -1; display: flex; align-items: baseline; column-gap: .3em; }
+  /* Texto reduzido pelo campanha.json (seloTexto < 1): o bloco centraliza na
+     placa. Alinhado à esquerda, toda a folga ia para a direita e o valor seguia
+     encostado na borda esquerda, onde a extrusão 3D já ocupa espaço (Urbana). */
+  .gbf-selo--centro .gbf-selo__texto { justify-content: center; padding-left: .5em; }
+  /* Com rodapé (ex.: "de desconto"): três linhas, tudo centrado */
+  .gbf-selo--rodape .gbf-selo__texto { grid-template-rows: auto auto auto; justify-content: center; padding-left: .5em; }
+  .gbf-selo--rodape .gbf-selo__topo { grid-column: 1 / -1; }
+  .gbf-selo--rodape { --selo-fonte-valor: 2.4em; }
+
+  /* EXTRUSÃO: seis cópias do contorno, cada uma um passo para trás/esquerda */
+  .gbf-selo__topo, .gbf-selo__digitos, .gbf-selo__sufixo, .gbf-selo__rodape {
+    --ex: calc(var(--p3, .0125em) * var(--selo-3d-dx));
+    --ey: calc(var(--p3, .0125em) * var(--selo-3d-dy));
+    filter:
+      drop-shadow(var(--ex) var(--ey) 0 var(--c1))
+      drop-shadow(var(--ex) var(--ey) 0 var(--c2))
+      drop-shadow(var(--ex) var(--ey) 0 var(--c3))
+      drop-shadow(var(--ex) var(--ey) 0 var(--c4))
+      drop-shadow(var(--ex) var(--ey) 0 var(--c5))
+      drop-shadow(var(--ex) var(--ey) 0 var(--c6))
+      drop-shadow(calc(var(--ex) * 2) 0 .06em rgba(0, 0, 0, .55));
+  }
+  .gbf-selo__brilho {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--selo-raio);
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(100deg, transparent 30%, var(--gbf-selo-brilho) 50%, transparent 70%);
+  }
+  .gbf__p--selo { container-type: inline-size; }
+  .gbf .gbf-selo__brilho { filter: none; }
+
+  /* ═══ BOTÃO ════════════════════════════════════════════════════════════════
+     Placa escura com borda da marca, na mesma perspectiva do selo: título
+     grande (o chamado), até duas linhas de apoio e as setas. Tudo em cqw da
+     caixa do botão, então ele escala inteiro como uma imagem. */
+  .gbf__p--cta { container-type: inline-size; }
+  .gbf-botao {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--gbf-botao-proporcao);
+    perspective: 60cqw;
+  }
+  .gbf-botao__placa {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 6cqw 0 9cqw;
+    border: .5cqw solid var(--gbf-botao-borda);
+    border-radius: 2.4cqw;
+    background: linear-gradient(165deg, var(--gbf-botao-fundo2) 0%, var(--gbf-botao-fundo) 58%);
+    box-shadow: 0 0 1.4cqw rgba(var(--gbf-botao-glow), .6), 0 0 5cqw rgba(var(--gbf-botao-glow), .22), inset 0 0 3cqw rgba(0, 0, 0, .55);
+    transform: rotateY(-13deg) rotateZ(-1.6deg);
+    transform-origin: 45% 50%;
+    color: var(--gbf-botao-texto);
+  }
+  .gbf-botao__titulo {
+    display: block;
+    font-family: var(--gbf-fonte-display);
+    font-weight: var(--gbf-fonte-display-peso);
+    font-size: var(--gbf-botao-titulo-fs);
+    line-height: .92;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--gbf-botao-titulo);
+    transform: skewX(-7deg);
+    transform-origin: 0 100%;
+    text-shadow: 0 0 1.4cqw rgba(255, 255, 255, .28), .5cqw .6cqw 0 rgba(0, 0, 0, .55);
+  }
+  .gbf-botao__sub {
+    display: block;
+    margin-top: 1.4cqw;
+    font-family: var(--gbf-fonte-texto);
+    font-weight: 500;
+    font-size: var(--gbf-botao-sub-fs);
+    line-height: 1.12;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  .gbf-botao__linha { display: block; white-space: nowrap; }
+  .gbf-botao__linha--forte { font-weight: 700; }
+  .gbf-botao__setas { margin-left: .55em; color: var(--gbf-botao-setas); font-weight: 700; letter-spacing: -.06em; }
+  .gbf-botao__brilho {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+  }
+  .gbf .gbf-botao__brilho { filter: none; }
+
+  /* Título (imagem do nome da oferta) */
+  .gbf .gbf__titulo { margin: 0; padding: 0; border: 0; font-size: 0; line-height: 0; }
+  .gbf__fx {
+    position: absolute;
+    left: -20%;
+    top: -25%;
+    width: 140%;
+    height: 150%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .gbf__fx * { transform-box: fill-box; transform-origin: center; }
+  .gbf__flash, .gbf__flare, .gbf__faiscas circle { opacity: 0; }
+  .gbf__fx-f1 { stop-color: var(--gbf-flash1); }
+  .gbf__fx-f2 { stop-color: var(--gbf-flash2); }
+  .gbf__fx-f3 { stop-color: var(--gbf-flash3); }
+  .gbf__fx-l1 { stop-color: var(--gbf-flare1); }
+  .gbf__fx-l2 { stop-color: var(--gbf-flare2); }
+  .gbf__fx-l3 { stop-color: var(--gbf-flare3); }
+  .gbf__faiscas { fill: var(--gbf-faisca); }
+  .gbf__faiscas .gbf__faisca-clara { fill: var(--gbf-faisca-clara); }
+
+  /* Brilho que atravessa a peça uma vez: cópia clareada da própria imagem
+     (no selo e no botão, um degradê), revelada por uma faixa que corre */
+  .gbf .gbf__brilho {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: brightness(1.7) saturate(1.1);
+    -webkit-mask-image: linear-gradient(100deg, transparent 38%, #000 50%, transparent 62%);
+    mask-image: linear-gradient(100deg, transparent 38%, #000 50%, transparent 62%);
+    -webkit-mask-size: 300% 100%;
+    mask-size: 300% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* Faróis acendendo (só produto com "farol" na campanha) */
+  .gbf__farol {
+    position: absolute;
+    left: var(--fx);
+    top: var(--fy);
+    width: var(--fw);
+    aspect-ratio: 1;
+    margin: calc(var(--fw) / -2) 0 0 calc(var(--fw) / -2);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gbf-farol1) 0, var(--gbf-farol2) 16%, var(--gbf-farol3) 40%, var(--gbf-farol4) 70%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Link do botão */
+  .gbf .gbf__cta {
+    display: block;
+    border: 0;
+    outline: 0;
+    background: none;
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .gbf__cta-int {
+    display: block;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), filter .35s ease;
+  }
+  .gbf .gbf__cta:hover .gbf__cta-int { transform: scale(1.035); filter: drop-shadow(0 0 18px var(--gbf-brilho-hover)); }
+  .gbf .gbf__cta:active .gbf__cta-int { transform: scale(.985); }
+  .gbf .gbf__cta:focus-visible { outline: 3px solid var(--gbf-foco); outline-offset: 6px; border-radius: 10px; }
+  .gbf__neon {
+    position: absolute;
+    inset: -.4cqw;
+    width: calc(100% + .8cqw);
+    height: calc(100% + .8cqw);
+    overflow: visible;
+    pointer-events: none;
+    filter: drop-shadow(0 0 3px var(--gbf-destaque)) drop-shadow(0 0 9px var(--gbf-quente));
+  }
+  .gbf__neon path {
+    fill: none;
+    stroke: var(--gbf-neon);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    opacity: 0;
+  }
+  .gbf__neon .gbf__neon-traco { stroke-dasharray: 100 100; stroke-width: 1.5; }
+  .gbf__neon .gbf__neon-cometa { stroke-dasharray: 18 82; stroke-width: 3; }
+
+  /* ── Estado armado: tudo apagado até a coreografia começar ──
+     A trava por CSS (5 s) mostra tudo mesmo se nenhum script rodar: otimizador
+     que atrasa JS, erro de outro plugin, framework que não executa o bloco. */
+  .gbf.is-armado .gbf__apagao { opacity: 1; animation: gbf-trava-apagao 1ms linear 5s both; }
+  .gbf.is-armado .gbf__a { opacity: 0; animation: gbf-trava 1ms linear 5s both; }
+  @keyframes gbf-trava { to { opacity: 1; } }
+  @keyframes gbf-trava-apagao { to { opacity: 0; } }
+
+  /* ── Coreografia (toca uma vez; o último quadro é o próprio layout) ── */
+  .gbf.is-tocando .gbf__palco    { animation: gbf-palco 2600ms cubic-bezier(.16, 1, .3, 1) 0ms both; }
+  .gbf.is-tocando .gbf__apagao   { animation: gbf-acende 1100ms linear 0ms both; }
+  .gbf.is-tocando .gbf__cena     { animation: gbf-tremor 460ms ease-out 1040ms both; }
+
+  .gbf.is-tocando .gbf__p--titulo .gbf__a { animation: gbf-titulo 760ms linear 600ms both; }
+  .gbf.is-tocando .gbf__flash    { animation: gbf-flash 850ms cubic-bezier(.2, .7, .3, 1) 1010ms both; }
+  .gbf.is-tocando .gbf__flare    { animation: gbf-flare 1000ms cubic-bezier(.2, .7, .3, 1) 1020ms both; }
+  .gbf.is-tocando .gbf__faiscas circle { animation-name: gbf-faisca; animation-timing-function: cubic-bezier(.15, .7, .3, 1); animation-fill-mode: both; }
+  .gbf.is-tocando .gbf__p--titulo .gbf__brilho { animation: gbf-brilho 1000ms ease-in-out 1560ms both; }
+
+  .gbf.is-tocando .gbf__p--prod1 .gbf__a { animation: var(--gbf-entrada1) 950ms cubic-bezier(.16, 1, .3, 1) 1250ms both; }
+  .gbf.is-tocando .gbf__p--prod2 .gbf__a { animation: var(--gbf-entrada2) 950ms cubic-bezier(.16, 1, .3, 1) 1400ms both; }
+  .gbf.is-tocando .gbf__p--prod1 .gbf__farol { animation: gbf-farol 800ms ease-out 1950ms both; }
+  .gbf.is-tocando .gbf__p--prod2 .gbf__farol { animation: gbf-farol 800ms ease-out 2100ms both; }
+
+  .gbf.is-tocando .gbf__p--selo1 .gbf__a { animation: gbf-selo 700ms linear 2150ms both; }
+  .gbf.is-tocando .gbf__p--selo2 .gbf__a { animation: gbf-selo 700ms linear 2300ms both; }
+  .gbf.is-tocando .gbf__p--selo1 .gbf__brilho { animation: gbf-brilho 900ms ease-in-out 2750ms both; }
+  .gbf.is-tocando .gbf__p--selo2 .gbf__brilho { animation: gbf-brilho 900ms ease-in-out 2900ms both; }
+
+  .gbf.is-tocando .gbf__p--cta .gbf__a { animation: gbf-cta 800ms cubic-bezier(.16, 1, .3, 1) 2500ms both; }
+  .gbf.is-tocando .gbf__neon-traco  { animation: gbf-neon-traco 1300ms cubic-bezier(.4, 0, .2, 1) 3000ms both; }
+  .gbf.is-tocando .gbf__neon-cometa { animation: gbf-neon-cometa 1300ms cubic-bezier(.4, 0, .2, 1) 3000ms both; }
+  .gbf.is-tocando .gbf__p--cta .gbf__brilho { animation: gbf-brilho 900ms ease-in-out 3350ms both; }
+
+  @keyframes gbf-palco { from { transform: scale(1.12); } to { transform: none; } }
+  @keyframes gbf-acende {
+    0%, 16% { opacity: 1; }
+    20% { opacity: .5; }
+    24% { opacity: .92; }
+    31% { opacity: .32; }
+    35% { opacity: .8; }
+    46% { opacity: .14; }
+    100% { opacity: 0; }
+  }
+  @keyframes gbf-tremor {
+    0% { transform: none; }
+    15% { transform: translate3d(-.5%, .7%, 0); }
+    32% { transform: translate3d(.45%, -.45%, 0); }
+    50% { transform: translate3d(-.28%, .25%, 0); }
+    70% { transform: translate3d(.12%, -.1%, 0); }
+    100% { transform: none; }
+  }
+  /* Linear na animação, curva por trecho: o impacto cai em 55% (1018 ms) junto do clarão */
+  @keyframes gbf-titulo {
+    0% { opacity: 0; transform: scale(2.4); filter: blur(18px) brightness(1); animation-timing-function: cubic-bezier(.5, 0, .9, .4); }
+    30% { opacity: 1; }
+    55% { transform: scale(.955); filter: blur(0) brightness(1.9); animation-timing-function: cubic-bezier(.2, .8, .3, 1); }
+    78% { transform: scale(1.012); filter: blur(0) brightness(1.12); animation-timing-function: ease-in-out; }
+    100% { opacity: 1; transform: none; filter: blur(0) brightness(1); }
+  }
+  @keyframes gbf-flash {
+    0% { opacity: 0; transform: scale(.55); }
+    9% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.4); }
+  }
+  @keyframes gbf-flare {
+    0% { opacity: 0; transform: scaleX(.05); }
+    28% { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: scaleX(1.3); }
+  }
+  @keyframes gbf-faisca {
+    0% { opacity: 0; transform: translate(0, 0) scale(1); }
+    10% { opacity: 1; }
+    70% { opacity: .9; }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.25); }
+  }
+  @keyframes gbf-brilho {
+    0% { opacity: 1; -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+    85% { opacity: 1; }
+    100% { opacity: 0; -webkit-mask-position: 0 0; mask-position: 0 0; }
+  }
+  @keyframes gbf-entra-esq {
+    0% { opacity: 0; transform: translate3d(-22%, 0, 0) scale(.93); filter: brightness(.15) blur(5px); }
+    55% { opacity: 1; filter: brightness(1.12) blur(0); }
+    100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes gbf-entra-dir {
+    0% { opacity: 0; transform: translate3d(22%, 0, 0) scale(.93); filter: brightness(.15) blur(5px); }
+    55% { opacity: 1; filter: brightness(1.12) blur(0); }
+    100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes gbf-farol {
+    0% { opacity: 0; transform: scale(.2); }
+    30% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.7); }
+  }
+  @keyframes gbf-selo {
+    0% { opacity: 0; transform: scale(.3) rotate(-9deg); animation-timing-function: cubic-bezier(.2, .8, .3, 1); }
+    50% { opacity: 1; transform: scale(1.07) rotate(1.5deg); animation-timing-function: ease-in-out; }
+    76% { transform: scale(.98) rotate(0deg); animation-timing-function: ease-in-out; }
+    100% { opacity: 1; transform: none; }
+  }
+  /* A cortina vai além da caixa (-40%/-20%): a placa em perspectiva, o skew do
+     título e o glow passam da caixa do botão. Com inset(0) o botão ficava
+     recortado do fim da entrada até tirar is-tocando (Urbana, 3,3 s → 4,4 s). */
+  @keyframes gbf-cta {
+    0% { opacity: 0; transform: translate3d(-14%, 0, 0); clip-path: inset(-40% 120% -40% -20%); }
+    100% { opacity: 1; transform: none; clip-path: inset(-40% -20% -40% -20%); }
+  }
+  @keyframes gbf-neon-traco {
+    0% { opacity: 1; stroke-dashoffset: 100; }
+    60% { opacity: 1; stroke-dashoffset: 0; }
+    100% { opacity: 0; stroke-dashoffset: 0; }
+  }
+  @keyframes gbf-neon-cometa {
+    0% { opacity: 0; stroke-dashoffset: 100; }
+    8% { opacity: 1; }
+    62% { opacity: 1; }
+    100% { opacity: 0; stroke-dashoffset: -18; }
+  }
+
+  /* Quem pede menos movimento vê o quadro final direto, sem trava nem espera */
+  @media (prefers-reduced-motion: reduce) {
+    .gbf.is-armado .gbf__a { opacity: 1; animation: none; }
+    .gbf.is-armado .gbf__apagao { opacity: 0; animation: none; }
+  }
+
+/* Green Energy: a seção entra por baixo do header sticky, como o .hero. */
+.gbf { margin-top: calc(var(--ge-header) * -1); }
+
+/* Green Energy: o botão é a arte do designer (campanhas/black-green/site.json).
+   A placa da arte ocupa a largura da caixa do botão e fica centrada nela; o
+   brilho da arte transborda. Mouse em cima ou foco: acende um halo verde. */
+.gbf-botao--arte { perspective: none; }
+.gbf .gbf-botao__arte {
+  position: absolute;
+  left: -2.56%;
+  top: 50%;
+  width: 104.78%;
+  max-width: none;
+  transform: translateY(-50.26%);
+  transition: filter .3s ease, transform .3s ease;
+}
+.gbf__cta:hover .gbf-botao__arte,
+.gbf__cta:focus-visible .gbf-botao__arte,
+.gbf__cta:active .gbf-botao__arte {
+  filter: drop-shadow(0 0 .6em rgba(124, 255, 46, .85)) drop-shadow(0 0 1.8em rgba(0, 194, 0, .55));
+  transform: translateY(-50.26%) scale(1.03);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gbf .gbf-botao__arte { transition: none; }
+  .gbf__cta:hover .gbf-botao__arte,
+  .gbf__cta:focus-visible .gbf-botao__arte,
+  .gbf__cta:active .gbf-botao__arte { transform: translateY(-50.26%); }
+}
