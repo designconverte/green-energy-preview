@@ -995,7 +995,122 @@ window.GREEN_GALERIAS = {
    "estudio": false
   }
  ],
- "titan": []
+ "titan": [],
+ "t1": [
+  {
+   "src": "assets/img/models/t1-01.webp",
+   "mini": "assets/img/models/t1-01-mini.webp",
+   "alt": "Painel digital colorido da TailG T1, com a marca TailG e o modo P",
+   "w": 960,
+   "h": 1280,
+   "fundo": "#8F8A7F",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/t1-02.webp",
+   "mini": "assets/img/models/t1-02-mini.webp",
+   "alt": "Traseira da TailG T1 branca, com bagageiro, lanterna e a plaqueta de autopropelido",
+   "w": 960,
+   "h": 1280,
+   "fundo": "#938A82",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/t1-03.webp",
+   "mini": "assets/img/models/t1-03-mini.webp",
+   "alt": "TailG T1 vista de trás, com a lanterna de LED acesa",
+   "w": 960,
+   "h": 1280,
+   "fundo": "#847F70",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/t1-04.webp",
+   "mini": "assets/img/models/t1-04-mini.webp",
+   "alt": "Banco da TailG T1, em preto com costura em losango",
+   "w": 960,
+   "h": 1280,
+   "fundo": "#807B72",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/t1-05.webp",
+   "mini": "assets/img/models/t1-05-mini.webp",
+   "alt": "Punho esquerdo da TailG T1 com os comandos de luz, seta e buzina",
+   "w": 960,
+   "h": 1280,
+   "fundo": "#817D79",
+   "estudio": false
+  }
+ ],
+ "t6": [],
+ "tank-g1": [
+  {
+   "src": "assets/img/models/tank-g1-01.webp",
+   "mini": "assets/img/models/tank-g1-01-mini.webp",
+   "alt": "Angie Tank G1 carbono de frente, com os dois faróis redondos, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/tank-g1-02.webp",
+   "mini": "assets/img/models/tank-g1-02-mini.webp",
+   "alt": "Angie Tank G1 carbono de perfil, com bagageiros dianteiro e traseiro, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/tank-g1-03.webp",
+   "mini": "assets/img/models/tank-g1-03-mini.webp",
+   "alt": "Angie Tank G1 carbono em três quartos traseira, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/tank-g1-04.webp",
+   "mini": "assets/img/models/tank-g1-04-mini.webp",
+   "alt": "Traseira da Angie Tank G1, com lanterna, setas e bagageiro, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FEFFFE",
+   "estudio": true
+  }
+ ],
+ "ag22": [
+  {
+   "src": "assets/img/models/ag22-01.webp",
+   "mini": "assets/img/models/ag22-01-mini.webp",
+   "alt": "Angie AG22 cinza com detalhes verde-limão, de perfil, numa loja",
+   "w": 1200,
+   "h": 676,
+   "fundo": "#807784",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/ag22-02.webp",
+   "mini": "assets/img/models/ag22-02-mini.webp",
+   "alt": "Angie AG22 cinza em três quartos frontal, com o farol de LED aceso, numa loja",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#948F8E",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/ag22-03.webp",
+   "mini": "assets/img/models/ag22-03-mini.webp",
+   "alt": "Angie AG22 cinza em três quartos frontal, lado esquerdo, numa loja",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#8D8B8F",
+   "estudio": false
+  }
+ ]
 };
 window.GREEN_FOTOS_COR = {
  "x11-3000w": {
@@ -1178,6 +1293,122 @@ window.GREEN_FOTOS_COR = {
    "w": 1000,
    "h": 750,
    "fundo": "#FFFFFF",
+   "estudio": true
+  }
+ },
+ "t1": {
+  "branco": {
+   "src": "assets/img/models/t1-cor-branco.webp",
+   "mini": "assets/img/models/t1-cor-branco-mini.webp",
+   "alt": "Scooter elétrica TailG T1 branca em três quartos frontal, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "cinza": {
+   "src": "assets/img/models/t1-cor-cinza.webp",
+   "mini": "assets/img/models/t1-cor-cinza-mini.webp",
+   "alt": "Scooter elétrica TailG T1 cinza em três quartos frontal, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "prata": {
+   "src": "assets/img/models/t1-cor-prata.webp",
+   "mini": "assets/img/models/t1-cor-prata-mini.webp",
+   "alt": "Scooter elétrica TailG T1 prata em três quartos frontal, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "verde-camaleao": {
+   "src": "assets/img/models/t1-cor-verde-camaleao.webp",
+   "mini": "assets/img/models/t1-cor-verde-camaleao-mini.webp",
+   "alt": "Scooter elétrica TailG T1 verde camaleão, pintura furta-cor verde e roxa, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  }
+ },
+ "t6": {
+  "cinza-dourado": {
+   "src": "assets/img/models/t6-cor-cinza-dourado.webp",
+   "mini": "assets/img/models/t6-cor-cinza-dourado-mini.webp",
+   "alt": "Scooter elétrica TailG T6 cinza com detalhes dourados e para-brisa, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "limited-edition": {
+   "src": "assets/img/models/t6-cor-limited-edition.webp",
+   "mini": "assets/img/models/t6-cor-limited-edition-mini.webp",
+   "alt": "Scooter elétrica TailG T6 Limited Edition preta com grafismos dourados, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "preto": {
+   "src": "assets/img/models/t6-cor-preto.webp",
+   "mini": "assets/img/models/t6-cor-preto-mini.webp",
+   "alt": "Scooter elétrica TailG T6 cinza-grafite com frisos vermelhos e para-brisa, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "verde-cinza": {
+   "src": "assets/img/models/t6-cor-verde-cinza.webp",
+   "mini": "assets/img/models/t6-cor-verde-cinza-mini.webp",
+   "alt": "Scooter elétrica TailG T6 prata com detalhes verdes e para-brisa, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  },
+  "vermelho-cinza": {
+   "src": "assets/img/models/t6-cor-vermelho-cinza.webp",
+   "mini": "assets/img/models/t6-cor-vermelho-cinza-mini.webp",
+   "alt": "Scooter elétrica TailG T6 prata com detalhes vermelhos e para-brisa, em estúdio",
+   "w": 1000,
+   "h": 750,
+   "fundo": "#FFFDFF",
+   "estudio": true
+  }
+ },
+ "tank-g1": {
+  "carbono": {
+   "src": "assets/img/models/tank-g1-cor-carbono.webp",
+   "mini": "assets/img/models/tank-g1-cor-carbono-mini.webp",
+   "alt": "Scooter elétrica Angie Tank G1 com carenagem em fibra de carbono, em três quartos frontal, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FFFFFE",
+   "estudio": true
+  },
+  "cinza": {
+   "src": "assets/img/models/tank-g1-cor-cinza.webp",
+   "mini": "assets/img/models/tank-g1-cor-cinza-mini.webp",
+   "alt": "Scooter elétrica Angie Tank G1 cinza, em três quartos frontal, em estúdio",
+   "w": 1000,
+   "h": 1000,
+   "fundo": "#FEFFFE",
+   "estudio": true
+  }
+ },
+ "ag22": {
+  "cinza": {
+   "src": "assets/img/models/ag22-cor-cinza.webp",
+   "mini": "assets/img/models/ag22-cor-cinza-mini.webp",
+   "alt": "Scooter elétrica Angie AG22 cinza com detalhes verde-limão, para-brisa e encosto, numa loja",
+   "w": 1200,
+   "h": 1600,
+   "fundo": "#A6A29D",
    "estudio": true
   }
  }

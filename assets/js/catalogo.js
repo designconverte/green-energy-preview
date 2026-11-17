@@ -26,6 +26,10 @@
    "V8 Ultra" (e o site herdou); agora é "V8 Pro" em tudo, com a página em
    /modelos-de-motos/v8-pro/ e 301 do endereço antigo no .htaccess.
 
+   17/11/2026, usuário: o Joy Tri sai da vitrine (a loja não trabalha com ele
+   no momento) e entram TailG T1 e T6, Angie Tank G1 e Angie AG22, no fim da
+   lista, sem preço. Ficha e fotos achadas na web (ver o bloco deles).
+
    REGRA HERDADA DO FRAMEWORK: nenhum número entra sem fonte. Aqui a fonte é a
    própria loja (o cadastro do WordPress). Onde o card e a ficha do mesmo
    modelo discordam, vale o CARD (é o que o cliente vê primeiro) e a
@@ -213,6 +217,7 @@ window.GREEN_ORDEM = [
   'gt2000', 'liberty', 'tiger-x6', 'kn8', 'mike', 'x11-3000w', 'ved',
   'mia-tri', 'roma', 's8-3000w',
   'tank', 'l10', 'l11', 'joy-tri', 'titan',
+  't1', 't6', 'tank-g1', 'ag22',
 ];
 
 const MODELOS = [
@@ -860,6 +865,7 @@ const MODELOS = [
   },
   {
     id: 'joy-tri',
+    oculto: true, // fora da vitrine a pedido do cliente (17/11/2026: a loja não trabalha com ele no momento)
     nome: 'Joy Tri',
     fabricante: 'MotoChefe',
     descritivo: 'Triciclo elétrico',
@@ -927,6 +933,177 @@ const MODELOS = [
       { ...COR.preta, galeria: fotoCor('titan', 'preto') },
     ],
     galeria: [],
+  },
+
+  /* ── Novos de 17/11/2026 (pedido do usuário) ──────────────────────────────
+     Ficha e fotos achadas na web: não há ficha completa da Angie (a
+     distribuidora) para nenhum dos quatro. Regra: só entra o que a fonte diz;
+     onde as fontes discordam, o campo fica de fora até a loja confirmar
+     (como na V8 Pro). Hex das cores = aproximado na foto. Sem preço por
+     enquanto (usuário). As fontes de cada foto estão no ORIGEM.md da pasta
+     modelos_a_adicionar/<modelo>/. */
+
+  {
+    id: 't1',
+    nome: 'T1',
+    fabricante: 'TailG',
+    descritivo: 'Scooter elétrica',
+    tags: ['Autonomia', 'Garupa', 'Design'],
+    categorias: ['autopropelido'],
+    /* A própria moto traz a plaqueta "Autopropelidos · Motor até 1000w ·
+       Velocidade até 32 km/h · Resolução CONTRAN nº 996" (foto da revenda), e
+       todos os vendedores a chamam de autopropelido. Largura e entre-eixos:
+       nenhuma fonte informa. */
+    classificacao: 'autopropelido',
+    foto: 'assets/img/models/t1-card.webp',
+    alt: 'Scooter elétrica TailG T1 branca, com farol de LED e encosto para garupa',
+    preco: null, // sem preço por enquanto (usuário, 17/11/2026)
+    /* Fonte: catálogo oficial da Angie Motors (angiemotors.app), que vende a
+       TailG como "AG T1". Ficaram de fora, por divergência entre revendas:
+       freios (hidráulico? disco nas duas rodas ou só na dianteira?) e
+       garantia (só um anúncio de usado fala em 12 meses). Os itens de série
+       vêm das fichas do Mercado Livre e das fotos. */
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W' },
+      autonomia: { valor: 70, unidade: 'km', nota: 'Até 70 km, segundo o catálogo da Angie.' },
+      bateria: 'Lítio 64V 30Ah',
+      recarga: '6 a 7 horas',
+      rodas: 'Pneus 90/90-11 na dianteira e 90/90-10 na traseira',
+      carga: 'Até 180 kg',
+    },
+    equipamentos: [
+      'Painel digital colorido', 'Farol e lanterna em LED', 'Marcha ré', 'Modo parking',
+      'Alarme', 'Entrada USB', 'Encosto e bagageiro traseiro',
+    ],
+    cores: [
+      { ...COR.branca, galeria: fotoCor('t1', 'branco') },
+      { nome: 'Verde camaleão', bicolor: ['#2E7D5B', '#6B3FA0'], aprox: true, galeria: fotoCor('t1', 'verde-camaleao') },
+      { ...COR.prata, galeria: fotoCor('t1', 'prata') },
+      { nome: 'Cinza', hex: '#5F6266', aprox: true, galeria: fotoCor('t1', 'cinza') },
+    ],
+    galeria: detalhes('t1'),
+  },
+  {
+    id: 't6',
+    nome: 'T6',
+    fabricante: 'TailG',
+    descritivo: 'Scooter elétrica',
+    tags: ['Autonomia', 'Estilo', 'Tecnologia'],
+    categorias: ['autopropelido'],
+    // 1000 W e 32 km/h (catálogo); vendida como autopropelido. Largura e entre-eixos: sem fonte.
+    classificacao: 'autopropelido',
+    foto: 'assets/img/models/t6-card.webp',
+    alt: 'Scooter elétrica TailG T6 cinza-grafite com frisos vermelhos e para-brisa',
+    preco: null, // sem preço por enquanto (usuário, 17/11/2026)
+    /* Fonte: catálogo oficial da Angie Motors (angiemotors.app, "AG T6");
+       "removível", NFC e farol de LED: anúncio da Danezi Motos (Jundiaí);
+       piloto automático: títulos dos vídeos do canal oficial da Angie.
+       Freios, garantia e dimensões: sem fonte. Os nomes das cores são os do
+       catálogo: a foto que ele chama de "Preto" é cinza-grafite (só a
+       Limited Edition é preta). */
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W' },
+      autonomia: { valor: 70, unidade: 'km', nota: 'Até 70 km, segundo o catálogo da Angie.' },
+      bateria: 'Lítio 64V 30Ah, removível',
+      recarga: '6 a 7 horas',
+      rodas: 'Pneus 90/90-12, dianteiro e traseiro',
+      carga: 'Até 180 kg',
+    },
+    equipamentos: ['Cartão NFC', 'Farol em LED', 'Piloto automático', 'Para-brisa', 'Encosto para garupa'],
+    cores: [
+      { nome: 'Preto', hex: '#55585C', aprox: true, galeria: fotoCor('t6', 'preto') },
+      { nome: 'Vermelho e cinza', bicolor: ['#C8CBCF', '#D32F2F'], aprox: true, galeria: fotoCor('t6', 'vermelho-cinza') },
+      { nome: 'Verde e cinza', bicolor: ['#C8CBCF', '#7ED321'], aprox: true, galeria: fotoCor('t6', 'verde-cinza') },
+      { nome: 'Cinza e dourado', bicolor: ['#6E7074', '#C9A46A'], aprox: true, galeria: fotoCor('t6', 'cinza-dourado') },
+      { nome: 'Limited Edition', bicolor: ['#1E1E1E', '#C9A24A'], aprox: true, galeria: fotoCor('t6', 'limited-edition') },
+    ],
+    galeria: [],
+  },
+  {
+    id: 'tank-g1',
+    /* "Tank G1" (usuário, 17/11/2026): o site já tem o "Tank" (triciclo da
+       Aima) e o "Tank (Titan)". É a Angie AG11 Tank de 1ª geração, a de dois
+       faróis redondos; "Carbono" é a pintura (a Mundo Encantado a chama de
+       "Preta"). */
+    nome: 'Tank G1',
+    fabricante: 'Angie',
+    descritivo: 'Scooter elétrica',
+    tags: ['Robustez', 'Garupa', 'Tecnologia'],
+    categorias: ['autopropelido'],
+    /* Todas as revendas: sem CNH e sem placa; a Mundo Encantado diz
+       "certificado pelos OCPs" e 59 cm de largura, 120 cm entre eixos. A
+       Moobi diz 75 cm de largura: por isso as dimensões ficaram de fora. */
+    classificacao: 'autopropelido',
+    foto: 'assets/img/models/tank-g1-card.webp',
+    alt: 'Scooter elétrica Angie Tank G1 com carenagem em fibra de carbono e dois faróis redondos',
+    preco: null, // sem preço por enquanto (usuário, 17/11/2026)
+    /* Fontes: Mundo Encantado (mundoencantado.com, "Tank AG11 1000w 60v",
+       texto igual ao da Off Import), Moobi (moobieletricos.com.br) e Scooters
+       Ourinhos. Entrou o que duas fontes confirmam; a suspensão é da Moobi.
+       De fora, por divergência: autonomia (50, 55, 64 ou 70 km), Ah da
+       bateria (20 ou 32), aro (10 ou 12), largura (59 ou 75 cm) e peso. */
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W' },
+      bateria: 'Lítio 60V, removível',
+      recarga: '6 a 8 horas',
+      carregador: 'Bivolt, incluso',
+      freios: 'A disco, dianteiro e traseiro',
+      suspensao: 'Telescópica na dianteira e dupla na traseira',
+      carga: 'Até 180 kg',
+    },
+    equipamentos: [
+      'Faróis duplos e iluminação full LED', 'Partida por chave, cartão NFC ou controle remoto',
+      'Bluetooth, rádio FM e entrada USB', 'Painel digital', 'Marcha ré', 'Modo parking',
+      'Alarme', 'Suporte de celular', 'Protetor de manoplas', 'Pedaleiras retráteis para garupa',
+      'Bagageiros dianteiro e traseiro',
+    ],
+    /* Branco e Camuflada: anunciadas pela Moobi, mas as fotos de lá são
+       montagens feitas com IA (não entram no site); ficam só no texto. */
+    cores: [
+      { ...COR.carbono, galeria: fotoCor('tank-g1', 'carbono') },
+      { nome: 'Cinza', hex: '#7A7D80', aprox: true, galeria: fotoCor('tank-g1', 'cinza') },
+      COR.branca,
+      { nome: 'Camuflada', bicolor: ['#4B5320', '#8A7F5A'], aprox: true },
+    ],
+    galeria: detalhes('tank-g1'),
+  },
+  {
+    id: 'ag22',
+    nome: 'AG22',
+    fabricante: 'Angie',
+    descritivo: 'Scooter elétrica',
+    tags: ['Autonomia', 'Garupa', 'Conforto'],
+    categorias: ['autopropelido'],
+    /* 1000 W e 32 km/h (revendas). Largura e entre-eixos: sem fonte. Uma
+       revenda (Extreme, OLX) escreve "32 km/h bloqueada e desbloqueado até
+       65 km/h": desbloqueada, deixa de ser autopropelido. Confirmar com a
+       loja como ela é vendida. */
+    classificacao: 'autopropelido',
+    foto: 'assets/img/models/ag22-card.webp',
+    alt: 'Scooter elétrica Angie AG22 cinza com detalhes verde-limão, para-brisa e encosto',
+    preco: null, // sem preço por enquanto (usuário, 17/11/2026)
+    /* Fontes: Fortvel Motors (via Autobig) e Extreme (OLX), que concordam em
+       motor, autonomia, bateria e carga; "removível", NFC e farol de LED:
+       Danezi Motos (Jundiaí). De fora: recarga (6 a 7 h ou 6 a 8 h), freios
+       e dimensões. Sem foto de estúdio: o card é recorte de foto de loja. */
+    specs: {
+      velocidade: { valor: 32, unidade: 'km/h' },
+      potencia: { valor: 1000, unidade: 'W' },
+      autonomia: { valor: 60, unidade: 'km', nota: 'Até 60 km, segundo as revendas.' },
+      bateria: 'Lítio 60V 30Ah, removível',
+      rodas: 'Pneus 3.50-10',
+      carga: 'Até 150 kg',
+    },
+    equipamentos: ['Cartão NFC', 'Farol em LED', 'Painel digital', 'Para-brisa', 'Banco com espaço para garupa e encosto'],
+    // Cores do folheto da Fortvel; só a cinza tem foto.
+    cores: [
+      { nome: 'Cinza', hex: '#8A9099', aprox: true, galeria: fotoCor('ag22', 'cinza') },
+      COR.preta, COR.branca, COR.vermelha,
+    ],
+    galeria: detalhes('ag22'),
   },
 ];
 
