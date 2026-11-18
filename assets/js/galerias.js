@@ -1044,38 +1044,38 @@ window.GREEN_GALERIAS = {
   }
  ],
  "t6": [],
- "tank-g1": [
+ "tank-scooter": [
   {
-   "src": "assets/img/models/tank-g1-01.webp",
-   "mini": "assets/img/models/tank-g1-01-mini.webp",
-   "alt": "Angie Tank G1 carbono de frente, com os dois faróis redondos, em estúdio",
+   "src": "assets/img/models/tank-scooter-01.webp",
+   "mini": "assets/img/models/tank-scooter-01-mini.webp",
+   "alt": "Angie Tank carbono de frente, com os dois faróis redondos, em estúdio",
    "w": 1000,
    "h": 1000,
    "fundo": "#FFFFFE",
    "estudio": true
   },
   {
-   "src": "assets/img/models/tank-g1-02.webp",
-   "mini": "assets/img/models/tank-g1-02-mini.webp",
-   "alt": "Angie Tank G1 carbono de perfil, com bagageiros dianteiro e traseiro, em estúdio",
+   "src": "assets/img/models/tank-scooter-02.webp",
+   "mini": "assets/img/models/tank-scooter-02-mini.webp",
+   "alt": "Angie Tank carbono de perfil, com bagageiros dianteiro e traseiro, em estúdio",
    "w": 1000,
    "h": 1000,
    "fundo": "#FFFFFE",
    "estudio": true
   },
   {
-   "src": "assets/img/models/tank-g1-03.webp",
-   "mini": "assets/img/models/tank-g1-03-mini.webp",
-   "alt": "Angie Tank G1 carbono em três quartos traseira, em estúdio",
+   "src": "assets/img/models/tank-scooter-03.webp",
+   "mini": "assets/img/models/tank-scooter-03-mini.webp",
+   "alt": "Angie Tank carbono em três quartos traseira, em estúdio",
    "w": 1000,
    "h": 1000,
    "fundo": "#FFFFFE",
    "estudio": true
   },
   {
-   "src": "assets/img/models/tank-g1-04.webp",
-   "mini": "assets/img/models/tank-g1-04-mini.webp",
-   "alt": "Traseira da Angie Tank G1, com lanterna, setas e bagageiro, em estúdio",
+   "src": "assets/img/models/tank-scooter-04.webp",
+   "mini": "assets/img/models/tank-scooter-04-mini.webp",
+   "alt": "Traseira da Angie Tank, com lanterna, setas e bagageiro, em estúdio",
    "w": 1000,
    "h": 1000,
    "fundo": "#FEFFFE",
@@ -1381,20 +1381,20 @@ window.GREEN_FOTOS_COR = {
    "estudio": true
   }
  },
- "tank-g1": {
+ "tank-scooter": {
   "carbono": {
-   "src": "assets/img/models/tank-g1-cor-carbono.webp",
-   "mini": "assets/img/models/tank-g1-cor-carbono-mini.webp",
-   "alt": "Scooter elétrica Angie Tank G1 com carenagem em fibra de carbono, em três quartos frontal, em estúdio",
+   "src": "assets/img/models/tank-scooter-cor-carbono.webp",
+   "mini": "assets/img/models/tank-scooter-cor-carbono-mini.webp",
+   "alt": "Scooter elétrica Angie Tank com carenagem em fibra de carbono, em três quartos frontal, em estúdio",
    "w": 1000,
    "h": 1000,
    "fundo": "#FFFFFE",
    "estudio": true
   },
   "cinza": {
-   "src": "assets/img/models/tank-g1-cor-cinza.webp",
-   "mini": "assets/img/models/tank-g1-cor-cinza-mini.webp",
-   "alt": "Scooter elétrica Angie Tank G1 cinza, em três quartos frontal, em estúdio",
+   "src": "assets/img/models/tank-scooter-cor-cinza.webp",
+   "mini": "assets/img/models/tank-scooter-cor-cinza-mini.webp",
+   "alt": "Scooter elétrica Angie Tank cinza, em três quartos frontal, em estúdio",
    "w": 1000,
    "h": 1000,
    "fundo": "#FEFFFE",
