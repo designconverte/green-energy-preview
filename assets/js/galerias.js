@@ -1,35 +1,6 @@
 /* Gerado por tools/gerar-galerias.js. NÃO editar à mão: o tamanho e a cor de
    fundo vêm do build-media.js; o texto alternativo, do próprio gerador. */
 window.GREEN_GALERIAS = {
- "v8-pro": [
-  {
-   "src": "assets/img/models/v8-pro-01.webp",
-   "mini": "assets/img/models/v8-pro-01-mini.webp",
-   "alt": "Bike elétrica V8 Pro preta em três quartos frontal, em estúdio",
-   "w": 753,
-   "h": 754,
-   "fundo": "#DFDBE0",
-   "estudio": true
-  },
-  {
-   "src": "assets/img/models/v8-pro-02.webp",
-   "mini": "assets/img/models/v8-pro-02-mini.webp",
-   "alt": "V8 Pro preta de perfil, com banco duplo e pneus fat de 20 polegadas",
-   "w": 753,
-   "h": 754,
-   "fundo": "#D4D0D3",
-   "estudio": false
-  },
-  {
-   "src": "assets/img/models/v8-pro-03.webp",
-   "mini": "assets/img/models/v8-pro-03-mini.webp",
-   "alt": "V8 Pro preta em três quartos traseira",
-   "w": 753,
-   "h": 754,
-   "fundo": "#D0CDC9",
-   "estudio": true
-  }
- ],
  "x13-pro": [
   {
    "src": "assets/img/models/x13-pro-01.webp",
@@ -1110,9 +1081,49 @@ window.GREEN_GALERIAS = {
    "fundo": "#8D8B8F",
    "estudio": false
   }
+ ],
+ "v8-pro": [
+  {
+   "src": "assets/img/models/v8pro-01.webp",
+   "mini": "assets/img/models/v8pro-01-mini.webp",
+   "alt": "Bike elétrica V8 Pro preta em três quartos frontal, com farol redondo e bagageiro dianteiro, em estúdio",
+   "w": 607,
+   "h": 480,
+   "fundo": "#FFFFFF",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/v8pro-02.webp",
+   "mini": "assets/img/models/v8pro-02-mini.webp",
+   "alt": "V8 Pro preta de perfil, com banco inteiriço e pneus fat Kenda, em estúdio",
+   "w": 607,
+   "h": 480,
+   "fundo": "#FFFFFF",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/v8pro-03.webp",
+   "mini": "assets/img/models/v8pro-03-mini.webp",
+   "alt": "V8 Pro preta em três quartos traseira, com a lanterna acesa, em estúdio",
+   "w": 804,
+   "h": 634,
+   "fundo": "#FFFEFF",
+   "estudio": true
+  }
  ]
 };
 window.GREEN_FOTOS_COR = {
+ "x13": {
+  "preta": {
+   "src": "assets/img/models/x13-cor-preta.webp",
+   "mini": "assets/img/models/x13-cor-preta-mini.webp",
+   "alt": "Scooter elétrica X13 preta em três quartos frontal, com farol redondo e encosto, em estúdio",
+   "w": 1200,
+   "h": 1200,
+   "fundo": "#FFF9FF",
+   "estudio": true
+  }
+ },
  "x11-3000w": {
   "grafite": {
    "src": "assets/img/models/x11-3000w-cor-grafite.webp",

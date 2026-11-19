@@ -133,6 +133,12 @@ window.GREEN_RENDER = (() => {
 
   /** Preço Black do modelo, só dentro da janela e só se for desconto de verdade. */
   const precoBlack = (m) => (emBlack() && m.black && m.preco?.valor && m.black < m.preco.valor ? m.black : null);
+  /** O 12x que vale agora: na Black, o total da Black (`blackParcelas`), se for menor. */
+  function parcelasVigentes(m) {
+    const p = m.preco?.parcelas;
+    if (!p || typeof p !== 'object' || !emBlack() || !m.blackParcelas || !(m.blackParcelas < p.total)) return p;
+    return { ...p, total: m.blackParcelas };
+  }
   /** O preço à vista que vale agora (tracking, JSON-LD). */
   const precoVigente = (m) => precoBlack(m) || m.preco?.valor || null;
   /** "30/11" do fim da Black, no fuso de Brasília. */
@@ -168,7 +174,7 @@ window.GREEN_RENDER = (() => {
         <p class="preco preco--black ${classe}">
           ${faixa}<span class="preco__rotulo">${aVista ? `À vista · ${escapar(aVista)}` : 'À vista'}</span>
           <span class="preco__valor">${real.format(b)}${largo ? ` ${antes(m.preco.valor, real)}` : ''}</span>
-          ${parcelas(m.preco.parcelas)}
+          ${parcelas(parcelasVigentes(m))}
         </p>`;
     }
     if (!m.preco?.valor) {
@@ -184,7 +190,7 @@ window.GREEN_RENDER = (() => {
         <p class="preco ${classe}">
           <span class="preco__rotulo">${aVista ? `À vista · ${escapar(aVista)}` : 'Valor'}</span>
           <span class="preco__valor">${real.format(m.preco.valor)}</span>
-          ${parcelas(m.preco.parcelas)}
+          ${parcelas(parcelasVigentes(m))}
         </p>`;
   }
 
@@ -369,6 +375,6 @@ window.GREEN_RENDER = (() => {
     ordenados, selos, numeros, parcelas, preco, eyebrow, eyebrowCurto, card, faq,
     HEX_VALIDO, IMAGEM_LOCAL, paletaDe, fotosDaCor, slides, miniaturas, ficha,
     equipamentos, swatches, urlModelo,
-    emBlack, precoBlack, precoVigente, fimBlack,
+    emBlack, precoBlack, precoVigente, parcelasVigentes, fimBlack,
   };
 })();
