@@ -28,6 +28,26 @@ window.GREEN_RENDER = (() => {
   const nomeCompleto = (m) => [m.fabricante, m.nome].filter(Boolean).join(' ');
   const categoriasDe = (m) => m.categorias || (m.categoria ? [m.categoria] : []);
 
+  /* "Olá, gostaria de…" → "Olá, vim pelo instagram e gostaria de…".
+     "Olá! Gostaria de…" → "Olá! Vim pelo instagram e gostaria de…".
+     Texto que já diz "vim pelo" não ganha outra frase, então aplicar duas
+     vezes não duplica. Se ele já vem escrito "vim pelo site" (o botão da
+     campanha Black Green), o "site" vira a origem de verdade.
+     Fora do padrão "Olá," / "Olá!", a frase vai na frente. */
+  function comOrigem(texto, origem) {
+    if (!origem) return texto;
+    if (/\bvim pelo\b/i.test(texto)) {
+      const semOrigem = window.GREEN_CONFIG?.origemAnuncio?.semOrigem || 'site';
+      if (origem === semOrigem) return texto;
+      return texto.replace(new RegExp(`\\b(vim pelo) ${semOrigem}\\b`, 'i'), `$1 ${origem}`);
+    }
+    const partes = texto.match(/^(Olá)([,!])\s+([\s\S]*)$/);
+    if (!partes) return `Vim pelo ${origem}. ${texto}`;
+    const [, ola, pontuacao, resto] = partes;
+    const vim = pontuacao === '!' ? 'Vim' : 'vim';
+    return `${ola}${pontuacao} ${vim} pelo ${origem} e ${resto.charAt(0).toLowerCase()}${resto.slice(1)}`;
+  }
+
   /** Monta o link do WhatsApp com a mensagem já preenchida. */
   function linkWhats(chave, trocas = {}) {
     const cfg = window.GREEN_CONFIG;
@@ -37,6 +57,10 @@ window.GREEN_RENDER = (() => {
     }
     const prefixo = cfg.prefixoMensagem;
     if (prefixo && !texto.toLowerCase().startsWith(prefixo.toLowerCase())) texto = `${prefixo}. ${texto}`;
+    /* GREEN_ORIGEM só existe no navegador (app.js). No build ele não existe e
+       a página gerada guarda a mensagem de sempre; o app.js acerta os links
+       dela quando a página abre. */
+    texto = comOrigem(texto, window.GREEN_ORIGEM);
     const numero = chave === 'assistencia' ? (cfg.assistencia?.e164 || cfg.whatsapp.e164) : cfg.whatsapp.e164;
     return `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
   }
@@ -371,7 +395,7 @@ window.GREEN_RENDER = (() => {
   const urlModelo = (m) => `modelos-de-motos/${m.slug || m.id}/`;
 
   return {
-    escapar, real, ICONE_WHATS, nomeCompleto, categoriasDe, linkWhats,
+    escapar, real, ICONE_WHATS, nomeCompleto, categoriasDe, linkWhats, comOrigem,
     ordenados, selos, numeros, parcelas, preco, eyebrow, eyebrowCurto, card, faq,
     HEX_VALIDO, IMAGEM_LOCAL, paletaDe, fotosDaCor, slides, miniaturas, ficha,
     equipamentos, swatches, urlModelo,

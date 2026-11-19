@@ -63,6 +63,61 @@
     emitir(slugEvento(`btn_interesse_${nomeCompleto(modelo)}`), dados, { somenteGa4: true });
   }
 
+  /* ── 0. Origem do anúncio (config.origemAnuncio) ──────────────────────
+     Decide o "vim pelo ___" da mensagem do WhatsApp. O utm_source do
+     endereço manda; sem ele, vale o que a visita trouxe antes (a pessoa
+     chega na home pelo anúncio e abre um modelo depois); sem nada, `semOrigem`.
+     Fica no sessionStorage: some quando a aba fecha. */
+  const CHAVE_ORIGEM = 'green_origem_anuncio';
+
+  function resolverOrigem() {
+    const opcoes = cfg.origemAnuncio;
+    if (!opcoes || !opcoes.ativo) return null;
+    const fontes = opcoes.fontes || {};
+    const semOrigem = opcoes.semOrigem || 'site';
+    const conhecidos = Object.values(fontes);
+
+    const daUrl = new URLSearchParams(location.search).get('utm_source');
+    if (daUrl !== null) {
+      const nome = fontes[daUrl.trim().toLowerCase()] || null;
+      try {
+        if (nome) sessionStorage.setItem(CHAVE_ORIGEM, nome);
+        else sessionStorage.removeItem(CHAVE_ORIGEM);
+      } catch (e) { /* sem storage: vale só para esta página */ }
+      return nome || semOrigem;
+    }
+
+    let guardada = null;
+    try { guardada = sessionStorage.getItem(CHAVE_ORIGEM); } catch (e) { /* idem */ }
+    return guardada && conhecidos.includes(guardada) ? guardada : semOrigem;
+  }
+
+  window.GREEN_ORIGEM = resolverOrigem();
+
+  /* As páginas de modelo saem do build com os links de WhatsApp já escritos
+     (mensagem de sempre). Aqui a frase da origem entra neles: uma vez na
+     partida e de novo no clique, para qualquer link que apareça depois. */
+  function acertarLinkWhats(a) {
+    if (!window.GREEN_ORIGEM) return;
+    let texto;
+    try { texto = new URL(a.href).searchParams.get('text'); } catch (e) { return; }
+    if (!texto) return;
+    const novo = R.comOrigem(texto, window.GREEN_ORIGEM);
+    if (novo === texto) return;
+    a.href = a.href.replace(/([?&]text=)[^&#]*/, (_, inicio) => inicio + encodeURIComponent(novo));
+  }
+
+  function origemNosLinksWhats() {
+    if (!window.GREEN_ORIGEM) return;
+    $$('a[href*="wa.me/"]').forEach(acertarLinkWhats);
+    const noClique = (e) => {
+      const a = e.target.closest?.('a[href*="wa.me/"]');
+      if (a) acertarLinkWhats(a);
+    };
+    document.addEventListener('click', noClique, true);
+    document.addEventListener('auxclick', noClique, true);
+  }
+
   /** Monta o link do WhatsApp com a mensagem já preenchida (render.js). */
   const { linkWhats } = R;
 
@@ -1249,6 +1304,7 @@
     midia();
     mapa();
     alertaSeguranca();
+    origemNosLinksWhats();
 
     /* motion.js (defer) já rodou e só se declarou: a coreografia começa aqui,
        com a vitrine, o FAQ e os depoimentos já no DOM e os números da faixa

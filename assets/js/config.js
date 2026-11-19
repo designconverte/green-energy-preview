@@ -90,6 +90,47 @@ window.GREEN_CONFIG = {
      `prefixoMensagem` vazio: a Green não tem a regra do "Vim pelo site" da KOM.
      Preenchido, o app.js garante que toda mensagem comece por ele. */
   prefixoMensagem: '',
+
+  /* ── Origem do anúncio na mensagem do WhatsApp ─────────────────────────
+     Pedido de 19/11/2026: saber no próprio WhatsApp de onde veio o lead.
+     O gestor de tráfego põe nos anúncios da Meta o parâmetro de URL
+     utm_source={{site_source_name}}, e a Meta troca pela plataforma
+     (ig, fb, msg, an, th). Com a chave ligada, a mensagem vira:
+
+       Olá, vim pelo instagram e gostaria de saber mais sobre o modelo V8 Pro.
+
+     Sem utm_source (ou com um valor fora da lista), vale `semOrigem`:
+       Olá, vim pelo site e gostaria de saber mais sobre o modelo V8 Pro.
+
+       ativo: true   LIGA/DESLIGA. false volta às mensagens de sempre, sem
+                     "vim pelo ...", exatamente como estavam.
+       fontes        valor do utm_source (sem diferença de maiúscula) → nome
+                     que aparece na mensagem. Para aceitar outro valor, é só
+                     acrescentar uma linha.
+       semOrigem     o nome usado quando não há utm_source reconhecido.
+
+     A origem vale para a visita inteira: quem chega pelo anúncio na home e
+     depois abre a página de um modelo continua "vim pelo instagram". Um novo
+     utm_source no endereço troca a origem; fechar a aba zera.
+
+     Para testar: greenscootereletrica.com.br/?utm_source=ig */
+  origemAnuncio: {
+    ativo: true,
+    fontes: {
+      ig: 'instagram',
+      instagram: 'instagram',
+      fb: 'facebook',
+      facebook: 'facebook',
+      msg: 'messenger',
+      messenger: 'messenger',
+      an: 'audience network',
+      'audience-network': 'audience network',
+      th: 'threads',
+      threads: 'threads',
+    },
+    semOrigem: 'site',
+  },
+
   mensagens: {
     geral: 'Olá! Gostaria de saber mais sobre os modelos e condições especiais da Green Energy - Jundiaí.',
     produtos: 'Olá, gostaria de saber mais sobre os Produtos da Green Energy - Jundiaí.',
