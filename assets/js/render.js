@@ -94,7 +94,7 @@ window.GREEN_RENDER = (() => {
      Decisão do cliente (29/10/2026): "sem juros" por extenso quando não há
      juros; com juros, a linha não fala neles.
      05/11/2026 (loja): o à vista é só no PIX ou dinheiro, então o rótulo diz
-     onde ele vale e a parcela vem como alternativa ("ou 12x"), em tom mais
+     onde ele vale e a parcela vem como alternativa ("ou 21x"), em tom mais
      discreto que o preço. Os cartões aceitos aparecem também no card
      ("tem que deixar na home"), numa linha própria: junto da parcela, o pior
      caso vazava o card a 320, 1024, 1280 e 1440 px. Sem o total a prazo, no
@@ -133,7 +133,7 @@ window.GREEN_RENDER = (() => {
 
   /** Preço Black do modelo, só dentro da janela e só se for desconto de verdade. */
   const precoBlack = (m) => (emBlack() && m.black && m.preco?.valor && m.black < m.preco.valor ? m.black : null);
-  /** O 12x que vale agora: na Black, o total da Black (`blackParcelas`), se for menor. */
+  /** O parcelado que vale agora: na Black, o total da Black (`blackParcelas`), se for menor. */
   function parcelasVigentes(m) {
     const p = m.preco?.parcelas;
     if (!p || typeof p !== 'object' || !emBlack() || !m.blackParcelas || !(m.blackParcelas < p.total)) return p;

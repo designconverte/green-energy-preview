@@ -40,6 +40,12 @@
    da vitrine (sem estoque, chegando em breve) e fotos novas da V8 Pro (as
    do WP eram da V8) e da X13 preta no card.
 
+   19/11/2026, Gabriel: o parcelamento passa de 12x para 21x no cartão
+   (`PAGAMENTO.vezes`), com a planilha nova (total em 21x, normal e da
+   Black). A KN8 volta à vitrine (uma unidade na loja), entra a GT73 Pro e
+   a Tank da planilha é só a Angie (a Titan da Voe segue fora). Patinetes
+   E20 e Alfa ficam fora do site (uma unidade de cada, decisão dele).
+
    REGRA HERDADA DO FRAMEWORK: nenhum número entra sem fonte. Aqui a fonte é a
    própria loja (o cadastro do WordPress). Onde o card e a ficha do mesmo
    modelo discordam, vale o CARD (é o que o cliente vê primeiro) e a
@@ -199,16 +205,16 @@ const doCard = (id, alt) => [{ src: `assets/img/models/${id}-card.webp`, alt, fu
 /* Condições de pagamento da loja (Gabriel, 05/11/2026): o preço à vista vale
    só no PIX ou em dinheiro; no cartão a loja não passa 1x, só parcelado com
    juros. Um lugar só para o rótulo do preço, o parcelamento e o FAQ. */
-const PAGAMENTO = { aVista: 'PIX ou dinheiro', vezes: 12, cartoes: 'Visa e Master' };
+const PAGAMENTO = { aVista: 'PIX ou dinheiro', vezes: 21, cartoes: 'Visa e Master' };
 window.GREEN_PAGAMENTO = PAGAMENTO;
 
 /* Black Green (tabela "BLACK MONTH GREEN" da loja, 12/11/2026), até 30/11
    (usuário). Cada modelo em oferta tem `black` = o preço À VISTA da Black e
-   `blackParcelas` = o total em 12x da Black (tabela de 18/11/2026; até ali o
-   12x não mudava na Black). Dentro da janela, o render.js mostra o à vista
-   da Black com o de sempre riscado, uma faixa no card, e a parcela tirada
-   do 12x da Black. Tiger X6 e Tank (Aima) só têm o 12x da Black: o à vista
-   da Black na tabela é o de sempre, então não há faixa nem riscado. Fora
+   `blackParcelas` = o total parcelado da Black (desde 18/11/2026; até ali o
+   parcelado não mudava na Black). Dentro da janela, o render.js mostra o à
+   vista da Black com o de sempre riscado, uma faixa no card, e a parcela
+   tirada do total da Black. Tiger X6 e Tank (Aima) não entram: na planilha
+   de 19/11 os dois preços da Black são os de sempre. Fora
    dela, tudo volta sozinho, no relógio de quem visita, sem publicar nada.
    `?gbf-agora=2026-12-01T00:00` na URL testa outra data (vale também para o
    hero da campanha, tools/campanha.js).
@@ -218,8 +224,9 @@ window.GREEN_PAGAMENTO = PAGAMENTO;
    12/11 não está no site. */
 window.GREEN_BLACK = { nome: 'Black Green', fim: '2026-11-30T23:59:59-03:00' };
 
-/* Parcelamento da tabela da loja: o total em 12x no cartão. O app.js tira
-   a parcela da conta (o total não aparece no site, pedido do dono, 05/11). */
+/* Parcelamento da tabela da loja: o total no cartão em PAGAMENTO.vezes (21x
+   desde 19/11/2026; antes, 12x), com centavos, como na planilha. O render.js
+   tira a parcela da conta (o total não aparece no site, pedido do dono, 05/11). */
 const PARCELADO = (total) => ({ vezes: PAGAMENTO.vezes, total, juros: true, cartoes: PAGAMENTO.cartoes });
 
 /* Ordem da vitrine = ordem do site atual. Mexer aqui é a forma certa de
@@ -229,7 +236,7 @@ window.GREEN_ORDEM = [
   'gt2000', 'liberty', 'tiger-x6', 'kn8', 'mike', 'x11-3000w', 'ved',
   'mia-tri', 'roma', 's8-3000w',
   'tank', 'l10', 'l11', 'joy-tri', 'titan',
-  't1', 't6', 'tank-scooter', 'ag22',
+  't1', 't6', 'tank-scooter', 'ag22', 'gt73-pro',
 ];
 
 const MODELOS = [
@@ -256,9 +263,9 @@ const MODELOS = [
        null`), escolha do usuário.
        Fotos: as que a loja mandou em 18/11/2026; as do WP eram da V8, não da
        V8 Pro (Gabriel). */
-    preco: { valor: 8590, parcelas: PARCELADO(9590) },
-    black: 7990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 8990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 8590, parcelas: PARCELADO(10076.25) }, // tabela da loja, 19/11/2026 (21x)
+    black: 7990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 9372.43, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W' },
@@ -294,9 +301,9 @@ const MODELOS = [
     foto: 'assets/img/models/x13-pro-card.webp',
     alt: 'Scooter elétrica X13 Pro vermelha e preta com pneus largos',
     // Loja, 30/10/2026 (era 11.990, do WP; bateria do WP: 60V 24Ah).
-    preco: { valor: 10590, parcelas: PARCELADO(11990) },
-    black: 9990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 10990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 10590, parcelas: PARCELADO(12422.29) }, // tabela da loja, 19/11/2026 (21x)
+    black: 9990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 11718.48, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2500 W.' },
@@ -319,9 +326,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/kuyan-litio-pro-card.webp',
     alt: 'Scooter elétrica Aima Kuyan Lítio Pro branca com banco bege e cesta',
-    preco: { valor: 8590, parcelas: PARCELADO(9590) }, // loja, 29/10/2026
-    black: 7990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 8990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 8590, parcelas: PARCELADO(10076.25) }, // tabela da loja, 19/11/2026 (21x)
+    black: 7990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 9372.43, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -346,9 +353,9 @@ const MODELOS = [
     foto: 'assets/img/models/x13-card-loja.webp',
     alt: 'Scooter elétrica X13 preta com pneus largos, farol redondo e encosto',
     // Loja, 30/10/2026 (era 9.590, do WP; bateria do WP: 60V 24Ah).
-    preco: { valor: 9990, parcelas: PARCELADO(10990) },
-    black: 8990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 9990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 9990, parcelas: PARCELADO(11718.48) }, // tabela da loja, 19/11/2026 (21x)
+    black: 8990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 10545.45, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -377,9 +384,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/q5-dimoon-card.webp',
     alt: 'Scooter elétrica Aima Q5 Dimoon creme com banco vermelho e baú',
-    preco: { valor: 11590, parcelas: PARCELADO(12990) }, // loja, 29/10/2026
-    black: 10590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 11990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 11590, parcelas: PARCELADO(13595.31) }, // tabela da loja, 19/11/2026 (21x)
+    black: 10590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 12422.29, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2600 W.' },
@@ -426,9 +433,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/gt2000-card.webp',
     alt: 'Bike elétrica GT2000 preta com pneus de trilha',
-    preco: { valor: 11590, parcelas: PARCELADO(12990) }, // loja, 30/10/2026
-    black: 10590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 11990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 11590, parcelas: PARCELADO(13595.31) }, // tabela da loja, 19/11/2026 (21x)
+    black: 10590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 12422.29, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W', nota: 'Pico de 2000 W.' },
@@ -458,9 +465,9 @@ const MODELOS = [
     foto: 'assets/img/models/liberty-card.webp',
     alt: 'Scooter elétrica Aima Liberty prata com baú traseiro',
     // Loja, 29/10/2026 (era 11.990 em 10x de 1.199, do WP).
-    preco: { valor: 10990, parcelas: PARCELADO(12590) }, // 12x: 12.290 até 18/11/2026
-    black: 9990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 10990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 10990, parcelas: PARCELADO(12891.50) }, // tabela da loja, 19/11/2026 (21x)
+    black: 9990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 11718.48, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Autonomia: o card diz 50 km; a ficha, "de 50 a 70 km". Vale o card, e
        a faixa da ficha vai na nota. Bateria: o WP dizia "Lítio"; a tabela da
        loja (29/10/2026) diz LiFePO4. */
@@ -497,8 +504,7 @@ const MODELOS = [
     foto: 'assets/img/models/tiger-x6-card.webp',
     alt: 'Scooter elétrica Aima Tiger X6 preta com farol em LED azul',
     // Loja, 29/10/2026 (era 23.900 em até 10x, do WP).
-    preco: { valor: 20990, parcelas: PARCELADO(23990) },
-    blackParcelas: 23590, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 20990, parcelas: PARCELADO(24621.70) }, // tabela da loja, 19/11/2026 (21x; sem preço de Black)
     specs: {
       velocidade: { valor: 80, unidade: 'km/h' },
       potencia: { valor: 3000, unidade: 'W', nota: 'Pico de 6000 W.' },
@@ -528,7 +534,8 @@ const MODELOS = [
   },
   {
     id: 'kn8',
-    oculto: true, // fora da vitrine a pedido do cliente (28/10/2026)
+    /* Fora da vitrine de 28/10 a 19/11/2026; voltou a pedido do Gabriel
+       (uma unidade na loja). */
     nome: 'KN8',
     fabricante: 'Kappak',
     descritivo: 'Scooter elétrica',
@@ -537,7 +544,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/kn8-card.webp',
     alt: 'Scooter elétrica Kappak KN8 branca e preta com baú',
-    preco: { valor: 11490, parcelas: 'Em até 10x sem juros no cartão' },
+    preco: { valor: 9990, parcelas: PARCELADO(11718.48) }, // tabela da loja, 19/11/2026 (21x); no WP, 11.490 em 10x sem juros
+    black: 8990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 10545.45, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 32, unidade: 'km/h' },
       potencia: { valor: 1000, unidade: 'W' },
@@ -564,9 +573,9 @@ const MODELOS = [
     recorte: false, // a foto do card do WP veio com fundo branco, sem alfa
     alt: 'Triciclo elétrico Aima Mike verde com banco marrom e cesta',
     // Loja, 30/10/2026 (era 13.990 em até 10x, do WP).
-    preco: { valor: 11590, parcelas: PARCELADO(12990) },
-    black: 10590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 11990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 11590, parcelas: PARCELADO(13595.31) }, // tabela da loja, 19/11/2026 (21x)
+    black: 10590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 12422.29, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Autonomia: o card diz 50 km; a ficha, "de 30 a 50 km". Bateria: a da
        tabela da loja (30/10/2026); o WP dizia grafeno chumbo 72V 21,8Ah, fixa. */
     specs: {
@@ -605,9 +614,9 @@ const MODELOS = [
     alt: 'Scooter elétrica MotoChefe X11 3000W com a bandeira do Reino Unido',
     /* Loja, 30/10/2026, como "X11-12 3000W Lítio 60V 24Ah" (era 12.490 em até
        10x, do WP, que não informava a bateria). */
-    preco: { valor: 11590, parcelas: PARCELADO(12990) }, // Gabriel, 18/11/2026 (era 11.490 e 12.590)
-    black: 10590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 11990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 11590, parcelas: PARCELADO(13595.31) }, // tabela da loja, 19/11/2026 (21x)
+    black: 10590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 12422.29, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     specs: {
       velocidade: { valor: 70, unidade: 'km/h' },
       potencia: { valor: 3000, unidade: 'W' },
@@ -675,9 +684,9 @@ const MODELOS = [
     foto: 'assets/img/models/mia-tri-card.webp',
     alt: 'Triciclo elétrico MotoChefe Mia Tri azul-claro com baú',
     // Loja, 30/10/2026 (era 12.990 em até 10x, do WP).
-    preco: { valor: 11990, parcelas: PARCELADO(13590) },
-    black: 10990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 12290, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 11990, parcelas: PARCELADO(14064.52) }, // tabela da loja, 19/11/2026 (21x)
+    black: 10990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 12891.50, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* A ficha do WP traz "Tamanho do veículo: 1356562mm", medida truncada no
        cadastro. Fica fora até a loja confirmar (ver README). */
     specs: {
@@ -751,9 +760,9 @@ const MODELOS = [
     alt: 'Scooter elétrica MotoChefe S8 3000W prata e preta com pneus largos',
     /* Loja, 30/10/2026, como "S8-12 3000W Lítio 60V 24Ah" (era 13.490 em até
        10x, do WP, que não informava a bateria). */
-    preco: { valor: 12590, parcelas: PARCELADO(13990) },
-    black: 11590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 12990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 12590, parcelas: PARCELADO(14768.33) }, // tabela da loja, 19/11/2026 (21x)
+    black: 11590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 13595.31, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* DIVERGÊNCIA (README): o card diz 50 km/h e 3000 W; a ficha lista duas
        versões, 2000 W/50 km/h/aro 10" e 3000 W/70 km/h/aro 12". O card
        mistura as duas. Fica o card, com as versões na nota. */
@@ -801,8 +810,7 @@ const MODELOS = [
     classificacao: 'ciclomotorSemHomologacao',
     foto: 'assets/img/models/tank-card.webp',
     alt: 'Triciclo de carga elétrico Aima Tank cáqui, com caçamba e cabine aberta',
-    preco: { valor: 20990, parcelas: PARCELADO(23990) }, // loja, 29/10/2026
-    blackParcelas: 23590, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 20990, parcelas: PARCELADO(24621.70) }, // tabela da loja, 19/11/2026 (21x; sem preço de Black)
     /* Fonte: aimabrasil.com.br/modelos/aima-tank (fabricante), menos a
        bateria, que é a da tabela da loja (29/10/2026: chumbo 40V 65Ah). O
        fabricante só descreve a de 60V 45/52Ah, e a autonomia (60 ou 70 km) e
@@ -837,9 +845,9 @@ const MODELOS = [
     foto: 'assets/img/models/l10-card.webp',
     recorte: false, // foto do anúncio com fundo branco, sem alfa
     alt: 'Patinete elétrico Atomi L10 preto, de perfil, em estúdio',
-    preco: { valor: 4990, parcelas: PARCELADO(5590) }, // tabela da loja, 18/11/2026
-    black: 4590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 4990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 4990, parcelas: PARCELADO(5853.37) }, // tabela da loja, 19/11/2026 (21x)
+    black: 4590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 5384.16, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Fonte: anúncio do Mercado Livre indicado pelo cliente (o modelo lá é
        "L10K"). O anúncio escreve "1,22 cm" e "1,28 cm": são metros. */
     specs: {
@@ -874,9 +882,9 @@ const MODELOS = [
     foto: 'assets/img/models/l11-card.webp',
     recorte: false, // foto do anúncio com fundo branco, sem alfa
     alt: 'Patinete elétrico Atomi L11 cinza-escuro com detalhes laranja, de perfil, em estúdio',
-    preco: { valor: 6990, parcelas: PARCELADO(7990) }, // tabela da loja, 18/11/2026
-    black: 6590, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 7590, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 6990, parcelas: PARCELADO(8199.41) }, // tabela da loja, 19/11/2026 (21x)
+    black: 6590, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 7730.21, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Fonte: anúncio do Mercado Livre indicado pelo cliente. A potência é a
        da tabela do anúncio; o texto diz "2 x 1000W (potência nominal 800W –
        1000W)", e isso vai na nota. Altura e comprimento em metros (o anúncio
@@ -1005,9 +1013,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/t1-card.webp',
     alt: 'Scooter elétrica TailG T1 branca, com farol de LED e encosto para garupa',
-    preco: { valor: 10990, parcelas: PARCELADO(12590) },
-    black: 9990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 10990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 10990, parcelas: PARCELADO(12891.50) }, // tabela da loja, 19/11/2026 (21x)
+    black: 9990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 11718.48, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Ficha: catálogo da loja. O da Angie (angiemotors.app, "AG T1") dizia
        64V, 70 km e pneus 90/90-11 e 90/90-10: valem os da loja. Recarga:
        catálogo da Angie. Itens de série: catálogo da loja, fichas do Mercado
@@ -1047,9 +1055,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/t6-card.webp',
     alt: 'Scooter elétrica TailG T6 cinza-grafite com frisos vermelhos e para-brisa',
-    preco: { valor: 12990, parcelas: PARCELADO(14590) },
-    black: 11990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 13590, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 12990, parcelas: PARCELADO(15237.54) }, // tabela da loja, 19/11/2026 (21x)
+    black: 11990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 14064.52, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Ficha: catálogo da loja. O da Angie (angiemotors.app, "AG T6") dizia
        64V, 70 km e pneus 90/90-12: valem os da loja. Recarga: catálogo da
        Angie; "removível", NFC e farol de LED: anúncio da Danezi Motos
@@ -1099,9 +1107,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/tank-scooter-card.webp',
     alt: 'Scooter elétrica Angie Tank com carenagem em fibra de carbono e dois faróis redondos',
-    preco: { valor: 12990, parcelas: PARCELADO(14590) },
-    black: 10990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 12590, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 12990, parcelas: PARCELADO(15237.54) }, // tabela da loja, 19/11/2026 (21x)
+    black: 10990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 12891.50, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Ficha: catálogo da loja (bateria 30Ah, 60 km, aro 10, peso, freios e
        suspensão hidráulicos), que resolve o que as revendas divergiam. Do
        resto, entrou o que duas revendas confirmam (Mundo Encantado, com texto
@@ -1150,9 +1158,9 @@ const MODELOS = [
     classificacao: 'autopropelido',
     foto: 'assets/img/models/ag22-card.webp',
     alt: 'Scooter elétrica Angie AG22 cinza com detalhes verde-limão, para-brisa e encosto',
-    preco: { valor: 10990, parcelas: PARCELADO(12590) },
-    black: 8990, // Black Green à vista (tabela da loja, 18/11/2026)
-    blackParcelas: 9990, // Black Green, total em 12x no cartão (tabela da loja, 18/11/2026)
+    preco: { valor: 10990, parcelas: PARCELADO(12891.50) }, // tabela da loja, 19/11/2026 (21x)
+    black: 8990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 10545.45, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
     /* Ficha: catálogo da loja, que bate com as revendas (Fortvel Motors, via
        Autobig, e Extreme, OLX) em motor, autonomia, bateria, aro e carga, e
        acrescenta freios, suspensão, peso, ré, alarme e Bluetooth.
@@ -1180,6 +1188,55 @@ const MODELOS = [
       COR.preta, COR.branca, COR.vermelha,
     ],
     galeria: detalhes('ag22'),
+  },
+  {
+    /* 19/11/2026, Gabriel: chegou na loja. Fotos: as da loja e as do
+       fabricante que ele mandou (origem no ORIGEM.md da pasta
+       modelos_a_adicionar/gt73-pro/). Ficha: página oficial da Riding'times
+       Brasil (br.ridingtimes.com, "GT73 vs. GT73 Pro" e "Specs & Details",
+       lida em 19/11/2026). */
+    id: 'gt73-pro',
+    nome: 'GT73 Pro',
+    fabricante: "Riding'times",
+    descritivo: 'Moto elétrica off-road',
+    tags: ['Potência', 'Off-road', 'Autonomia'],
+    /* 3000 W de pico e 60 a 75 km/h: passa, e muito, do autopropelido. O
+       fabricante diz que os pedais não a fazem bicicleta elétrica e que o
+       uso em via pública depende da classificação (CNH ou ACC, registro,
+       placa). Até a loja dizer como a vende, o selo manda consultar, e ela
+       não entra em nenhum filtro além de "Todos". */
+    categorias: [],
+    classificacao: 'consultar',
+    foto: 'assets/img/models/gt73-pro-card.webp',
+    alt: "Moto elétrica off-road Riding'times GT73 Pro preta de perfil, com pneus de trilha e pedais",
+    preco: { valor: 14990, parcelas: PARCELADO(17583.58) }, // tabela da loja, 19/11/2026 (21x)
+    black: 13990, // Black Green à vista (tabela da loja, 19/11/2026)
+    blackParcelas: 16410.56, // Black Green, total em 21x no cartão (tabela da loja, 19/11/2026)
+    /* O destaque da página diz "80KM/H"; a tabela técnica, 60 a 75 km/h:
+       vale a tabela. A potência é só a de pico (o fabricante não dá a
+       nominal). Garantia: a da página é a da loja on-line do fabricante,
+       não a da Green; fica de fora. */
+    specs: {
+      velocidade: { valor: 75, unidade: 'km/h', nota: 'De 60 a 75 km/h, conforme o piso e a carga, segundo o fabricante.' },
+      potencia: { valor: 3000, unidade: 'W', nota: 'Potência de pico, motor no cubo traseiro.' },
+      autonomia: { valor: 140, unidade: 'km', nota: 'Só no acelerador; com pedal assistido, até 270 km, segundo o fabricante. Varia com a velocidade e o peso.' },
+      bateria: 'Duas de lítio 60V 18Ah, removíveis (2160 Wh no total)',
+      recarga: '5 a 6 horas',
+      carregador: 'Dois carregadores 67,2V 3A',
+      freios: 'Hidráulicos a disco de 230 mm, dianteiro e traseiro, com freio regenerativo (EABS)',
+      suspensao: 'Garfo invertido em alumínio na dianteira e amortecedor na traseira',
+      rodas: 'Aro 19, pneus off-road 70/100-19, aros de alumínio',
+      protecao: 'IPX4',
+      carga: 'Até 150 kg',
+      dimensoes: '1875 × 730 × 1166 mm · 1270 mm entre eixos',
+      peso: '56 kg',
+    },
+    equipamentos: [
+      'Três faróis de LED', 'Lanterna, luz de freio e setas em LED', 'Painel digital colorido',
+      'Pedais com sensor de cadência', 'Acelerador de punho', 'Controlador FarDriver 60V 40A',
+    ],
+    cores: [COR.preta],
+    galeria: detalhes('gt73-pro'),
   },
 ];
 

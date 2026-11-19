@@ -1110,6 +1110,80 @@ window.GREEN_GALERIAS = {
    "fundo": "#FFFEFF",
    "estudio": true
   }
+ ],
+ "gt73-pro": [
+  {
+   "src": "assets/img/models/gt73-pro-01.webp",
+   "mini": "assets/img/models/gt73-pro-01-mini.webp",
+   "alt": "Moto elétrica off-road Riding'times GT73 Pro preta em três quartos frontal, com os faróis acesos, na loja da Green Energy",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#4B3B30",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/gt73-pro-02.webp",
+   "mini": "assets/img/models/gt73-pro-02-mini.webp",
+   "alt": "GT73 Pro de perto, com os três faróis de LED acesos e o banco longo, na loja da Green Energy",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#472D24",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/gt73-pro-03.webp",
+   "mini": "assets/img/models/gt73-pro-03-mini.webp",
+   "alt": "GT73 Pro preta de perfil, com pneus off-road aro 19 e pedais, em estúdio",
+   "w": 1200,
+   "h": 800,
+   "fundo": "#FFFFFF",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/gt73-pro-04.webp",
+   "mini": "assets/img/models/gt73-pro-04-mini.webp",
+   "alt": "GT73 Pro preta em três quartos frontal, com garfo invertido e freios a disco, em estúdio",
+   "w": 1200,
+   "h": 800,
+   "fundo": "#FFFFFF",
+   "estudio": true
+  },
+  {
+   "src": "assets/img/models/gt73-pro-05.webp",
+   "mini": "assets/img/models/gt73-pro-05-mini.webp",
+   "alt": "Painel digital colorido da GT73 Pro, com velocidade, modo de pilotagem e tensão da bateria",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#78726B",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/gt73-pro-06.webp",
+   "mini": "assets/img/models/gt73-pro-06-mini.webp",
+   "alt": "Garfo invertido da GT73 Pro, com as mesas douradas e o regulador vermelho",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#816D5F",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/gt73-pro-07.webp",
+   "mini": "assets/img/models/gt73-pro-07-mini.webp",
+   "alt": "Roda traseira da GT73 Pro, com o motor no cubo, o disco de freio e o descanso lateral",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#574C40",
+   "estudio": false
+  },
+  {
+   "src": "assets/img/models/gt73-pro-08.webp",
+   "mini": "assets/img/models/gt73-pro-08-mini.webp",
+   "alt": "Pedais e amortecedor traseiro da GT73 Pro, sob o quadro",
+   "w": 1200,
+   "h": 900,
+   "fundo": "#645046",
+   "estudio": true
+  }
  ]
 };
 window.GREEN_FOTOS_COR = {
